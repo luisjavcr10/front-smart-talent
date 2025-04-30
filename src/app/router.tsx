@@ -1,7 +1,7 @@
-import { createBrowserRouter } from 'react-router-dom'
 import App from './App';
-import { authRoutes } from '../auth/routes'
+import { createBrowserRouter } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
+import { authRoutes } from '../auth/authRoutes'
 
 export const router = createBrowserRouter([
   { 
