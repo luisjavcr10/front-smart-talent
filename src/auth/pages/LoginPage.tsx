@@ -21,12 +21,12 @@ export function LoginPage() {
                         <input type="password" className="bg-white-20 rounded-[15px] h-10 px-4 py-2" />
                     </div>
                     <a className="opacity-50 text-[16px] cursor-pointer">Olvidaste tu contraseña?</a>
-                    <button className="bg-orange rounded-[15px] px-4 py-2 w-full mt-6 cursor-pointer text-[24px]">Ingresar</button>
+                    <button className="bg-orange hover:opacity-80 rounded-[15px] px-4 py-2 w-full mt-6 cursor-pointer text-[24px]">Ingresar</button>
                 </form>
                 <button 
                     className="
                         flex justify-center items-center
-                        bg-white-20 
+                        bg-white-20 hover:opacity-80
                         border border-orange rounded-[15px] 
                         px-4 py-2 
                         w-full 
