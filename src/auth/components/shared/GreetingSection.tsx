@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const GreetingSection = ({
     greeting,
     message,
@@ -7,8 +9,9 @@ export const GreetingSection = ({
     greeting:string,
     message:string,
     direction:string,
-    href?:string
+    href:string
 }>) =>{
+
     return(
         <div 
             className={`
@@ -22,7 +25,12 @@ export const GreetingSection = ({
         >
             <img src="/images/logo-black.png" alt="logo" className="mb-10"/>
             <h1 className="text-[48px] font-bebasneue font-normal">{greeting}</h1>
-            {href && <a href={href} className="text-[16px] cursor-pointer hover:text-orange opacity-80">{message}</a>}
+            <Link 
+                to={href}
+                className="text-[16px] cursor-pointer hover:text-orange opacity-80"
+            >
+                {message}
+            </Link>
             
         </div>
     )

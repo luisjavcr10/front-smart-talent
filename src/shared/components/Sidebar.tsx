@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TbFileDollar, TbFileDescription, TbLogout, TbList, TbPlaylistAdd, TbCaretDownFilled } from "react-icons/tb";
+import { Link } from 'react-router-dom';
 
 const menuItemClasses = "w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-black-1 border-b border-orange";
 const iconClasses = "w-[30px] h-[30px]";
@@ -28,13 +29,6 @@ export const Sidebar = () => {
     { 
       icon: <TbFileDollar className={iconClasses} />, 
       text: "Facturación", 
-      px: "px-4", 
-      bg: "bg-gray dark:bg-background",
-      action: null
-    },
-    { 
-      icon: <TbLogout className={iconClasses} />, 
-      text: "Cerrar Sesión", 
       px: "px-4", 
       bg: "bg-gray dark:bg-background",
       action: null
@@ -77,8 +71,16 @@ export const Sidebar = () => {
                 ))}
               </div>
             )}
+            
           </div>
         ))}
+        <Link
+          to="/login" 
+          className={`${menuItemClasses} px-4 bg-gray dark:bg-background cursor-pointer`}
+        >
+          <TbLogout className={iconClasses}/>
+          Cerrar Sesión
+        </Link>
       </div>         
     </div>
   );
