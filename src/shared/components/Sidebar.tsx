@@ -17,11 +17,11 @@ export const Sidebar = () => {
       icon: <TbFileDescription className={iconClasses} />, 
       text: "Solicitudes", 
       px: "px-4", 
-      bg: "bg-background",
+      bg: "bg-gray dark:bg-background",
       action: toggleRequestsMenu,
       chevron: (
         <div className={`transition-all duration-300 transform ${isRequestsOpen ? 'rotate-180' : 'rotate-0'}`}>
-          <TbCaretDownFilled className={iconClasses} />
+          <TbCaretDownFilled className="w-[25px] h-[25px]" />
         </div>
       )
     },
@@ -29,14 +29,14 @@ export const Sidebar = () => {
       icon: <TbFileDollar className={iconClasses} />, 
       text: "Facturación", 
       px: "px-4", 
-      bg: "bg-background",
+      bg: "bg-gray dark:bg-background",
       action: null
     },
     { 
       icon: <TbLogout className={iconClasses} />, 
       text: "Cerrar Sesión", 
       px: "px-4", 
-      bg: "bg-background",
+      bg: "bg-gray dark:bg-background",
       action: null
     }
   ];
@@ -47,7 +47,7 @@ export const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-80 bg-black-1 flex flex-col items-center py-10 gap-14 text-white font-bevietnampro">
+    <div className="fixed left-0 top-0 h-screen w-80 bg-white dark:bg-black-1 flex flex-col items-center py-10 gap-14 text-black dark:text-white font-bevietnampro">
       <img className="w-3/5" src="/images/logo-black.png" alt="logo" />
       
       <div className="flex flex-col justify-center items-center gap-5">

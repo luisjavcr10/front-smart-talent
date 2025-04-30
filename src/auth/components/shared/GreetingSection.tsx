@@ -12,7 +12,8 @@ export const GreetingSection = ({
     return(
         <div 
             className={`
-                bg-black-1 text-white 
+                bg-white dark:bg-black-1 
+                text-black dark:text-white 
                 h-screen 
                 ${direction==='r'? 'w-9/20':'w-11/20'} 
                 flex flex-col justify-center items-center 
