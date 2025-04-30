@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
 import { FormLayout } from "../../shared/FormLayout";
 import { FormInput } from "../../shared/FormInput";
 import { FormButton } from "../../shared/FormButton";
 import GoogleLogo from "../../../../shared/ui/logos/GoogleLogo";
 
 export const LoginForm = () =>{
+
     return(
         <>
             <p className="w-full opacity-50 text-[20px]">Por favor ingresa tus datos</p>
@@ -11,7 +13,12 @@ export const LoginForm = () =>{
             <FormLayout>
                 <FormInput text="Email" type="email"/>
                 <FormInput text="Contraseña" type="password">
-                    <a href="/recovery-password" className="opacity-50 text-[16px] cursor-pointer hover:text-orange hover:opacity-80">¿Olvidaste tu contraseña?</a>
+                <Link 
+                    to="/recovery-password" 
+                    className="text-[16px] cursor-pointer hover:text-orange"
+                    >
+                    ¿Olvidaste tu contraseña?
+                </Link>
                 </FormInput>
                 <FormButton text="Ingresar"/>
             </FormLayout>

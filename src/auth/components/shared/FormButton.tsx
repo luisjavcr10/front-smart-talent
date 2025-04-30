@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
+
 export const FormButton = ({
     text
 }:Readonly<{
     text:string
 }>) =>{
     return(
-        <button 
+        <Link 
+            to="/requests"
             className="
-                text-[20px]
+                text-[20px] text-center
                 bg-orange 
                 hover:opacity-80 
                 rounded-[15px] 
@@ -16,6 +19,6 @@ export const FormButton = ({
                 cursor-pointer"
         >
             {text}
-        </button>
+        </Link>
     );
 }
