@@ -6,7 +6,7 @@ import { authRoutes } from '../auth/authRoutes'
 export const router = createBrowserRouter([
   { 
     element: 
-      <main className="bg-black-0 flex justify-center items-center h-screen w-full font-bevietnampro font-light">
+      <main className="bg-gray dark:bg-black-0 flex justify-center items-center h-screen w-full font-bevietnampro font-light">
         <Outlet />
       </main>,
     children: authRoutes

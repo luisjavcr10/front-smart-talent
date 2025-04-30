@@ -3,7 +3,7 @@ import { Sidebar } from '../shared/components/Sidebar'
 
 export default function App() {
   return (
-    <div className="app-container bg-background text-foreground min-h-screen flex">
+    <div className="app-container bg-gray dark:bg-background text-foreground min-h-screen flex">
       {/* Aquí puedes colocar elementos que quieres en todas las páginas: */}
       {/*<header>Smart Talent Header</header>*/}
       <Sidebar />
