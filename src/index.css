@@ -1,7 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-black: #171717;
+  --color-black-0:#000000;
+  --color-black-1: #171717;
   --color-white: #FFFFFF;
+  --color-white-20:#FFFFFF33;
   --color-orange: #FA8D28;
+
+  --radius-5xl: 6rem;
+
+  --font-family-display:"Be Vietnam Pro", "sans-serif";
+  --font-family-display:400;
 }
