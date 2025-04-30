@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -9,6 +10,15 @@
 
   --radius-5xl: 6rem;
 
-  --font-family-display:"Be Vietnam Pro", "sans-serif";
-  --font-family-display:400;
+  --font-bebasneue: "Bebas Neue", sans-serif;
+  --font-bevietnampro: "Be Vietnam Pro", sans-serif;
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
 }
