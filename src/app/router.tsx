@@ -16,9 +16,6 @@ export const router = createBrowserRouter([
     children:[
         { 
             path: '/', 
-            element: <div>
-              <h1 className="bg-orange">Este es el sistema para Smart Talent</h1>
-            </div> 
         }
     ]
   }
