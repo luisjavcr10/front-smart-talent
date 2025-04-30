@@ -2,6 +2,7 @@ import App from './App';
 import { createBrowserRouter } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 import { authRoutes } from '../auth/authRoutes'
+import { requestsRoutes } from '../requests/requestsRoutes';
 
 export const router = createBrowserRouter([
   { 
@@ -13,10 +14,6 @@ export const router = createBrowserRouter([
   },
   {
     element: <App />, 
-    children:[
-        { 
-            path: '/', 
-        }
-    ]
+    children: requestsRoutes
   }
 ])
