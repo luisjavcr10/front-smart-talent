@@ -1,4 +1,6 @@
 import { LoginPage } from './pages/LoginPage';
+import { RecoveryPasswordPage } from './pages/RecoveryPasswordPage';
+import { ResetPassword } from './pages/ResetPassword';
 
 export const authRoutes = [
   {
@@ -6,7 +8,11 @@ export const authRoutes = [
     element: <LoginPage />,
   },
   {
-    path: '/register',
-    element: <div>Register Page</div>, // Reemplaza con tu componente
+    path: '/recovery-password',
+    element: <RecoveryPasswordPage />, 
   },
+  {
+    path:'/reset-password',
+    element: <ResetPassword />
+  }
 ];
