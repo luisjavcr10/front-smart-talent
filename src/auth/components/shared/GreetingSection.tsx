@@ -23,15 +23,17 @@ export const GreetingSection = ({
                 ${direction==='r'?'border-r-[5px] border-r-orange rounded-r-5xl': 'border-l-[5px] border-l-orange rounded-l-5xl'}
                 `}
         >
-            <img src="/images/logo-black.png" alt="logo" className="mb-10"/>
-            <h1 className="text-[48px] font-bebasneue font-normal">{greeting}</h1>
+            <img src="/images/logo.png" alt="logo" className="w-[300px]"/>
+            <p className='font-vendura text-[48px] text-center'>Smart Talent</p>
+            <p className='font-vendura text-[32px] text-center'>Group</p>
+
+            <h1 className="mt-20 text-[48px] font-bebasneue font-normal text-center">{greeting}</h1>
             <Link 
                 to={href}
                 className="text-[16px] cursor-pointer hover:text-orange opacity-80"
             >
                 {message}
             </Link>
-            
         </div>
     )
 }

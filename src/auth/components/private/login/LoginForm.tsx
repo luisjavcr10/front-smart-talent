@@ -25,8 +25,8 @@ export const LoginForm = () =>{
             <button 
                 className="
                     flex justify-center items-center
-                    bg-white-20 hover:opacity-80
-                    border border-orange rounded-[15px] 
+                    bg-orange-15 dark:bg-white-20 hover:opacity-80
+                    border border-white dark:border-orange rounded-[15px] 
                     px-4 py-2 
                     w-full 
                     cursor-pointer
