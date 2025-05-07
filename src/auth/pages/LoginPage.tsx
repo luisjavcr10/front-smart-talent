@@ -9,7 +9,7 @@ export function LoginPage() {
             href="/register"
             direction="r" 
             greeting="¡HOLA DE NUEVO!" 
-            message="¿Aún no tienes cuenta? Registrate aquí"/>
+            />
 
          <FormSection direction="r">
                 <LoginForm/>
