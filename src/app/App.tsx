@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Sidebar } from '../shared/components/Sidebar'
+import ThemeToggle from '../shared/components/ThemeToggle'
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Sidebar />
       <main className='flex-1 ml-80'>
           <Outlet />
+          <ThemeToggle position='right'/>
       </main>
       
       {/*<footer>© 2023 Smart Talent</footer>*/}
