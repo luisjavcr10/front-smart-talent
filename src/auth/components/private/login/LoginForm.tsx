@@ -17,7 +17,6 @@ export const LoginForm = () =>{
 
             try {
                 await AuthService.login(email,password);
-                console.log('hola');
                 navigate('/requests');
             } catch (error) {
                 console.error(error);
