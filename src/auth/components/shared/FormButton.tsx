@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 
 export const FormButton = ({
     text
@@ -6,8 +5,8 @@ export const FormButton = ({
     text:string
 }>) =>{
     return(
-        <Link 
-            to="/requests"
+        <button 
+            type="submit"
             className="
                 text-[20px] text-center
                 bg-orange 
@@ -19,6 +18,6 @@ export const FormButton = ({
                 cursor-pointer"
         >
             {text}
-        </Link>
+        </button>
     );
 }

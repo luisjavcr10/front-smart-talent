@@ -1,17 +1,24 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { TbFileDollar, TbFileDescription, TbLogout, TbList, TbPlaylistAdd, TbCaretDownFilled } from "react-icons/tb";
-import { Link } from 'react-router-dom';
+import { storage } from '../utils/storage';
 
 const menuItemClasses = "w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-orange-15 dark:bg-black-1 border-b border-orange";
 const iconClasses = "w-[30px] h-[30px]";
 const subMenuItemClasses = `${menuItemClasses} bg-white-10 px-10`;
 
 export const Sidebar = () => {
+  const navigate = useNavigate();
   const [isRequestsOpen, setIsRequestsOpen] = useState(false);
 
   const toggleRequestsMenu = () => {
     setIsRequestsOpen(!isRequestsOpen);
   };
+
+  const handleLogout = () =>{
+    storage.clearToken();
+    navigate('/login');
+  }
 
   const mainMenuItems = [
     { 
@@ -79,13 +86,13 @@ export const Sidebar = () => {
             
           </div>
         ))}
-        <Link
-          to="/login" 
+        <button
+          onClick={handleLogout}
           className={`${menuItemClasses} px-4 bg-gray dark:bg-background cursor-pointer`}
         >
           <TbLogout className={iconClasses}/>
           Cerrar Sesión
-        </Link>
+        </button>
       </div>         
     </div>
   );
