@@ -9,7 +9,7 @@ export const RecoveryForm = () =>{
 
     return(
         <>
-            <p className="w-full opacity-50 text-[20px]">Ingresa el email vinculado a tu usuario</p>
+            <p className="w-full opacity-50 text-[20px]">Si eres administrador, ingresa el email asociado.</p>
 
             <FormLayout handlelogin={handleSubmit}>
                 <FormInput text="Email" type="email"/>

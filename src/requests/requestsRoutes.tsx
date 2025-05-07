@@ -5,4 +5,7 @@ export const requestsRoutes = [
     path: '/requests',
     element: <RequestsListPage />,
   },
+  {
+    path:'/'
+  }
 ];

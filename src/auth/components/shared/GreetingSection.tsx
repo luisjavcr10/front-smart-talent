@@ -7,7 +7,7 @@ export const GreetingSection = ({
     href
 }:Readonly<{
     greeting:string,
-    message:string,
+    message?:string,
     direction:string,
     href:string
 }>) =>{
