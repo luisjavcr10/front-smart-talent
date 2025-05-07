@@ -1,6 +1,6 @@
-import { LoginPage } from './pages/LoginPage';
-import { RecoveryPasswordPage } from './pages/RecoveryPasswordPage';
-import { ResetPasswordPage } from './pages/ResetPasswordPage';
+import { LoginPage } from '../pages/LoginPage';
+import { RecoveryPasswordPage } from '../pages/RecoveryPasswordPage';
+import { ResetPasswordPage } from '../pages/ResetPasswordPage';
 
 export const authRoutes = [
   {

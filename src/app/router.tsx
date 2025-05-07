@@ -1,8 +1,9 @@
 import App from './App';
 import { createBrowserRouter } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
-import { authRoutes } from '../auth/authRoutes'
+import { authRoutes } from '../auth/router/authRoutes'
 import { requestsRoutes } from '../requests/requestsRoutes';
+import { ProtectedRoute } from '../shared/routes/ProtectedRoutes';
 import ThemeToggle from '../shared/components/ThemeToggle';
 
 export const router = createBrowserRouter([
@@ -15,7 +16,9 @@ export const router = createBrowserRouter([
     children: authRoutes
   },
   {
-    element: <App />, 
+    element:<ProtectedRoute> 
+                <App /> 
+            </ProtectedRoute>, 
     children: requestsRoutes
   }
 ])

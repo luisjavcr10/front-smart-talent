@@ -1,10 +1,12 @@
 export const FormLayout = ({
-    children
+    children,
+    handlelogin
 }: Readonly<{
     children: React.ReactNode,
+    handlelogin: (e:React.FormEvent<HTMLFormElement>)=>void
     }>)=>{
     return (
-    <form className="w-full flex flex-col items-start gap-6">
+    <form onSubmit={handlelogin} className="w-full flex flex-col items-start gap-6">
         {children}
     </form>
     );
