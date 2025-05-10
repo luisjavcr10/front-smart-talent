@@ -23,7 +23,6 @@ export const LoginForm = () =>{
             }
         };
 
-
     return(
         <>
             <p className="w-full opacity-50 text-[20px]">Por favor ingresa tus datos</p>
