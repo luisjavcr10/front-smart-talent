@@ -1,20 +1,19 @@
 import App from './App';
-import { createBrowserRouter } from 'react-router-dom'
-import { Outlet } from 'react-router-dom'
-import { authRoutes } from '../auth/router/authRoutes'
+import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { authRoutes } from '../auth/router/authRoutes';
+import { LayoutAuth } from '../auth/components/shared/LayoutAuth';
+import { ProtectedAuthRoutes } from '../auth/router/protetedRoutes';
 import { requestsRoutes } from '../requests/requestsRoutes';
 import { ProtectedRoute } from '../shared/routes/ProtectedRoutes';
-import { ProtectedAuthRoutes } from '../auth/router/protetedRoutes';
-import ThemeToggle from '../shared/components/ThemeToggle';
+import { NotFoundPage } from '../errors/pages/NotFoundPage';
 
 export const router = createBrowserRouter([
   { 
     element: 
     <ProtectedAuthRoutes>
-      <main className="bg-gray dark:bg-black-0 flex justify-center items-center h-screen w-full font-bevietnampro font-light">
+      <LayoutAuth>
         <Outlet />
-        <ThemeToggle position='left'/>
-      </main>,
+      </LayoutAuth>
     </ProtectedAuthRoutes>,
     children: authRoutes
   },
@@ -23,5 +22,10 @@ export const router = createBrowserRouter([
                 <App /> 
             </ProtectedRoute>, 
     children: requestsRoutes
+  },
+  {
+    path:'/*',
+    element: <NotFoundPage/>
+
   }
 ])
