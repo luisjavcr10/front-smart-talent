@@ -6,7 +6,7 @@ type LoginPayload = {
     password: string
 }
 
-type AuthResponse ={
+type LoginResponse ={
     title: string,
     data: {
         email: string,
@@ -16,5 +16,5 @@ type AuthResponse ={
 
 export const AuthApi = {
   login: (payload: LoginPayload) => 
-    apiClient.post<AuthResponse>(AUTH_ENDPOINTS.LOGIN, payload),
+    apiClient.post<LoginResponse>(AUTH_ENDPOINTS.LOGIN, payload),
 };

@@ -16,11 +16,21 @@
   --color-black-05:rgba(0, 0, 0, 0.05);
   --color-white: #FFFFFF;
   --color-gray: #F0F0F0;
+  --color-cream:rgb(252, 247, 242);
   --color-white-10: rgba(255, 255, 255, 0.1);
   --color-white-20:#FFFFFF33;
+  --color-green:rgba(48, 192, 173, 1);
   --color-orange: #FA8D28;
   --color-orange-15:rgba(250, 141, 40, 0.15);
+  --color-orange-20:rgba(250, 141, 40, 0.2);
+  --color-orange-25: rgba(250, 141, 40, 0.25);
   --color-orange-50:rgba(250, 141, 40, 0.5);
+  --color-shadow:rgba(0, 0, 0, 0.25);
+  --shadow-medium: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
+  --shadow-full: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  --shadow-sidebar: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+
+
 
   --radius-5xl: 6rem;
 
