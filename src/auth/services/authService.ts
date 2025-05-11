@@ -9,6 +9,7 @@ export const AuthService = {
       return data.data.jwt;
     } catch (error) {
       throw new Error('Login failed');
+      console.log('el error fue en el auth service');
     }
   },
 
