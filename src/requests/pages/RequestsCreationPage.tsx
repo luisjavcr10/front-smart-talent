@@ -1,3 +1,5 @@
+import { Checkbox } from "@/components/ui/checkbox"
+
 const requests= [
     {
         dni:'70926081',
@@ -53,7 +55,7 @@ export function RequestsCreationPage () {
                 <tbody>
                 {requests.map((request, index) => (
                     <tr key={index} className="hover:bg-gray-50">
-                    <td className="p-2 border border-black-05"></td>
+                    <td className="p-2 border border-black-05"><Checkbox/></td>
                     <td className="p-2 border border-black-05">{request.dni}</td>
                     <td className="p-2 border border-black-05">{request.fullname}</td>
                     <td className="p-2 border border-black-05">
