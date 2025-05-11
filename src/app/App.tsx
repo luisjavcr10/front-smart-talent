@@ -8,7 +8,7 @@ export default function App() {
       {/* Aquí puedes colocar elementos que quieres en todas las páginas: */}
       {/*<header>Smart Talent Header</header>*/}
       <Sidebar />
-      <main className='flex-1 ml-80'>
+      <main className='flex-1 ml-72'>
           <Outlet />
           <ThemeToggle position='right'/>
       </main>

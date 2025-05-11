@@ -48,7 +48,7 @@ export const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-80 bg-white dark:bg-black-1 flex flex-col items-center py-10 gap-14 text-black dark:text-white font-bevietnampro border-r-none rounded-r-[24px] shadow-sidebar">
+    <div className="fixed left-0 top-0 h-screen w-72 bg-white dark:bg-black-1 flex flex-col items-center py-10 gap-14 text-black dark:text-white font-bevietnampro border-r-none rounded-r-[24px] shadow-sidebar">
       <div className='w-full flex flex-col items-center'>
         <img className="w-3/5" src="/images/logo.png" alt="logo" />
         <p className='font-vendura text-[20px]'>Smart Talent</p>
