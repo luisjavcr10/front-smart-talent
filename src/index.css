@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&display=swap");
 @font-face {
   font-family: 'Vendura';
-  src: url('/fonts/Vendura.otf') format('opentype'); /* Formato correcto */
-  font-weight: 100 900; /* Rango de pesos soportados */
-  font-display: swap; /* Evita FOIT (Flash of Invisible Text) */
+  src: url('/fonts/Vendura.otf') format('opentype');
+  font-weight: 100 900;
+  font-display: swap;
 }
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -25,7 +25,8 @@
   --color-orange-20:rgba(250, 141, 40, 0.2);
   --color-orange-25: rgba(250, 141, 40, 0.25);
   --color-orange-50:rgba(250, 141, 40, 0.5);
-  --color-shadow:rgba(0, 0, 0, 0.25);
+  --color-shadow:rgba(0, 0, 0, .25);
+  --color-shadow-dark:rgba(255, 255, 255, .25);
   --shadow-medium: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
   --shadow-full: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   --shadow-sidebar: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
