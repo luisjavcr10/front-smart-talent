@@ -19,7 +19,7 @@ export default function ThemeToggle({position}: Readonly<{position:string}>) {
   return (
     <button
       onClick={handleToggle}
-      className={`fixed top-4 z-50 p-2 rounded-xl text-xl bg-orange text-white dark:bg-orange-50 transition-colors ${position === "left" ? "left-4" : "right-4"}`}
+      className={`fixed top-4 z-50 p-2 rounded-xl text-xl bg-orange text-white dark:bg-orange-50 transition-colors ${position === "left" ? "left-4" : "right-4"} cursor-pointer`}
       title={`Tema actual: ${theme}`}
     >
       {icon}

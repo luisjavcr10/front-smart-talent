@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Logotipo } from '@/shared/components/Logotipo';
 
 export const GreetingSection = ({
     greeting,
@@ -23,10 +24,7 @@ export const GreetingSection = ({
                 ${direction==='r'?'border-r-[5px] border-r-orange rounded-r-5xl': 'border-l-[5px] border-l-orange rounded-l-5xl'}
                 `}
         >
-            <img src="/images/logo.png" alt="logo" className="w-[300px]"/>
-            <p className='font-vendura text-[48px] text-center'>Smart Talent</p>
-            <p className='font-vendura text-[32px] text-center'>Group</p>
-
+            <Logotipo where='greeting'/>
             <h1 className="mt-20 text-[48px] font-bebasneue font-normal text-center">{greeting}</h1>
             <Link 
                 to={href}
