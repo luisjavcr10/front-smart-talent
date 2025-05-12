@@ -4,7 +4,7 @@ import ThemeToggle from '../shared/components/ThemeToggle'
 
 export default function App() {
   return (
-    <div className="app-container bg-gray dark:bg-background text-foreground min-h-screen flex font-bevietnampro">
+    <div className="bg-gray dark:bg-background text-foreground min-h-screen flex font-bevietnampro">
       {/* Aquí puedes colocar elementos que quieres en todas las páginas: */}
       {/*<header>Smart Talent Header</header>*/}
       <Sidebar />
