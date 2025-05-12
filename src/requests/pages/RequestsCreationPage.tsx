@@ -4,15 +4,15 @@ const requests= [
     {
         dni:'70926081',
         fullname:'Luis Castillo Rabanal',
-        state:'Pendiente',
+        phone:'999999999',
         docs:[
             {
                 name:'Verificación Domiciliaria',
-                state:true
+                state:false
             },
             {
                 name:'Verificación Laboral',
-                state:true
+                state:false
             },
             {
                 name:'Antecedentes penales',
@@ -23,6 +23,7 @@ const requests= [
     {
         dni:'70251318',
         fullname:'Alexander Huamanchumo Gordillo',
+        phone:'999999999',
         state:'Pendiente',
         docs:[
             {
@@ -63,15 +64,20 @@ export function RequestsCreationPage () {
                         {request.docs.map((doc, docIndex) => (
                             <span 
                             key={docIndex} 
-                            className={`${doc.state? 'bg-green text-white': 'bg-transparent border border-black-05 text-black'}  py-0.5 px-2 rounded-[5px]`}
+                            className='bg-transparent border border-black-05 text-black py-0.5 px-2 rounded-[5px]'
                             >
                             {doc.name}
                             </span>
                         ))}
+                        <span  
+                            className='bg-transparent border border-black-05 text-black py-0.5 px-2 rounded-[5px]'
+                            >
+                            +
+                            </span>
                         </div>
                     </td>
                     <td className="p-2 border border-black-05">
-                        <button className="cursor-pointer">Ver</button>
+                        <button className="cursor-pointer">Confirmar</button>
                     </td>
                     </tr>
                 ))}
