@@ -1,5 +1,5 @@
-import { RequestsListPage } from "./pages/RequestsListPage";
-import { RequestsCreationPage } from "./pages/RequestsCreationPage";
+import { RequestsListPage } from "../pages/RequestsListPage";
+import { RequestsCreationPage } from "../pages/RequestsCreationPage";
 
 export const requestsRoutes = [
   {
