@@ -55,7 +55,7 @@ export const Sidebar = () => {
           fixed xl:relative inset-y-0 left-0 z-40 
           w-96 h-screen
           transition-transform duration-300 ease-in-out
-          ${isOpen ? 'translate-x-0 max-w-72' : '-translate-x-full xl:translate-x-0'}
+          ${isOpen ? 'translate-x-0 max-w-72' : '-translate-x-full xl:translate-x-0 max-w-72'}
           bg-white dark:bg-black-1 
           flex flex-col items-center 
           py-10 gap-14

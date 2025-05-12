@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import { Logotipo } from '@/shared/components/Logotipo';
 
 export const GreetingSection = ({
+    greeting,
     message,
     direction,
     href
 }:Readonly<{
+    greeting:string,
     message?:string,
     direction:string,
     href:string
@@ -23,6 +25,7 @@ export const GreetingSection = ({
                 `}
         >
             <Logotipo where='greeting'/>
+            <h1 className="mt-20 text-[48px] font-bebasneue font-normal text-center">{greeting}</h1>
             <Link 
                 to={href}
                 className="text-[16px] cursor-pointer hover:text-orange opacity-80"
