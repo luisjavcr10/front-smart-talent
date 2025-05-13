@@ -8,7 +8,7 @@ export function LoginPage() {
         <GreetingSection 
             href="/register"
             direction="r" 
-            greeting="¡HOLA DE NUEVO!" 
+            greeting="¡BIENVENIDO!" 
             />
 
          <FormSection direction="r">

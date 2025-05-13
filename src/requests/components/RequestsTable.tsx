@@ -48,13 +48,13 @@ export const RequestsTable = () =>{
                 <th className="text-start p-2 border border-black-05 dark:border-shadow-dark">Acciones</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody className="text-black dark:text-white">
             {requests.map((request, index) => (
                 <tr key={index} className="hover:bg-black-05 dark:bg-white-10">
-                <td className="p-2  border border-black-05 dark:border-shadow-dark ">{index + 1}</td>
-                <td className="p-2  border border-black-05 dark:border-shadow-dark ">{request.dni}</td>
-                <td className="p-2  border border-black-05 dark:border-shadow-dark ">{request.fullname}</td>
-                <td className="p-2  border border-black-05 dark:border-shadow-dark ">
+                <td className="p-2 border border-black-05 dark:border-shadow-dark ">{index + 1}</td>
+                <td className="p-2 border border-black-05 dark:border-shadow-dark ">{request.dni}</td>
+                <td className="p-2 border border-black-05 dark:border-shadow-dark ">{request.fullname}</td>
+                <td className="p-2 border border-black-05 dark:border-shadow-dark ">
                     <span className={`status-${request.state.toLowerCase()}`}>
                     {request.state}
                     </span>
