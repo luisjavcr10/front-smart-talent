@@ -41,7 +41,7 @@ export const OptionsModal = ({
                 stiffness: 150,
                 mass: 0.8
                 }}
-                className="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] shadow-medium p-5 z-10"
+                className="absolute bottom-0 left-0 right-0 bg-white dark:bg-background rounded-t-[24px] shadow-medium p-5 z-10 text-black dark:text-white"
                 ref={modalRef}
             >
                 <div className="flex flex-col items-center justify-center gap-5">
@@ -53,7 +53,7 @@ export const OptionsModal = ({
                     <motion.button
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
-                        className="bg-orange-20 hover:bg-orange-50 py-2 px-4 w-full rounded-[24px] shadow-full text-[16px] transition-colors"
+                        className="bg-orange-20 dark:bg-white-10 hover:bg-orange-50 py-2 px-4 w-full rounded-[24px] shadow-full text-[16px] transition-colors border border-transparent dark:border-shadow-dark "
                     >
                         Registrar manualmente
                     </motion.button>
@@ -62,15 +62,15 @@ export const OptionsModal = ({
                         <motion.button
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.99 }}
-                            className="bg-orange-20 hover:bg-orange-50 py-2 px-4 w-full rounded-[24px] shadow-full text-[16px] transition-colors"
+                            className="bg-orange-20 dark:bg-white-10 hover:bg-orange-50 py-2 px-4 w-full rounded-[24px] shadow-full text-[16px] transition-colors border border-transparent dark:border-shadow-dark "
                         >
                             Importar archivo
                         </motion.button>
                         <motion.button
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.99 }}
-                            className="bg-orange-25 hover:bg-orange-50 py-2 px-4 w-3/4 
-                            rounded-b-[24px] shadow-full text-[16px] transition-colors"
+                            className="bg-orange-25 dark:bg-white-10 hover:bg-orange-50 py-2 px-4 w-3/4 
+                            rounded-b-[24px] shadow-full  text-[16px] transition-colors border border-transparent dark:border-shadow-dark"
                         >
                             Descargar plantilla
                         </motion.button>

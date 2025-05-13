@@ -32,6 +32,36 @@ const requests= [
                 state:false
             }
         ]
+    },
+    {
+        dni:'70251318',
+        fullname:'Alexander Huamanchumo Gordillo',
+        state:'Pendiente',
+        docs:[
+            {
+                name:'Verificación Domiciliaria',
+                state:true
+            },
+            {
+                name:'Verificación Laboral',
+                state:false
+            }
+        ]
+    },
+    {
+        dni:'70251318',
+        fullname:'Alexander Huamanchumo Gordillo',
+        state:'Pendiente',
+        docs:[
+            {
+                name:'Verificación Domiciliaria',
+                state:true
+            },
+            {
+                name:'Verificación Laboral',
+                state:false
+            }
+        ]
     }
 ]
 
@@ -50,30 +80,30 @@ export const RequestsTable = () =>{
             </thead>
             <tbody className="text-black dark:text-white">
             {requests.map((request, index) => (
-                <tr key={index} className="hover:bg-black-05 dark:bg-white-10">
-                <td className="p-2 border border-black-05 dark:border-shadow-dark ">{index + 1}</td>
-                <td className="p-2 border border-black-05 dark:border-shadow-dark ">{request.dni}</td>
-                <td className="p-2 border border-black-05 dark:border-shadow-dark ">{request.fullname}</td>
-                <td className="p-2 border border-black-05 dark:border-shadow-dark ">
-                    <span className={`status-${request.state.toLowerCase()}`}>
-                    {request.state}
-                    </span>
-                </td>
-                <td className="p-2  border border-black-05 dark:border-shadow-dark ">
-                    <div className="flex flex-wrap gap-1">
-                    {request.docs.map((doc, docIndex) => (
-                        <span 
-                        key={docIndex} 
-                        className={`${doc.state? 'bg-green text-white': 'bg-transparent  border border-black-05 dark:border-shadow-dark text-black dark:text-white'}  py-0.5 px-2 rounded-[5px]`}
-                        >
-                        {doc.name}
+                <tr key={index} className="hover:bg-black-15">
+                    <td className="p-2 border border-black-05 dark:border-shadow-dark ">{index + 1}</td>
+                    <td className="p-2 border border-black-05 dark:border-shadow-dark ">{request.dni}</td>
+                    <td className="p-2 border border-black-05 dark:border-shadow-dark ">{request.fullname}</td>
+                    <td className="p-2 border border-black-05 dark:border-shadow-dark ">
+                        <span className={`status-${request.state.toLowerCase()}`}>
+                        {request.state}
                         </span>
-                    ))}
-                    </div>
-                </td>
-                <td className="p-2 border border-black-05 dark:border-shadow-dark">
-                    <button className="cursor-pointer">Ver</button>
-                </td>
+                    </td>
+                    <td className="p-2  border border-black-05 dark:border-shadow-dark ">
+                        <div className="flex flex-wrap gap-1">
+                        {request.docs.map((doc, docIndex) => (
+                            <span 
+                            key={docIndex} 
+                            className={`${doc.state? 'bg-green text-white': 'bg-transparent  border border-black-05 dark:border-shadow-dark text-black dark:text-white'}  py-0.5 px-2 rounded-[5px]`}
+                            >
+                            {doc.name}
+                            </span>
+                        ))}
+                        </div>
+                    </td>
+                    <td className="p-2 border border-black-05 dark:border-shadow-dark">
+                        <button className="cursor-pointer">Ver</button>
+                    </td>
                 </tr>
             ))}
             </tbody>
