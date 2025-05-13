@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthService } from '../../../services/authService';
 import { FormLayout } from "../../shared/FormLayout";
 import { FormInput } from "../../shared/FormInput";
 import { FormButton } from "../../shared/FormButton";
 import GoogleLogo from "../../../../shared/ui/logos/GoogleLogo";
+import { Loader } from '@/shared/components/Loader';
 
 export const LoginForm = () =>{
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
 
         const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +19,10 @@ export const LoginForm = () =>{
             const password = formData.get("password") as string;
 
             try {
+                setIsLoading(true);
                 await AuthService.login(email,password);
+                setIsLoading(false);
+                // Redirigir a la página de solicitudes después del inicio de sesión exitoso
                 navigate('/requests');
             } catch (error) {
                 console.error(error);
@@ -25,6 +31,7 @@ export const LoginForm = () =>{
 
     return(
         <>
+            {isLoading && <Loader />}
             <p className="w-full opacity-50 text-[20px]">Por favor ingresa tus datos</p>
 
             <FormLayout handlelogin={handleLogin}>
