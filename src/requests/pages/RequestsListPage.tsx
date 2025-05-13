@@ -14,12 +14,12 @@ export function RequestsListPage() {
                     w-full mt-5 md:mt-0
                     text-black dark:text-white">
                 <h1 className="font-bebasneue text-[32px] md:text-[48px] xl:text-[64px]">LISTA DE SOLICITUDES</h1>
-                <button onClick={()=>setIsActive(!isActive)}>
+                <button onClick={()=>setIsActive(true)}>
                     <FiPlusCircle className="w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px] h-[30px] md:h-[40px] lg:h-[50px] xl:h-[60px] hover:text-orange-50"/>
                 </button>
             </div>
 
-            <div className="w-full h-[550px] bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
+            <div className="w-full h-[500px] bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
                 <RequestsTable />
                 <OptionsModal isActive={isActive} handleActive={()=>setIsActive(!isActive)}/>
                 

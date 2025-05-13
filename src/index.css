@@ -19,6 +19,7 @@
 --color-black-1: #171717;
 --color-background: #202120;
 --color-black-05: rgba(0, 0, 0, 0.05);
+--color-black-15: rgba(0, 0, 0, 0.15);
 --color-white: #FFFFFF;
 --color-gray: #F0F0F0;
 --color-cream: rgb(252, 247, 242);
@@ -30,6 +31,8 @@
 --color-orange-20: rgba(250, 141, 40, 0.2);
 --color-orange-25: rgba(250, 141, 40, 0.25);
 --color-orange-50: rgba(250, 141, 40, 0.5);
+--color-orange-80: rgba(250, 141, 40, 0.8);
+
 --color-shadow: rgba(0, 0, 0, .25);
 --color-shadow-dark: rgba(255, 255, 255, .25);
 
@@ -37,6 +40,9 @@
 --shadow-medium: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
 --shadow-full: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 --shadow-sidebar: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+--shadow-medium-dark: 0px -4px 4px 0px rgba(250, 141, 40, 0.5);
+--shadow-full-dark: 0px 4px 4px 0px rgba(250, 141, 40, 0.5);
+--shadow-sidebar-dark: 4px 0px 4px 0px rgba(250, 141, 40, 0.5);
 
 /* Bordes */
 --radius-5xl: 6rem;
