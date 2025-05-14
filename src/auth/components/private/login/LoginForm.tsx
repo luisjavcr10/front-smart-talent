@@ -22,7 +22,6 @@ export const LoginForm = () =>{
                 setIsLoading(true);
                 await AuthService.login(email,password);
                 setIsLoading(false);
-                // Redirigir a la página de solicitudes después del inicio de sesión exitoso
                 navigate('/requests');
             } catch (error) {
                 console.error(error);
