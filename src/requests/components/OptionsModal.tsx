@@ -41,7 +41,7 @@ export const OptionsModal = ({
                 stiffness: 150,
                 mass: 0.8
                 }}
-                className="absolute bottom-0 left-0 right-0 bg-white dark:bg-background rounded-t-[24px] shadow-medium p-5 z-10 text-black dark:text-white"
+                className="absolute bottom-0 left-0 right-0 bg-white dark:bg-background rounded-t-[24px] shadow-medium p-5 z-10 text-black dark:text-white border border-transparent dark:border-x-shadow-dark dark:border-t-shadow-dark"
                 ref={modalRef}
             >
                 <div className="flex flex-col items-center justify-center gap-5">

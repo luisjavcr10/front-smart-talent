@@ -7,7 +7,7 @@ export function RequestsListPage() {
     const [isActive, setIsActive] = useState(false);
     
     return(
-        <div className="flex flex-col mx-12 my-15 gap-11">
+        <div className="flex flex-col mx-5 md:mx-12 my-15 gap-11">
             <div 
                 className="
                     flex flex-row justify-between items-center
