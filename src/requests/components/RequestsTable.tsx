@@ -32,40 +32,12 @@ const requests= [
                 state:false
             }
         ]
-    },
-    {
-        dni:'70251318',
-        fullname:'Alexander Huamanchumo Gordillo',
-        state:'Pendiente',
-        docs:[
-            {
-                name:'Verificación Domiciliaria',
-                state:true
-            },
-            {
-                name:'Verificación Laboral',
-                state:false
-            }
-        ]
-    },
-    {
-        dni:'70251318',
-        fullname:'Alexander Huamanchumo Gordillo',
-        state:'Pendiente',
-        docs:[
-            {
-                name:'Verificación Domiciliaria',
-                state:true
-            },
-            {
-                name:'Verificación Laboral',
-                state:false
-            }
-        ]
     }
 ]
 
 import { useState } from "react";
+import { HiOutlineDocumentSearch } from "react-icons/hi";
+import { FaChevronCircleDown } from "react-icons/fa";
 
 export const RequestsTable = () => {
     const [openRows, setOpenRows] = useState<number[]>([]);
@@ -105,7 +77,7 @@ export const RequestsTable = () => {
                 {requests.map((request, index) => (
                     <>
                         {/* Fila normal (visible en desktop) */}
-                        <tr key={index} className="hover:bg-black-15">
+                        <tr key={index} className="hover:bg-black-05 dark:hover:bg-white-10">
                             <td className={commonCellStyles}>{index + 1}</td>
                             <td className={commonCellStyles}>{request.dni}</td>
                             <td className={commonCellStyles}>{request.fullname}</td>
@@ -121,13 +93,18 @@ export const RequestsTable = () => {
                                     ))}
                                 </div>
                             </td>
-                            <td className={`${commonCellStyles} ${hiddenOnMobile}`}>
-                                <button className="cursor-pointer">Ver</button>
+                            <td className={`${commonCellStyles} ${hiddenOnMobile} text-center`}>
+                                <button title="Ver detalles de solicitud" className="cursor-pointer text-center hover:text-orange"><HiOutlineDocumentSearch className="w-[24px] h-[24px]"/></button>
                             </td>
-                            <td className={`${commonCellStyles} md:hidden`}>
-                                <button onClick={() => handleToggleRow(index)}>
-                                    {openRows.includes(index) ? "Cerrar" : "Expandir"}
-                                </button>
+                            <td className={`${commonCellStyles} md:hidden text-center`}>
+                            <button
+                                className="text-center" 
+                                onClick={() => handleToggleRow(index)}
+                            >
+                                <FaChevronCircleDown 
+                                    className={`w-[20px] h-[20px] transform origin-center transition-all duration-500 ease-in-out ${openRows.includes(index) ? "rotate-180" : ""}`} 
+                                />
+                            </button>
                             </td>
                         </tr>
 
