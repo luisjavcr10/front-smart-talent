@@ -34,7 +34,7 @@
 --color-orange-80: rgba(250, 141, 40, 0.8);
 
 --color-shadow: rgba(0, 0, 0, .25);
---color-shadow-dark: rgba(255, 255, 255, .25);
+--color-shadow-dark: #D8D8D8;
 
 /* Sombras */
 --shadow-medium: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -43,6 +43,7 @@
 --shadow-medium-dark: 0px -4px 4px 0px rgba(250, 141, 40, 0.5);
 --shadow-full-dark: 0px 4px 4px 0px rgba(250, 141, 40, 0.5);
 --shadow-sidebar-dark: 4px 0px 4px 0px rgba(250, 141, 40, 0.5);
+--shadow-doc-options: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
 /* Bordes */
 --radius-5xl: 6rem;
