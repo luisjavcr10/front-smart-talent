@@ -1,43 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox"
-import { useEffect, useState } from "react"
-
-const requestsAux = [
-    {
-        dni: '70926081',
-        fullname: 'Luis Castillo Rabanal',
-        phone: '999999999',
-        docs: [
-            {
-                name: 'Verificación Domiciliaria',
-                state: false
-            },
-            {
-                name: 'Verificación Laboral',
-                state: false
-            },
-            {
-                name: 'Antecedentes penales',
-                state: false
-            }
-        ]
-    },
-    {
-        dni: '70251318',
-        fullname: 'Alexander Huamanchumo Gordillo',
-        phone: '999999999',
-        state: 'Pendiente',
-        docs: [
-            {
-                name: 'Verificación Domiciliaria',
-                state: true
-            },
-            {
-                name: 'Verificación Laboral',
-                state: false
-            }
-        ]
-    }
-]
+import { useState } from "react"
 
 export function RequestsCreationPage() {
     const [requests, setRequests] = useState<any>([])
