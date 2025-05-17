@@ -50,12 +50,6 @@ export const RequestsTable = () => {
         );
     };
 
-    // Clases reutilizables
-    const commonCellStyles = "p-2 border border-black-05 dark:border-shadow-dark";
-    const hiddenOnMobile = "hidden md:table-cell";
-    const docStatusStyle = (state: boolean) => 
-        `${state ? 'bg-green text-white' : 'bg-transparent border border-black-05 dark:border-shadow-dark text-black dark:text-white'} py-0.5 px-2 rounded-[5px]`;
-
     return (
         <table className="w-full">
             <thead className="bg-cream dark:bg-black-0 text-black dark:text-white">
@@ -63,14 +57,14 @@ export const RequestsTable = () => {
                     {["#", "DNI", "Nombre Completo", "Estado", "Documentos", "Acciones"].map((header, idx) => (
                         <th 
                             key={header}
-                            className={`text-start ${commonCellStyles} ${
-                                idx >= 3 ? hiddenOnMobile : ""
+                            className={`text-start p-2 border border-black-05 dark:border-shadow-dark ${
+                                idx >= 3 ? "hidden md:table-cell" : ""
                             }`}
                         >
                             {header}
                         </th>
                     ))}
-                    <th className={`text-start ${commonCellStyles} md:hidden`}>Acciones</th>
+                    <th className={`text-start p-2 border border-black-05 dark:border-shadow-dark md:hidden`}>Acciones</th>
                 </tr>
             </thead>
             <tbody className="text-black dark:text-white">
@@ -78,25 +72,25 @@ export const RequestsTable = () => {
                     <>
                         {/* Fila normal (visible en desktop) */}
                         <tr key={index} className="hover:bg-black-05 dark:hover:bg-white-10">
-                            <td className={commonCellStyles}>{index + 1}</td>
-                            <td className={commonCellStyles}>{request.dni}</td>
-                            <td className={commonCellStyles}>{request.fullname}</td>
-                            <td className={`${commonCellStyles} ${hiddenOnMobile}`}>
+                            <td className="p-2 border border-black-05 dark:border-shadow-dark">{index + 1}</td>
+                            <td className="p-2 border border-black-05 dark:border-shadow-dark">{request.dni}</td>
+                            <td className="p-2 border border-black-05 dark:border-shadow-dark">{request.fullname}</td>
+                            <td className={`p-2 border border-black-05 dark:border-shadow-dark ${"hidden md:table-cell"}`}>
                                 <span>{request.state}</span>
                             </td>
-                            <td className={`${commonCellStyles} ${hiddenOnMobile}`}>
+                            <td className={`p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell`}>
                                 <div className="flex flex-wrap gap-1">
                                     {request.docs.map((doc, docIndex) => (
-                                        <span key={docIndex} className={docStatusStyle(doc.state)}>
+                                        <span key={docIndex} className={`${doc.state ? 'bg-green text-white' : 'bg-transparent border border-black-05 dark:border-shadow-dark text-black dark:text-white'} py-0.5 px-2 rounded-[5px]`}>
                                             {doc.name}
                                         </span>
                                     ))}
                                 </div>
                             </td>
-                            <td className={`${commonCellStyles} ${hiddenOnMobile} text-center`}>
+                            <td className={`p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell text-center`}>
                                 <button title="Ver detalles de solicitud" className="cursor-pointer text-center hover:text-orange"><HiOutlineDocumentSearch className="w-[24px] h-[24px]"/></button>
                             </td>
-                            <td className={`${commonCellStyles} md:hidden text-center`}>
+                            <td className={`p-2 border border-black-05 dark:border-shadow-dark md:hidden text-center`}>
                             <button
                                 className="text-center" 
                                 onClick={() => handleToggleRow(index)}
@@ -111,7 +105,7 @@ export const RequestsTable = () => {
                         {/* Fila expandida (solo móvil) */}
                         {openRows.includes(index) && (
                             <tr className="md:hidden">
-                                <td colSpan={7} className={commonCellStyles}>
+                                <td colSpan={7} className="p-2 border border-black-05 dark:border-shadow-dark">
                                     <div className="flex flex-col gap-2 mx-4 my-2">
                                         <p>Estado: <strong>{request.state}</strong></p>
                                         <p>Documentos solicitados:</p>
@@ -119,7 +113,7 @@ export const RequestsTable = () => {
                                             {request.docs.map((doc, docIndex) => (
                                                 <span 
                                                     key={docIndex} 
-                                                    className={`w-full ${docStatusStyle(doc.state)} text-center`}
+                                                    className={`w-full ${doc.state ? 'bg-green text-white' : 'bg-transparent border border-black-05 dark:border-shadow-dark text-black dark:text-white'} py-0.5 px-2 rounded-[5px] text-center`}
                                                 >
                                                     {doc.name}
                                                 </span>
