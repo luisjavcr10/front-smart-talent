@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { DocsChecklist } from "./DocsChecklist";
 import { RequestsType } from "@/requests/types/RequestsListType";
@@ -7,12 +7,18 @@ import { AddButton } from "./AddButton";
 import { FaDeleteLeft } from "react-icons/fa6";
 
 const headers = [
-  "DNI", 
+  "DNI",
   "Nombres completos",
   "Teléfono",
   "Documentos",
   "Acciones",
-]
+];
+
+interface InputErrors {
+  dni: Record<number, boolean>; // { [index: number]: boolean }
+  phone: Record<number, boolean>;
+  fullname: Record<number, boolean>;
+}
 
 export const CreationTable = ({
   requests,
@@ -33,6 +39,12 @@ export const CreationTable = ({
     checked: boolean
   ) => void;
 }>) => {
+  const [inputErrors, setInputErrors] = useState<InputErrors>({
+    dni: {},
+    phone: {},
+    fullname: {},
+  });
+  const listEndRef = useRef<HTMLDivElement>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const addRow = () => {
@@ -57,6 +69,10 @@ export const CreationTable = ({
     }
   }, [requests.length]);
 
+  useEffect(() => {
+    listEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [requests]);
+
   return (
     <div className="w-full h-[550px] bg-white-100 dark:bg-white-10 shadow-doc-options text-[12px] overflow-x-auto relative text-black dark:text-white">
       {/* Encabezados con grid */}
@@ -64,9 +80,9 @@ export const CreationTable = ({
         <div className="p-2 border border-border dark:border-shadow-dark">
           <Checkbox />
         </div>
-        {headers.map((header)=>(
+        {headers.map((header) => (
           <div className="p-2 border border-border dark:border-shadow-dark">
-          {header}
+            {header}
           </div>
         ))}
       </div>
@@ -79,33 +95,74 @@ export const CreationTable = ({
             className="grid grid-cols-[0.5fr_2fr_4fr_2fr_8fr_2.5fr] bg-black-02 hover:bg-black-05 dark:hover:bg-white-10"
           >
             {/* Checkbox */}
-            <div className="p-2 border border-border dark:border-shadow-dark "><Checkbox /></div>
+            <div className="p-2 border border-border dark:border-shadow-dark ">
+              <Checkbox />
+            </div>
 
             {/* DNI */}
             <div className="p-2 border border-border dark:border-shadow-dark">
               <div className="w-full overflow-hidden">
                 <input
                   ref={(el) => setInputRef(el, index)}
-                  className="w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows"
+                  className={`w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
+                    inputErrors.dni[index]
+                      ? "border-2 border-red-500"
+                      : "border border-gray-300"
+                  }`}
                   type="text"
                   value={request.dni}
                   onChange={(e) => {
+                    const value = e.target.value;
+
+                    // 1. Permite cualquier input pero detecta si hay caracteres no numéricos
+                    const hasInvalidChars = /[^0-9]/.test(value);
+
+                    // 2. Actualiza el estado de error
+                    setInputErrors((prev) => ({
+                      ...prev,
+                      dni: { ...prev.dni, [index]: hasInvalidChars },
+                    }));
+
+                    // 3. Siempre actualiza el estado (permite borrado/corrección)
                     const newRequests = [...requests];
-                    newRequests[index].dni = e.target.value;
+                    newRequests[index].dni = value;
                     handleRequests(newRequests);
                   }}
+                  maxLength={8}
                 />
+                {inputErrors.dni[index] && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Formato incorrecto
+                  </p>
+                )}
               </div>
             </div>
 
             {/* Nombres completos */}
             <div className="p-2 border border-border dark:border-shadow-dark">
+              <div className="w-full overflow-hidden"> 
               <textarea
-                className="w-full resize-none bg-white rounded-[5px] py-0.5 px-1 focus:outline-none"
+                className={`w-full resize-none bg-white rounded-[5px] py-0.5 px-1 focus:outline-none ${
+                  inputErrors.fullname[index]
+                    ? "border-2 border-red-500"
+                    : "border border-gray-300"
+                }`}
                 value={request.fullname}
                 onChange={(e) => {
+                  const value = e.target.value;
+
+                  // 1. Verifica si hay dígitos numéricos (0-9)
+                  const hasNumbers = /[0-9]/.test(value);
+
+                  // 2. Actualiza el estado de error
+                  setInputErrors((prev) => ({
+                    ...prev,
+                    fullname: { ...prev.fullname, [index]: hasNumbers },
+                  }));
+
+                  // 3. Siempre actualiza el valor (permite corrección)
                   const newRequests = [...requests];
-                  newRequests[index].fullname = e.target.value;
+                  newRequests[index].fullname = value;
                   handleRequests(newRequests);
                 }}
                 rows={1}
@@ -115,21 +172,49 @@ export const CreationTable = ({
                     e.currentTarget.scrollHeight + "px";
                 }}
               />
+              {inputErrors.fullname[index] && (
+                <p className="text-red-500 text-xs mt-1">
+                  Formato incorrecto
+                </p>
+              )}
+              </div>
             </div>
 
             {/* Teléfono */}
             <div className="p-2 border border-border dark:border-shadow-dark">
               <div className="w-full h-full overflow-hidden">
                 <input
-                  className="w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows"
+                  className={`w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
+                    inputErrors.phone[index]
+                      ? "border-2 border-red-500"
+                      : "border border-gray-300"
+                  }`}
                   type="text"
                   value={request.phone}
                   onChange={(e) => {
+                    const value = e.target.value;
+
+                    // 1. Permite cualquier input pero detecta si hay caracteres no numéricos
+                    const hasInvalidChars = /[^0-9]/.test(value);
+
+                    // 2. Actualiza el estado de error
+                    setInputErrors((prev) => ({
+                      ...prev,
+                      phone: { ...prev.phone, [index]: hasInvalidChars },
+                    }));
+
+                    // 3. Siempre actualiza el estado (permite borrado/corrección)
                     const newRequests = [...requests];
-                    newRequests[index].phone = e.target.value;
+                    newRequests[index].phone = value;
                     handleRequests(newRequests);
                   }}
+                  maxLength={12}
                 />
+                {inputErrors.phone[index] && (
+                  <p className="text-red-500 text-xs mt-1">
+                    Formato incorrecto
+                  </p>
+                )}
               </div>
             </div>
 
@@ -147,7 +232,10 @@ export const CreationTable = ({
                   ))}
                 </div>
 
-                <AddButton type="document" onClick={() => toggleOpenOptions(index)} />
+                <AddButton
+                  type="document"
+                  onClick={() => toggleOpenOptions(index)}
+                />
               </div>
               <DocsChecklist
                 openIndex={openIndex}
@@ -160,7 +248,7 @@ export const CreationTable = ({
 
             {/* Acciones */}
             <div className="p-2 border border-border dark:border-shadow-dark flex justify-around items-start gap-1">
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.98 }}
                 className="
@@ -174,12 +262,12 @@ export const CreationTable = ({
               >
                 Confirmar
               </motion.button>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.98 }}
                 className="cursor-pointer hover:text-red"
               >
-                  <FaDeleteLeft className="w-[24px] h-[24px]"/>
+                <FaDeleteLeft className="w-[24px] h-[24px]" />
               </motion.button>
             </div>
           </div>
@@ -187,7 +275,7 @@ export const CreationTable = ({
       </div>
 
       {/* Botón para agregar fila */}
-      <div className="flex justify-start p-4">
+      <div ref={listEndRef} className="flex justify-start p-4">
         <AddButton type="request" onClick={addRow} />
       </div>
     </div>
