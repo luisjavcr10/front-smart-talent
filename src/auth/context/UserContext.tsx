@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { storage } from "@/shared/utils/storage";
-import { AuthService } from "../services/authService";
+//import { AuthService } from "../services/authService";
 
 interface User {
   id: string;
@@ -35,8 +35,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async ({ email, password }: LoginProps) => {
-    const { token, user } = await AuthService.login(email, password);
-
+    //const { token, user } = await AuthService.login(email, password);
+    console.log(email);
+    console.log(password);
+    const { token, user } = {
+      token: "token",
+      user: {
+        id: "1",
+        name: "Luis Javier Castillo Rabanal",
+        email: "ing.castillorabanal@gmail.com",
+        role: "ADMIN"
+      }
+    }
     storage.setToken(token);
     storage.setUser(user);
     setUser(user);

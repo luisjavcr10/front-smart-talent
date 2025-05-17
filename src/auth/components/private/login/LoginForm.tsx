@@ -20,7 +20,7 @@ export const LoginForm = () => {
 
     try {
       setIsLoading(true);
-      await login({ email, password }); // 🔑
+      await login({ email, password });
       setIsLoading(false);
       navigate("/requests");
     } catch (error) {
