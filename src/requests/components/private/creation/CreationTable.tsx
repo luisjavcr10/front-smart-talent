@@ -116,11 +116,12 @@ export const CreationTable = ({
 
                     // 1. Permite cualquier input pero detecta si hay caracteres no numéricos
                     const hasInvalidChars = /[^0-9]/.test(value);
+                    const length = value.length;
 
                     // 2. Actualiza el estado de error
                     setInputErrors((prev) => ({
                       ...prev,
-                      dni: { ...prev.dni, [index]: hasInvalidChars },
+                      dni: { ...prev.dni, [index]: (hasInvalidChars || length>=9 || length<=7) },
                     }));
 
                     // 3. Siempre actualiza el estado (permite borrado/corrección)
@@ -128,11 +129,10 @@ export const CreationTable = ({
                     newRequests[index].dni = value;
                     handleRequests(newRequests);
                   }}
-                  maxLength={8}
                 />
                 {inputErrors.dni[index] && (
-                  <p className="text-red-500 text-xs mt-1">
-                    Formato incorrecto
+                  <p className="text-red text-[8px] font-bold mt-1">
+                   Formato incorrecto
                   </p>
                 )}
               </div>
@@ -173,7 +173,7 @@ export const CreationTable = ({
                 }}
               />
               {inputErrors.fullname[index] && (
-                <p className="text-red-500 text-xs mt-1">
+                <p className="text-red text-[8px] font-bold mt-1">
                   Formato incorrecto
                 </p>
               )}
@@ -196,11 +196,12 @@ export const CreationTable = ({
 
                     // 1. Permite cualquier input pero detecta si hay caracteres no numéricos
                     const hasInvalidChars = /[^0-9]/.test(value);
+                    const length = value.length;
 
                     // 2. Actualiza el estado de error
                     setInputErrors((prev) => ({
                       ...prev,
-                      phone: { ...prev.phone, [index]: hasInvalidChars },
+                      phone: { ...prev.phone, [index]: hasInvalidChars || length>=10 || length<=8 },
                     }));
 
                     // 3. Siempre actualiza el estado (permite borrado/corrección)
@@ -208,10 +209,9 @@ export const CreationTable = ({
                     newRequests[index].phone = value;
                     handleRequests(newRequests);
                   }}
-                  maxLength={12}
                 />
                 {inputErrors.phone[index] && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="text-red text-[8px] font-bold mt-1">
                     Formato incorrecto
                   </p>
                 )}
