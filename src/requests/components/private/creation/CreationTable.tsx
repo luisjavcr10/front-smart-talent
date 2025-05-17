@@ -15,7 +15,7 @@ const headers = [
 ];
 
 interface InputErrors {
-  dni: Record<number, boolean>; // { [index: number]: boolean }
+  dni: Record<number, boolean>;
   phone: Record<number, boolean>;
   fullname: Record<number, boolean>;
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { OptionsModal } from "../components/OptionsModal";
+import { OptionsModal } from "../components/private/list/OptionsModal";
 import { FiPlusCircle } from "react-icons/fi";
-import { RequestsTable } from "../components/RequestsTable";
+import { RequestsTable } from "../components/private/list/RequestsTable";
 
 export function RequestsListPage() {
     const [isActive, setIsActive] = useState(false);
@@ -19,7 +19,7 @@ export function RequestsListPage() {
                 </button>
             </div>
 
-            <div className="w-full h-[500px] bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
+            <div className="w-full h-[500px] shadow-doc-options bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
                 <RequestsTable />
                 <OptionsModal isActive={isActive} handleActive={()=>setIsActive(!isActive)}/>
                 
