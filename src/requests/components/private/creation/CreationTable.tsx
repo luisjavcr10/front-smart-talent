@@ -1,10 +1,8 @@
 import { useRef, useEffect } from "react";
 import { DocsChecklist } from "./DocsChecklist";
 import { RequestsType } from "@/requests/types/RequestsListType";
-import { motion } from "framer-motion";
-import { GoPlus } from "react-icons/go";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AddRequestButton } from "./AddRequestButton";
+import { AddButton } from "./AddButton";
 
 export const CreationTable = ({
   requests,
@@ -89,7 +87,6 @@ export const CreationTable = ({
                     newRequests[index].dni = e.target.value;
                     handleRequests(newRequests);
                   }}
-                  style={{ minWidth: "0" }}
                 />
               </div>
             </div>
@@ -105,10 +102,6 @@ export const CreationTable = ({
                   handleRequests(newRequests);
                 }}
                 rows={1}
-                style={{
-                  minHeight: "1.5rem",
-                  overflow: "hidden",
-                }}
                 onInput={(e) => {
                   e.currentTarget.style.height = "auto";
                   e.currentTarget.style.height =
@@ -129,7 +122,6 @@ export const CreationTable = ({
                     newRequests[index].phone = e.target.value;
                     handleRequests(newRequests);
                   }}
-                  style={{ minWidth: "0" }}
                 />
               </div>
             </div>
@@ -147,14 +139,8 @@ export const CreationTable = ({
                     </span>
                   ))}
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-white dark:bg-transparent border border-black dark:border-white rounded-[5px] ml-auto"
-                  onClick={() => toggleOpenOptions(index)}
-                >
-                  <GoPlus className="w-[20px] h-[20px]" />
-                </motion.button>
+
+                <AddButton type="document" onClick={() => toggleOpenOptions(index)} />
               </div>
               <DocsChecklist
                 openIndex={openIndex}
@@ -175,7 +161,7 @@ export const CreationTable = ({
 
       {/* Botón para agregar fila */}
       <div ref={listEndRef} className="flex justify-start p-4">
-        <AddRequestButton addRow={addRow} />
+        <AddButton type="request" onClick={addRow} />
       </div>
     </div>
   );
