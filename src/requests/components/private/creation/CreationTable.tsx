@@ -106,8 +106,8 @@ export const CreationTable = ({
                   ref={(el) => setInputRef(el, index)}
                   className={`w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
                     inputErrors.dni[index]
-                      ? "border-2 border-red-500"
-                      : "border border-gray-300"
+                      ? "border border-red"
+                      : "border border-border"
                   }`}
                   type="text"
                   value={request.dni}
@@ -144,8 +144,8 @@ export const CreationTable = ({
               <textarea
                 className={`w-full resize-none bg-white rounded-[5px] py-0.5 px-1 focus:outline-none ${
                   inputErrors.fullname[index]
-                    ? "border-2 border-red-500"
-                    : "border border-gray-300"
+                    ? "border border-red"
+                    : "border border-border"
                 }`}
                 value={request.fullname}
                 onChange={(e) => {
@@ -186,8 +186,8 @@ export const CreationTable = ({
                 <input
                   className={`w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
                     inputErrors.phone[index]
-                      ? "border-2 border-red-500"
-                      : "border border-gray-300"
+                      ? "border border-red"
+                      : "border border-border"
                   }`}
                   type="text"
                   value={request.phone}
