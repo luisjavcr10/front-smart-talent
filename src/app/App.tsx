@@ -4,7 +4,7 @@ import ThemeToggle from '../shared/components/ThemeToggle'
 
 export default function App() {
   return (
-    <div className="w-full bg-gray dark:bg-background text-foreground min-h-screen flex font-bevietnampro">
+    <div className="w-full bg-white dark:bg-background text-foreground min-h-screen flex font-bevietnampro">
       {/* Smart Talent Header */}
       
       <Sidebar />
