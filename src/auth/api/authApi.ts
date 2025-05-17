@@ -10,8 +10,11 @@ type LoginResponse ={
     title: string,
     data: {
         email: string,
-        jwt: string
-  }
+        jwt: string,
+        id: string,
+        name: string,
+        role: string
+    },
 }
 
 export const AuthApi = {

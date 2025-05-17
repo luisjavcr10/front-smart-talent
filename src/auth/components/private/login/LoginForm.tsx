@@ -1,29 +1,30 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthService } from "../../../services/authService";
 import { FormLayout } from "../../shared/FormLayout";
 import { FormInput } from "../../shared/FormInput";
 import { FormButton } from "../../shared/FormButton";
 import GoogleLogo from "../../../../shared/ui/logos/GoogleLogo";
 import { Loader } from "@/shared/components/Loader";
+import { useUser } from "@/auth/hooks/useUser";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { login } = useUser();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     try {
       setIsLoading(true);
-      await AuthService.login(email, password);
+      await login({ email, password }); // 🔑
       setIsLoading(false);
       navigate("/requests");
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
     }
   };
