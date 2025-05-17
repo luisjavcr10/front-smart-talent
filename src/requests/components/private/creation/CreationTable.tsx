@@ -33,8 +33,7 @@ export const CreationTable = ({
     checked: boolean
   ) => void;
 }>) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const listEndRef = useRef<HTMLDivElement>(null);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const addRow = () => {
     handleRequests([
@@ -46,12 +45,17 @@ export const CreationTable = ({
         docs: [],
       },
     ]);
-    inputRef.current?.focus();
+  };
+  const setInputRef = (el: HTMLInputElement | null, index: number) => {
+    inputRefs.current[index] = el;
   };
 
   useEffect(() => {
-    listEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [requests]);
+    if (requests.length > 0) {
+      const lastInput = inputRefs.current[requests.length - 1];
+      lastInput?.focus();
+    }
+  }, [requests.length]);
 
   return (
     <div className="w-full h-[550px] bg-white-100 dark:bg-white-10 shadow-doc-options text-[12px] overflow-x-auto relative text-black dark:text-white">
@@ -81,8 +85,8 @@ export const CreationTable = ({
             <div className="p-2 border border-border dark:border-shadow-dark">
               <div className="w-full overflow-hidden">
                 <input
-                  ref={inputRef}
-                  className="w-full bg-transparent focus:outline-none number-input-hide-arrows"
+                  ref={(el) => setInputRef(el, index)}
+                  className="w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows"
                   type="text"
                   value={request.dni}
                   onChange={(e) => {
@@ -97,7 +101,7 @@ export const CreationTable = ({
             {/* Nombres completos */}
             <div className="p-2 border border-border dark:border-shadow-dark">
               <textarea
-                className="w-full resize-none bg-transparent focus:outline-none"
+                className="w-full resize-none bg-white rounded-[5px] py-0.5 px-1 focus:outline-none"
                 value={request.fullname}
                 onChange={(e) => {
                   const newRequests = [...requests];
@@ -117,7 +121,7 @@ export const CreationTable = ({
             <div className="p-2 border border-border dark:border-shadow-dark">
               <div className="w-full h-full overflow-hidden">
                 <input
-                  className="w-full bg-transparent focus:outline-none number-input-hide-arrows"
+                  className="w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows"
                   type="text"
                   value={request.phone}
                   onChange={(e) => {
@@ -183,7 +187,7 @@ export const CreationTable = ({
       </div>
 
       {/* Botón para agregar fila */}
-      <div ref={listEndRef} className="flex justify-start p-4">
+      <div className="flex justify-start p-4">
         <AddButton type="request" onClick={addRow} />
       </div>
     </div>
