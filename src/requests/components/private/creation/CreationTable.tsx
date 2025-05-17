@@ -1,8 +1,18 @@
 import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { DocsChecklist } from "./DocsChecklist";
 import { RequestsType } from "@/requests/types/RequestsListType";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AddButton } from "./AddButton";
+import { FaDeleteLeft } from "react-icons/fa6";
+
+const headers = [
+  "DNI", 
+  "Nombres completos",
+  "Teléfono",
+  "Documentos",
+  "Acciones",
+]
 
 export const CreationTable = ({
   requests,
@@ -23,6 +33,7 @@ export const CreationTable = ({
     checked: boolean
   ) => void;
 }>) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const listEndRef = useRef<HTMLDivElement>(null);
 
   const addRow = () => {
@@ -35,6 +46,7 @@ export const CreationTable = ({
         docs: [],
       },
     ]);
+    inputRef.current?.focus();
   };
 
   useEffect(() => {
@@ -44,25 +56,15 @@ export const CreationTable = ({
   return (
     <div className="w-full h-[550px] bg-white-100 dark:bg-white-10 shadow-doc-options text-[12px] overflow-x-auto relative text-black dark:text-white">
       {/* Encabezados con grid */}
-      <div className="grid grid-cols-[0.5fr_2fr_4fr_2fr_8fr_2fr] min-w-[800px] sticky top-0 z-10 bg-cream dark:bg-black-0 ">
+      <div className="grid grid-cols-[0.5fr_2fr_4fr_2fr_8fr_2.5fr] min-w-[800px] sticky top-0 z-10 bg-cream dark:bg-black-0 ">
         <div className="p-2 border border-border dark:border-shadow-dark">
           <Checkbox />
         </div>
-        <div className="p-2 border border-border dark:border-shadow-dark">
-          DNI
-        </div>
-        <div className="p-2 border border-border dark:border-shadow-dark">
-          Nombres completos
-        </div>
-        <div className="p-2 border border-border dark:border-shadow-dark">
-          Teléfono
-        </div>
-        <div className="p-2 border border-border dark:border-shadow-dark">
-          Documentos
-        </div>
-        <div className="p-2 border border-border dark:border-shadow-dark">
-          Acciones
-        </div>
+        {headers.map((header)=>(
+          <div className="p-2 border border-border dark:border-shadow-dark">
+          {header}
+          </div>
+        ))}
       </div>
 
       {/* Filas con grid */}
@@ -70,7 +72,7 @@ export const CreationTable = ({
         {requests.map((request, index) => (
           <div
             key={index}
-            className="grid grid-cols-[0.5fr_2fr_4fr_2fr_8fr_2fr] bg-black-02 hover:bg-black-05 dark:hover:bg-white-10"
+            className="grid grid-cols-[0.5fr_2fr_4fr_2fr_8fr_2.5fr] bg-black-02 hover:bg-black-05 dark:hover:bg-white-10"
           >
             {/* Checkbox */}
             <div className="p-2 border border-border dark:border-shadow-dark "><Checkbox /></div>
@@ -79,6 +81,7 @@ export const CreationTable = ({
             <div className="p-2 border border-border dark:border-shadow-dark">
               <div className="w-full overflow-hidden">
                 <input
+                  ref={inputRef}
                   className="w-full bg-transparent focus:outline-none number-input-hide-arrows"
                   type="text"
                   value={request.dni}
@@ -152,8 +155,28 @@ export const CreationTable = ({
             </div>
 
             {/* Acciones */}
-            <div className="p-2 border border-border dark:border-shadow-dark">
-              <button className="cursor-pointer">Confirmar</button>
+            <div className="p-2 border border-border dark:border-shadow-dark flex justify-around items-start gap-1">
+              <motion.button 
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.98 }}
+                className="
+                  py-0.5 px-1
+                  cursor-pointer 
+                  bg-white 
+                  border border-black hover:border-green
+                  hover:text-green 
+                  rounded-[5px]
+                "
+              >
+                Confirmar
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.98 }}
+                className="cursor-pointer hover:text-red"
+              >
+                  <FaDeleteLeft className="w-[24px] h-[24px]"/>
+              </motion.button>
             </div>
           </div>
         ))}
