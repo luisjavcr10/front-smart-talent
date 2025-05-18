@@ -1,5 +1,5 @@
 /* Fuentes externas */
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&display=swap");
+@import url("https://fonts.google.com/share?selection.family=Faustina:ital,wght@0,300..800;1,300..800|Karla:ital,wght@0,200..800;1,200..800");
 
 /* Fuentes locales */
 @font-face {
@@ -15,6 +15,24 @@
 /* Variables de tema personalizadas */
 @theme {
 /* Colores */
+--color-black: #101010;
+--color-black-2: #535353;
+--color-black-1:#7D7D7D;
+--color-medium: #A6A6A6;
+--color-white-1: #E7E7E7;
+--color-white-2: #F5F7F8;
+--color-white: #FFFFFF;
+--color-error:#E74C3C;
+--color-warning:#F3CB26;
+--color-success:#1ABC9C;
+--color-main-3:#B65800;
+--color-main-2:#D16500;
+--color-main-1:#E97407;
+--color-main:#FA8D28;
+--color-main-1plus:#FF9E44;
+--color-main-2plus:#FFBD81;
+--color-main-3plus:#FFDCBD;
+
 --color-black-0: #000000;
 --color-black-1: #171717;
 --color-background: #202120;
@@ -42,9 +60,11 @@
 --color-border: rgba(226, 226, 226, 1);
 
 /* Sombras */
+--shadow-sidebar:1px 0px 2px 0px #00000040;
+--shadow-optionsmodal:0px -1px 1px 0px #00000040;
+
 --shadow-medium: 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
 --shadow-full: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
---shadow-sidebar: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
 --shadow-medium-dark: 0px -4px 4px 0px rgba(250, 141, 40, 0.5);
 --shadow-full-dark: 0px 4px 4px 0px rgba(250, 141, 40, 0.5);
 --shadow-sidebar-dark: 4px 0px 4px 0px rgba(250, 141, 40, 0.5);
@@ -52,13 +72,12 @@
 
 /* Bordes */
 --radius-5xl: 6rem;
+--radius-sidebar:12px;
 
 /* Tipografías */
 --font-vendura: "Vendura", sans-serif;
---font-bebasneue: "Bebas Neue", sans-serif;
---font-bevietnampro: "Be Vietnam Pro", sans-serif;
---font-weight-light: 300;
---font-weight-normal: 400;
+--font-karla: "Karla", sans-serif;
+--font-faustina: "Faustina", sans-serif;
 }
 
 /* Variantes personalizadas */
