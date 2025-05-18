@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { HiOutlineDocumentSearch } from "react-icons/hi";
 import { FaChevronCircleDown } from "react-icons/fa";
 import { RequestsBody } from "@/requests/types/RequestBody";
 
@@ -33,7 +32,7 @@ export const RequestsTable = ({
         {data.map((request, index) => (
           <div key={index}>
             {/* Main Row */}
-            <div className="px-2 grid grid-cols-12 border border-white-1 rounded-sidebar gap-0 hover:bg-black-05 dark:hover:bg-white-10">
+            <div className="px-2 grid grid-cols-12 border border-white-1 rounded-sidebar hover:bg-black-05 dark:hover:bg-white-10">
               <div className="col-span-1 p-2 ">
                 {request.dni}
               </div>

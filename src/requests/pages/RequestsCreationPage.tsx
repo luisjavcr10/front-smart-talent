@@ -10,9 +10,9 @@ export function RequestsCreationPage() {
     setOpenOptionsIndex(openOptionsIndex === rowIndex ? null : rowIndex);
   };
 
-  const handleSetOpenOptions = () =>{
+  const handleSetOpenOptions = () => {
     setOpenOptionsIndex(null);
-  }
+  };
 
   const handleRequests = (newRequests: RequestsType[]) => {
     setRequests(newRequests);
@@ -43,9 +43,14 @@ export function RequestsCreationPage() {
                     w-full mt-5 md:mt-0
                     text-black dark:text-white"
       >
-        <h1 className="font-bebasneue text-[32px] md:text-[48px] xl:text-[64px]">
+        <div>
+          <p className="font-karla text-[32px] md:text-[36px] xl:text-[36px]">
           CREACIÓN DE SOLICITUDES
-        </h1>
+          </p>
+          <p className="text-[12px] font-light">
+            Registra personas por DNI y nombre para solicitar documentos.
+          </p>
+        </div>
       </div>
       <CreationTable
         requests={requests}
