@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { TbFileDollar, TbFileDescription, TbLogout, TbList, TbPlaylistAdd, TbCaretDownFilled } from "react-icons/tb";
-import { storage } from '../utils/storage';
 import { SidebarToggle } from './SidebarToggle';
 import { Logotipo } from './Logotipo';
+import { useUser } from '@/auth/hooks/useUser';
 
 const iconClasses = "w-[30px] h-[30px]";
 
 export const Sidebar = () => {
+  const {user, logout} = useUser();
   const navigate = useNavigate();
   const [isRequestsOpen, setIsRequestsOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ export const Sidebar = () => {
   };
 
   const handleLogout = () =>{
-    storage.clearToken();
+    logout();
     navigate('/login');
   };
 
@@ -70,7 +71,7 @@ export const Sidebar = () => {
         
         <div className="flex flex-col justify-center items-center gap-5">
           <img className="w-[60px] h-[60px]" src="/images/profile.png" alt="profile" />
-          <p>Ally Lecca</p>
+          <p>{user?.name}</p>
         </div>
 
         <div className="flex flex-col w-full border-t border-orange">
