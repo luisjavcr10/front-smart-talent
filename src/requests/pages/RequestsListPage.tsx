@@ -3,6 +3,47 @@ import { OptionsModal } from "../components/private/list/OptionsModal";
 import { FiPlusCircle } from "react-icons/fi";
 import { RequestsTable } from "../components/private/list/RequestsTable";
 
+const requests= [
+    {
+        propietario:'1',
+        dni:'70926081',
+        fullname:'Luis Castillo Rabanal',
+        state:'Pendiente',
+        phone:'984214874',
+        docs:[
+            {
+                name:'Verificación Domiciliaria',
+                state:true
+            },
+            {
+                name:'Verificación Laboral',
+                state:true
+            },
+            {
+                name:'Antecedentes penales',
+                state:false
+            }
+        ]
+    },
+    {
+        propietario:'1',
+        dni:'70251318',
+        fullname:'Alexander Huamanchumo Gordillo',
+        state:'Pendiente',
+        phone:'984214874',
+        docs:[
+            {
+                name:'Verificación Domiciliaria',
+                state:true
+            },
+            {
+                name:'Verificación Laboral',
+                state:false
+            }
+        ]
+    }
+]
+
 export function RequestsListPage() {
     const [isActive, setIsActive] = useState(false);
     
@@ -20,7 +61,7 @@ export function RequestsListPage() {
             </div>
 
             <div className="w-full h-[500px] shadow-doc-options bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
-                <RequestsTable />
+                <RequestsTable data={requests}/>
                 <OptionsModal isActive={isActive} handleActive={()=>setIsActive(!isActive)}/>
                 
             </div>
