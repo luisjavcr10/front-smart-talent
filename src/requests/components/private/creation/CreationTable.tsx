@@ -1,10 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
 import { DocsChecklist } from "./DocsChecklist";
 import { RequestsType } from "@/requests/types/RequestsListType";
-import { Checkbox } from "@/components/ui/checkbox";
 import { AddButton } from "./AddButton";
-import { FaDeleteLeft } from "react-icons/fa6";
 
 const headers = [
   "DNI",
