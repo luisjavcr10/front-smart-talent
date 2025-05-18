@@ -2,14 +2,12 @@ import { useState } from "react";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 import { FaChevronCircleDown } from "react-icons/fa";
 import { RequestsBody } from "@/requests/types/RequestBody";
-import { useUser } from "@/auth/hooks/useUser";
 
 export const RequestsTable = ({
   data,
 }: Readonly<{
   data: RequestsBody[];
 }>) => {
-    const {user} =useUser();
   const [openRows, setOpenRows] = useState<number[]>([]);
 
   const handleToggleRow = (index: number) => {
@@ -19,64 +17,33 @@ export const RequestsTable = ({
   };
 
   return (
-    <table className="w-full">
-      <thead className="bg-cream dark:bg-black-0 text-black dark:text-white">
-        <tr>
-          <th className="text-start p-2 border border-black-05 dark:border-shadow-dark">
-            #
-          </th>
-          {user?.role==='ADMIN' && <th className="text-start p-2 border border-black-05 dark:border-shadow-dark">
-            USER
-          </th>}
-          <th className="text-start p-2 border border-black-05 dark:border-shadow-dark">
-            DNI
-          </th>
-          <th className="text-start p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell">
-            Nombre Completo
-          </th>
-          <th className="text-start p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell">
-            Estado
-          </th>
-          <th className="text-start p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell">
-            Documentos
-          </th>
-          <th className="text-start p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell">
-            Acciones
-          </th>
-          <th className="text-start p-2 border border-black-05 dark:border-shadow-dark md:hidden">
-            Acciones
-          </th>
-        </tr>
-      </thead>
-      <tbody className="text-black dark:text-white">
+    <div className="w-full text-[14px] font-karla font-light">
+      {/* Header */}
+      <div className="px-2 grid grid-cols-12 gap-0 bg-main-3plus dark:bg-black-0 text-black dark:text-white rounded-sidebar mb-4">
+        <div className="col-span-1 p-2">DNI</div>
+        <div className="col-span-3 p-2 hidden md:block">Nombre Completo</div>
+        <div className="col-span-1 p-2 hidden md:block">Estado</div>
+        <div className="col-span-6 p-2 hidden md:block">Documentos</div>
+        <div className="col-span-1 p-2 hidden md:block">Acciones</div>
+        <div className="col-span-1 p-2 md:hidden">Acciones</div>
+      </div>
+
+      {/* Rows */}
+      <div className="text-black dark:text-white flex flex-col gap-2">
         {data.map((request, index) => (
-          <>
-            {/* Fila normal (visible en desktop) */}
-            <tr
-              key={index}
-              className="hover:bg-black-05 dark:hover:bg-white-10"
-            >
-              <td className="p-2 border border-black-05 dark:border-shadow-dark">
-                {index + 1}
-              </td>
-              {user?.role==='ADMIN' && <td className="p-2 border border-black-05 dark:border-shadow-dark">
-                {request.propietario}
-              </td>
-              }
-              <td className="p-2 border border-black-05 dark:border-shadow-dark">
+          <div key={index}>
+            {/* Main Row */}
+            <div className="px-2 grid grid-cols-12 border border-white-1 rounded-sidebar gap-0 hover:bg-black-05 dark:hover:bg-white-10">
+              <div className="col-span-1 p-2 ">
                 {request.dni}
-              </td>
-              <td className="p-2 border border-black-05 dark:border-shadow-dark">
+              </div>
+              <div className="col-span-3 p-2 ">
                 {request.fullname}
-              </td>
-              <td
-                className={`p-2 border border-black-05 dark:border-shadow-dark ${"hidden md:table-cell"}`}
-              >
+              </div>
+              <div className="col-span-1 p-2  hidden md:block">
                 <span>{request.state}</span>
-              </td>
-              <td
-                className={`p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell`}
-              >
+              </div>
+              <div className="col-span-6 p-2  hidden md:block">
                 <div className="flex flex-wrap gap-1">
                   {request.docs.map((doc, docIndex) => (
                     <span
@@ -84,27 +51,23 @@ export const RequestsTable = ({
                       className={`${
                         doc.state
                           ? "bg-green text-white"
-                          : "bg-transparent border border-black-05 dark:border-shadow-dark text-black dark:text-white"
+                          : "bg-transparent  text-black dark:text-white"
                       } py-0.5 px-2 rounded-[5px]`}
                     >
                       {doc.name}
                     </span>
                   ))}
                 </div>
-              </td>
-              <td
-                className={`p-2 border border-black-05 dark:border-shadow-dark hidden md:table-cell text-center`}
-              >
+              </div>
+              <div className="col-span-1 p-2  hidden md:block text-center">
                 <button
                   title="Ver detalles de solicitud"
-                  className="cursor-pointer text-center hover:text-orange"
+                  className="cursor-pointer text-center hover:text-main-2plus"
                 >
-                  <HiOutlineDocumentSearch className="w-[24px] h-[24px]" />
+                  <p>Ver</p>
                 </button>
-              </td>
-              <td
-                className={`p-2 border border-black-05 dark:border-shadow-dark md:hidden text-center`}
-              >
+              </div>
+              <div className="col-span-1 p-2  md:hidden text-center">
                 <button
                   className="text-center"
                   onClick={() => handleToggleRow(index)}
@@ -115,16 +78,13 @@ export const RequestsTable = ({
                     }`}
                   />
                 </button>
-              </td>
-            </tr>
+              </div>
+            </div>
 
-            {/* Fila expandida (solo móvil) */}
+            {/* Expanded Row (Mobile) */}
             {openRows.includes(index) && (
-              <tr className="md:hidden">
-                <td
-                  colSpan={7}
-                  className="p-2 border border-black-05 dark:border-shadow-dark"
-                >
+              <div className="md:hidden col-span-12">
+                <div className="p-2 border border-black-05 dark:border-shadow-dark">
                   <div className="flex flex-col gap-2 mx-4 my-2">
                     <p>
                       Estado: <strong>{request.state}</strong>
@@ -150,12 +110,12 @@ export const RequestsTable = ({
                       </button>
                     </div>
                   </div>
-                </td>
-              </tr>
+                </div>
+              </div>
             )}
-          </>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };

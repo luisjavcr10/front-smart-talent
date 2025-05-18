@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { OptionsModal } from "../components/private/list/OptionsModal";
-import { FiPlusCircle } from "react-icons/fi";
 import { RequestsTable } from "../components/private/list/RequestsTable";
+import {motion} from "framer-motion"
 
 const requests= [
     {
@@ -48,19 +48,31 @@ export function RequestsListPage() {
     const [isActive, setIsActive] = useState(false);
     
     return(
-        <div className="flex flex-col mx-5 md:mx-12 my-15 gap-11">
+        <div className="flex flex-col mx-5 md:mx-8 my-15 gap-11">
             <div 
                 className="
                     flex flex-row justify-between items-center
                     w-full mt-5 md:mt-0
-                    text-black dark:text-white">
-                <h1 className="font-karla text-[32px] md:text-[36px] xl:text-[36px]">LISTA DE SOLICITUDES</h1>
-                <button onClick={()=>setIsActive(true)}>
-                    <FiPlusCircle className="w-[30px] md:w-[40px] lg:w-[50px] xl:w-[60px] h-[30px] md:h-[40px] lg:h-[50px] xl:h-[60px] hover:text-orange-50"/>
-                </button>
+                    text-black dark:text-white"
+            >
+                <div>
+                    <p className="font-karla text-[32px] md:text-[36px] xl:text-[36px]">LISTA DE SOLICITUDES</p>
+                    <p className="text-[12px] font-light">Visualiza tus solicitudes, su estado y los documentos requeridos.</p>
+                </div>
+                
+                <motion.button 
+                    whileHover={{
+                        scale: 1.01,
+                        transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="bg-main-1plus hover:bg-main rounded-sidebar py-2 px-8 text-[14px] font-light"
+                    onClick={()=>setIsActive(true)}>
+                    Agregar nueva solicitud
+                </motion.button>
             </div>
 
-            <div className="w-full h-[500px] shadow-doc-options bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
+            <div className="w-full h-[500px] p-3 rounded-sidebar shadow-doc-options bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
                 <RequestsTable data={requests}/>
                 <OptionsModal isActive={isActive} handleActive={()=>setIsActive(!isActive)}/>
                 

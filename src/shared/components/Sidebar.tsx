@@ -95,7 +95,7 @@ export const Sidebar = () => {
               {item.text === "Solicitudes" && isRequestsOpen && (
                 <div className="transition-all duration-300 ease-in-out">
                   {requestsSubMenu.map((subItem, subIndex) => (
-                    <div key={subIndex} className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white border-b border-medium bg-white-2 dark:bg-black-1 px-10'>
+                    <div key={subIndex} className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white border-b border-medium bg-white-2 dark:bg-black-1 px-10 cursor-pointer'>
                       {subItem.icon}
                       {subItem.text}
                     </div>
