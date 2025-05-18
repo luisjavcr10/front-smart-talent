@@ -1,15 +1,21 @@
 import { AuthApi } from '../api/authApi';
-import { storage } from '../../shared/utils/storage';
 
 export const AuthService = {
   async login(email: string, password: string) {
     try {
       const { data } = await AuthApi.login({ email, password });
-      storage.setToken(data.data.jwt);
-      return data.data.jwt;
+
+      const token = data.data.jwt;
+      const user = {
+        id: data.data.id,
+        name: data.data.name,
+        email: data.data.email,
+        role: data.data.role,
+      };
+
+      return { token, user };
     } catch (error) {
       throw new Error('Login failed');
     }
   },
-
 };
