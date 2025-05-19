@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const OptionsModal = ({
@@ -8,6 +9,7 @@ export const OptionsModal = ({
   isActive: boolean;
   handleActive: () => void;
 }>) => {
+  const navigate = useNavigate();
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,6 +57,7 @@ export const OptionsModal = ({
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
+                onClick={()=>(navigate("/requests/create"))}
                 className="bg-main-1plus dark:bg-white-10 hover:bg-main py-2 px-4 w-full rounded-sidebar text-[16px] transition-colors border border-transparent dark:border-shadow-dark "
               >
                 <p className="text-[14px] font-light">Registrar manualmente</p>
