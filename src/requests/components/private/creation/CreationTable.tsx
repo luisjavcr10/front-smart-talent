@@ -71,9 +71,9 @@ export const CreationTable = ({
   }, [requests]);
 
   return (
-    <div className="p-3 w-full h-[500px] bg-white-100 dark:bg-white-10 shadow-doc-options text-[14px] overflow-x-auto relative text-black dark:text-white rounded-sidebar font-karla font-light">
+    <div className="p-3 w-full h-[500px] dark:border dark:border-black-1 shadow-doc-options text-[14px] overflow-x-auto relative text-black dark:text-white rounded-sidebar font-karla font-light">
       {/* Encabezados con grid - usando 12 columnas para mejor control */}
-      <div className="px-2 grid grid-cols-40 items-center min-w-[800px] sticky top-0 z-10 bg-main-3plus dark:bg-black-0 rounded-sidebar mb-4">
+      <div className="px-2 grid grid-cols-40 items-center min-w-[800px] sticky top-0 z-10 bg-main-1plus dark:bg-black-0 rounded-sidebar mb-4">
         {/* DNI - 2 columnas */}
         <div className="col-span-5 p-2">{headers[0]}</div>
         {/* Nombres - 4 columnas */}
@@ -90,16 +90,16 @@ export const CreationTable = ({
       <div className="text-black dark:text-white flex flex-col gap-2">
         {requests.map((request, index) => (
           <div key={index}>
-            <div className="px-2 grid grid-cols-40 h-full border border-white-1 rounded-sidebar hover:bg-black-05 dark:hover:bg-white-10">
+            <div className="px-2 grid grid-cols-40 h-full border border-white-1 dark:border-black-1 rounded-sidebar hover:bg-black-05 ">
               {/* DNI - 2 columnas */}
               <div className="col-span-5 p-2 ">
                 <div className="w-full overflow-hidden">
                   <input
                     ref={(el) => setInputRef(el, index)}
-                    className={`w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
+                    className={`w-full  rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
                       inputErrors.dni[index]
-                        ? "border border-red"
-                        : "border border-border"
+                        ? "border border-error"
+                        : "border border-white-1 dark:border-black-2"
                     }`}
                     type="text"
                     value={request.dni}
@@ -119,7 +119,7 @@ export const CreationTable = ({
                     }}
                   />
                   {inputErrors.dni[index] && (
-                    <p className="text-red text-[8px] font-bold mt-1">
+                    <p className="text-error text-[8px] font-bold mt-1">
                       Formato incorrecto
                     </p>
                   )}
@@ -130,10 +130,10 @@ export const CreationTable = ({
               <div className="col-span-8 p-2 ">
                 <div className="w-full overflow-hidden"> 
                   <textarea
-                    className={`w-full resize-none bg-white rounded-[5px] py-0.5 px-1 focus:outline-none ${
+                    className={`w-full resize-none rounded-[5px] py-0.5 px-1 focus:outline-none ${
                       inputErrors.fullname[index]
-                        ? "border border-red"
-                        : "border border-border"
+                        ? "border border-error"
+                        : "border border-white-1 dark:border-black-2"
                     }`}
                     value={request.fullname}
                     onChange={(e) => {
@@ -157,7 +157,7 @@ export const CreationTable = ({
                     }}
                   />
                   {inputErrors.fullname[index] && (
-                    <p className="text-red text-[8px] font-bold mt-1">
+                    <p className="text-error text-[8px] font-bold mt-1">
                       Formato incorrecto
                     </p>
                   )}
@@ -168,10 +168,10 @@ export const CreationTable = ({
               <div className="col-span-5 p-2 ">
                 <div className="w-full h-full overflow-hidden">
                   <input
-                    className={`w-full bg-white rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
+                    className={`w-full rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
                       inputErrors.phone[index]
-                        ? "border border-red"
-                        : "border border-border"
+                        ? "border border-error"
+                        : "border border-white-1 dark:border-black-2"
                     }`}
                     type="text"
                     value={request.phone}
@@ -191,7 +191,7 @@ export const CreationTable = ({
                     }}
                   />
                   {inputErrors.phone[index] && (
-                    <p className="text-red text-[8px] font-bold mt-1">
+                    <p className="text-error text-[8px] font-bold mt-1">
                       Formato incorrecto
                     </p>
                   )}
@@ -205,7 +205,7 @@ export const CreationTable = ({
                     {request.docs.map((doc, docIndex) => (
                       <span
                         key={docIndex}
-                        className="bg-white border border-border text-black py-0.5 px-2 rounded-[5px]"
+                        className="border border-medium dark:border-black-2 py-0.5 px-2 rounded-[5px]"
                       >
                         {doc.name}
                       </span>

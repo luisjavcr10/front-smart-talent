@@ -9,8 +9,13 @@ import { useUser } from "@/auth/hooks/useUser";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login } = useUser();
+
+  const clearError = () => {
+    setError(null);
+  };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,9 +25,14 @@ export const LoginForm = () => {
 
     try {
       setIsLoading(true);
-      await login({ email, password });
-      setIsLoading(false);
-      navigate("/requests");
+      const state = await login({ email, password });
+      if(state){
+        setIsLoading(false);
+        navigate("/requests");
+      }else{
+        setIsLoading(false);
+        setError("Credenciales inválidas");
+      }
     } catch (error) {
       setIsLoading(false);
       console.error(error);
@@ -37,13 +47,16 @@ export const LoginForm = () => {
       </p>
 
       <FormLayout handlelogin={handleLogin}>
-        <FormInput text="Email" type="email" />
-        <FormInput text="Contraseña" type="password">
+        <FormInput handleError={clearError} error={error} text="Email" type="email" />
+        <FormInput handleError={clearError} error={error} text="Contraseña" type="password">
           <Link
             to="/recovery-password"
-            className="text-[16px] cursor-pointer hover:text-orange"
+            className="text-[16px] cursor-pointer hover:text-main"
           >
-            ¿Olvidaste tu contraseña?
+            <div className="flex justify-between">
+              <p>¿Olvidaste tu contraseña?</p>
+              {error && <p className="text-error">{error}</p>}
+            </div>
           </Link>
         </FormInput>
         <FormButton text="Ingresar" />
@@ -51,8 +64,8 @@ export const LoginForm = () => {
       <button
         className="
                     flex justify-center items-center
-                    bg-orange-15 dark:bg-white-20 hover:opacity-80
-                    border border-white dark:border-orange rounded-[15px] 
+                    bg-main-3plus dark:bg-black-2 hover:opacity-80
+                    border border-white dark:border-main rounded-[15px] 
                     px-4 py-2 
                     w-full 
                     cursor-pointer

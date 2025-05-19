@@ -6,16 +6,16 @@ type LoginPayload = {
     password: string
 }
 
-type LoginResponse ={
-    title: string,
-    data: {
-        email: string,
-        jwt: string,
-        id: string,
-        name: string,
-        role: string
-    },
-}
+interface LoginResponse {
+    message: string;
+    token: string;
+    user: {
+      id: number;
+      name: string;
+      email: string;
+      role: string[];
+    };
+  }
 
 export const AuthApi = {
   login: (payload: LoginPayload) => 

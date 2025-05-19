@@ -18,7 +18,7 @@ export const RequestsTable = ({
   return (
     <div className="w-full text-[14px] font-karla font-light">
       {/* Header */}
-      <div className="px-2 grid grid-cols-12 gap-0 bg-main-3plus dark:bg-black-0 text-black dark:text-white rounded-sidebar mb-4">
+      <div className="px-2 grid grid-cols-12 gap-0 bg-main-3plus dark:bg-main-1plus text-black dark:text-white rounded-sidebar mb-4">
         <div className="col-span-1 p-2">DNI</div>
         <div className="col-span-3 p-2 hidden md:block">Nombre Completo</div>
         <div className="col-span-1 p-2 hidden md:block">Estado</div>
@@ -32,7 +32,7 @@ export const RequestsTable = ({
         {data.map((request, index) => (
           <div key={index}>
             {/* Main Row */}
-            <div className="px-2 grid grid-cols-12 border border-white-1 rounded-sidebar hover:bg-black-05 dark:hover:bg-white-10">
+            <div className="px-2 grid grid-cols-12 border border-white-1 dark:border-black-1 rounded-sidebar hover:bg-black-05 dark:hover:bg-white-10">
               <div className="col-span-1 p-2 ">
                 {request.dni}
               </div>
@@ -49,7 +49,7 @@ export const RequestsTable = ({
                       key={docIndex}
                       className={`${
                         doc.state
-                          ? "bg-green text-white"
+                          ? "bg-success text-white"
                           : "bg-transparent  text-black dark:text-white"
                       } py-0.5 px-2 rounded-[5px]`}
                     >
@@ -95,7 +95,7 @@ export const RequestsTable = ({
                           key={docIndex}
                           className={`w-full ${
                             doc.state
-                              ? "bg-green text-white"
+                              ? "bg-success text-white"
                               : "bg-transparent border border-black-05 dark:border-shadow-dark text-black dark:text-white"
                           } py-0.5 px-2 rounded-[5px] text-center`}
                         >

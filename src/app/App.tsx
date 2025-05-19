@@ -3,7 +3,7 @@ import { Sidebar } from '../shared/components/Sidebar'
 
 export default function App() {
   return (
-    <div className="w-full bg-white dark:bg-background text-foreground min-h-screen flex font-bevietnampro">
+    <div className="w-full bg-white dark:bg-black text-foreground min-h-screen flex font-bevietnampro">
       {/* Smart Talent Header */}
       
       <Sidebar />
