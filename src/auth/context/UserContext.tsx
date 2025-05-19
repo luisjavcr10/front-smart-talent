@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { storage } from "@/shared/utils/storage";
-//import { AuthService } from "../services/authService";
+import { AuthService } from "../services/authService";
 
 interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
-  role: string;
+  role: string[];
 }
 
 interface LoginProps {
@@ -16,7 +16,7 @@ interface LoginProps {
 
 interface UserContextType {
   user: User | null;
-  login: (credentials: LoginProps) => Promise<void>;
+  login: (credentials: LoginProps) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -34,22 +34,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const login = async ({ email, password }: LoginProps) => {
-    //const { token, user } = await AuthService.login(email, password);
+  const login = async ({ email, password }: LoginProps): Promise<boolean> => {
+    const response = await AuthService.login(email, password);
     console.log(email);
     console.log(password);
-    const { token, user } = {
-      token: "token",
-      user: {
-        id: "1",
-        name: "Luis Javier Castillo Rabanal",
-        email: "ing.castillorabanal@gmail.com",
-        role: "ADMIN"
-      }
+    if (response.message === "Credenciales inválidas") {
+      return false;
+    }else{
+      storage.setToken(response.token);
+      storage.setUser(response.user);
+      setUser(response.user);
+      return true;
     }
-    storage.setToken(token);
-    storage.setUser(user);
-    setUser(user);
   };
 
   const logout = () => {
