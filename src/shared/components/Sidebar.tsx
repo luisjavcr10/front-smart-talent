@@ -28,25 +28,25 @@ export const Sidebar = () => {
 
   const mainMenuItems = [
     { 
-      icon: <TbFileDescription className='w-[30px] h-[30px] text-black-2' />, 
+      icon: <TbFileDescription className='w-[30px] h-[30px] text-black-2  dark:text-white-1' />, 
       text: "Solicitudes", 
       action: toggleRequestsMenu,
       chevron: (
         <div className={`transition-all duration-300 transform ${isRequestsOpen ? 'rotate-180' : 'rotate-0'}`}>
-          <MdExpandMore className="w-[25px] h-[25px] text-black-2" />
+          <MdExpandMore className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
         </div>
       )
     },
     { 
-      icon: <TbFileDollar className='w-[30px] h-[30px] text-black-2' />, 
+      icon: <TbFileDollar className='w-[30px] h-[30px] text-black-2  dark:text-white-1' />, 
       text: "Facturación",
       action: null
     }
   ];
 
   const requestsSubMenu = [
-    { icon: <TbList className="w-[30px] h-[30px] text-black-2" />, text: "Lista de Solicitudes" },
-    { icon: <TbPlaylistAdd className="w-[30px] h-[30px] text-black-2" />, text: "Agregar Solicitud" }
+    { icon: <TbList className="w-[30px] h-[30px] text-black-2  dark:text-white-1" />, text: "Lista de Solicitudes" },
+    { icon: <TbPlaylistAdd className="w-[30px] h-[30px] text-black-2  dark:text-white-1" />, text: "Agregar Solicitud" }
   ];
 
   return (
@@ -57,12 +57,12 @@ export const Sidebar = () => {
           w-96 h-screen
           transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0 max-w-72' : '-translate-x-full xl:translate-x-0 max-w-72'}
-          bg-white dark:bg-black-1
+          bg-white dark:bg-black
           flex flex-col items-center 
           py-14
           text-black dark:text-white 
           font-karla  
-          border-r-medium rounded-r-sidebar shadow-sidebar`}
+          border-r border-medium  dark:border-black-1 rounded-r-sidebar shadow-sidebar`}
       >
         <div className='w-full flex flex-col items-center mb-5'>
           <Logotipo where='sidebar'/>
@@ -84,7 +84,7 @@ export const Sidebar = () => {
           {mainMenuItems.map((item, index) => (
             <div key={index}>
               <div 
-                className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 border-b border-medium px-6  cursor-pointer`}
+                className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6  cursor-pointer`}
                 onClick={item.action || undefined}
               >
                 {item.icon}
@@ -95,7 +95,7 @@ export const Sidebar = () => {
               {item.text === "Solicitudes" && isRequestsOpen && (
                 <div className="transition-all duration-300 ease-in-out">
                   {requestsSubMenu.map((subItem, subIndex) => (
-                    <div key={subIndex} className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white border-b border-medium bg-white-2 dark:bg-black-1 px-10 cursor-pointer'>
+                    <div key={subIndex} className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
                       {subItem.icon}
                       {subItem.text}
                     </div>
@@ -107,9 +107,9 @@ export const Sidebar = () => {
           ))}
           <button
             onClick={handleLogout}
-            className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 border-b border-medium px-6  cursor-pointer`}
+            className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6  cursor-pointer`}
           >
-            <TbLogout className="w-[30px] h-[30px] text-black-2"/>
+            <TbLogout className="w-[30px] h-[30px] text-black-2 dark:text-white-1"/>
             Cerrar Sesión
           </button>
         </div>         

@@ -45,7 +45,7 @@ export const DocsChecklist = ({
     if(openIndex === index){
         return (
             <div  ref={modalRef} className="w-52 absolute top-full right-10 mt-1 z-10">
-              <div className="flex flex-col gap-1 bg-white rounded-[4px] shadow-doc-options border border-shadow-dark">
+              <div className="flex flex-col gap-1 bg-white dark:bg-black rounded-[4px] shadow-doc-options border border-white-1 dark:border-black-2">
                 {DOCUMENT_OPTIONS.map((option, optIdx) => {
                   const checked = request.docs.some(
                     (doc: { name: string; state: boolean }) => doc.name === option.name
@@ -53,7 +53,7 @@ export const DocsChecklist = ({
                   return (
                     <div
                       key={optIdx}
-                      className="flex justify-between items-center gap-4 p-2 cursor-pointer border-b border-b-black-05 last:border-b-0"
+                      className="flex justify-between items-center gap-4 p-2 cursor-pointer border-b border-white-1 dark:border-black-2 last:border-b-0"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <span>{option.name}</span>
