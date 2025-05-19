@@ -4,7 +4,7 @@ import { AuthService } from "../services/authService";
 
 interface User {
   id: number;
-  name: string;
+  username: string;
   email: string;
   role: string[];
 }
@@ -35,26 +35,17 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async ({ email, password }: LoginProps): Promise<boolean> => {
-    const response = await AuthService.login(email, password);
-    console.log(email);
-    console.log(password);
-    //const response = {
-    //  message: "Credenciales validas",
-    //  token: "odfnsdognjdfsjbv9u",
-    //  user: {
-    //    id: 1,
-    //    name: "Luis Castillo Rabanal",
-    //    email: "ing.castillorabanal@gmail.com",
-    //    role: ["ADMIN"]
-    //  }
-    //}
-    if (response.message === "Credenciales inválidas") {
-      return false;
-    }else{
+    try {
+      const response = await AuthService.login(email, password);
+      if (!response) return false; // Si es null, credenciales incorrectas
+  
       storage.setToken(response.token);
       storage.setUser(response.user);
       setUser(response.user);
       return true;
+    } catch (error) {
+      console.error("Error en login:", error);
+      return false;
     }
   };
 

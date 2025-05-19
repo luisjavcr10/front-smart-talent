@@ -71,7 +71,7 @@ export const Sidebar = () => {
         
         <div className="flex justify-center items-center gap-4 px-2 py-6 border-t-[1px] border-medium w-full">
           <img className="w-[45px] h-[45px]" src="/images/profile.png" alt="profile" />
-          <p className='text-[14px] font-light'>{user?.name}</p>
+          <p className='text-[14px] font-light'>{user?.username}</p>
         </div>
 
         <div className="flex flex-col w-full border-t border-medium text-[14px] font-light">
