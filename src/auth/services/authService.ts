@@ -1,19 +1,21 @@
 import { AuthApi } from '../api/authApi';
 
+interface LoginResponse {
+  message: string;
+  token: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    role: string[];
+  };
+}
+
 export const AuthService = {
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<LoginResponse> {
     try {
       const { data } = await AuthApi.login({ email, password });
-
-      const token = data.data.jwt;
-      const user = {
-        id: data.data.id,
-        name: data.data.name,
-        email: data.data.email,
-        role: data.data.role,
-      };
-
-      return { token, user };
+      return data;
     } catch (error) {
       throw new Error('Login failed');
     }

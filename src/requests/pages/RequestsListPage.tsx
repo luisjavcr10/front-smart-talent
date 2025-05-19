@@ -66,13 +66,13 @@ export function RequestsListPage() {
                         transition: { duration: 0.2 },
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="bg-main-1plus hover:bg-main rounded-sidebar py-2 px-8 text-[14px] font-light"
+                    className="bg-main-1plus dark:bg-main hover:bg-main dark:hover:bg-main-1plus rounded-sidebar py-2 px-8 text-[14px] font-light"
                     onClick={()=>setIsActive(true)}>
                     Agregar nueva solicitud
                 </motion.button>
             </div>
 
-            <div className="w-full h-[500px] p-3 rounded-sidebar shadow-doc-options bg-white dark:bg-white-10 text-[12px] overflow-x-auto relative">
+            <div className="w-full h-[500px] p-3 rounded-sidebar shadow-doc-options bg-white dark:bg-black dark:border dark:border-black-1 text-[12px] overflow-x-auto relative">
                 <RequestsTable data={requests}/>
                 <OptionsModal isActive={isActive} handleActive={()=>setIsActive(!isActive)}/>
                 
