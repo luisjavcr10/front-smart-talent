@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-interface UseS3UploadOptions {
+interface UseUploadOptions {
   onSuccess?: (url: string) => void;
   onError?: (error: Error) => void;
 }
 
-interface UseS3UploadReturn {
+interface UseUploadReturn {
   uploadFile: (file: File, signedUrl: string) => Promise<void>;
   isUploading: boolean;
   error: Error | null;
 }
 
-export const useS3Upload = (options?: UseS3UploadOptions): UseS3UploadReturn => {
+export const useUpload = (options?: UseUploadOptions): UseUploadReturn => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
