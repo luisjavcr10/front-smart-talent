@@ -51,7 +51,7 @@ export const LoginForm = () => {
         <FormInput handleError={clearError} error={error} text="Contraseña" type="password">
           <Link
             to="/recovery-password"
-            className="text-[16px] cursor-pointer hover:text-orange"
+            className="text-[16px] cursor-pointer hover:text-main"
           >
             <div className="flex justify-between">
               <p>¿Olvidaste tu contraseña?</p>
@@ -64,8 +64,8 @@ export const LoginForm = () => {
       <button
         className="
                     flex justify-center items-center
-                    bg-orange-15 dark:bg-white-20 hover:opacity-80
-                    border border-white dark:border-orange rounded-[15px] 
+                    bg-main-3plus dark:bg-black-2 hover:opacity-80
+                    border border-white dark:border-main rounded-[15px] 
                     px-4 py-2 
                     w-full 
                     cursor-pointer

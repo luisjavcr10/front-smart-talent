@@ -9,7 +9,7 @@ export const FormButton = ({
             type="submit"
             className="
                 text-[20px] text-center
-                bg-orange 
+                bg-main 
                 hover:opacity-80 
                 rounded-[15px] 
                 px-4 py-2 
