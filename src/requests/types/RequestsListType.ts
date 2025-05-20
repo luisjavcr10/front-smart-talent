@@ -4,9 +4,15 @@ export type RequestsType = {
     dni: string;
     fullname: string;
     phone: string;
-    docs: {
+    documents: {
+      documentTypeId: number;
       name: string;
       state: boolean;
-      resources: IResourceType[];
+      resourceTypes: IResourceType[];
+      resources: {
+        resourceTypeId: number;
+        name: string;
+        value: File[] | string | null;
+      }[];
     }[];
 };

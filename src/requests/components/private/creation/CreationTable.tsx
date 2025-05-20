@@ -56,7 +56,7 @@ export const CreationTable = ({
         dni: "",
         fullname: "",
         phone: "",
-        docs: [],
+        documents: [],
       },
     ]);
   };
@@ -81,10 +81,6 @@ export const CreationTable = ({
   };
 
   const handleConfirmRequest = () => {
-    if (selectedRequest !== null) {
-      // Aquí puedes implementar la lógica de confirmación
-      console.log('Confirmando solicitud:', requests[selectedRequest]);
-    }
     setModalOpen(false);
     setSelectedRequest(null);
   };
@@ -219,7 +215,7 @@ export const CreationTable = ({
                 <div className="col-span-16 p-2  relative">
                   <div className="flex justify-between items-start w-full">
                     <div className="flex flex-wrap gap-1 flex-1">
-                      {request.docs.map((doc, docIndex) => (
+                      {request.documents.map((doc, docIndex) => (
                         <span
                           key={docIndex}
                           className="border border-medium dark:border-black-2 py-0.5 px-2 rounded-[5px]"
@@ -269,7 +265,14 @@ export const CreationTable = ({
       <Modal
         isOpen={modalOpen}
         title="Recursos Necesarios"
-        onClose={() => setModalOpen(false)}
+        onClose={() => {
+          setModalOpen(false)
+          const newRequests = [...requests];
+          if (selectedRequest !== null) {
+            newRequests[selectedRequest].documents = newRequests[selectedRequest].documents.filter(doc => doc.resources.length > 0)
+          }
+          handleRequests(newRequests);
+        }}
         position="center"
         width="400px"
         className="p-6"
@@ -285,14 +288,23 @@ export const CreationTable = ({
         <div className="flex flex-col gap-4">
           {selectedRequest !== null && (
             <div className="text-sm">
-              {requests[selectedRequest].docs.map((doc, index) => (
-                <div key={index} className="gap-2">
+              {requests[selectedRequest].documents.map((doc, i) => (
+                <div key={i} className="gap-2">
                   <h2 className="text-lg">{doc.name}</h2>
                   
-                  {doc.resources.map((resource, index) => (
+                  {doc.resourceTypes.map((resourceType, j) => (
                     <ResourceInput
-                      key={index}
-                      {...resource}
+                      key={j}
+                      {...resourceType}
+                      onChange={(value) => {
+                        const newRequests = [...requests];
+                        newRequests[selectedRequest].documents[i].resources.push({
+                          resourceTypeId: resourceType.id,
+                          name: resourceType.name,
+                          value: value,
+                        })
+                        handleRequests(newRequests);
+                      }}
                     />
                   ))}
                 </div>
