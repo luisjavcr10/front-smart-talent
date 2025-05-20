@@ -72,26 +72,18 @@ export const CreationTable = ({
 
   return (
     <div className="p-3 w-full h-[500px] dark:border dark:border-black-1 shadow-doc-options text-[14px] overflow-x-auto relative text-black dark:text-white rounded-sidebar font-karla font-light">
-      {/* Encabezados con grid - usando 12 columnas para mejor control */}
       <div className="px-2 grid grid-cols-40 items-center min-w-[800px] sticky top-0 z-10 bg-main-1plus dark:bg-black-0 rounded-sidebar mb-4">
-        {/* DNI - 2 columnas */}
         <div className="col-span-5 p-2">{headers[0]}</div>
-        {/* Nombres - 4 columnas */}
         <div className="col-span-8 p-2">{headers[1]}</div>
-        {/* Teléfono - 2 columnas */}
         <div className="col-span-5 p-2">{headers[2]}</div>
-        {/* Documentos - 2 columnas */}
         <div className="col-span-16 p-2">{headers[3]}</div>
-        {/* Acciones - 1 columna */}
         <div className="col-span-6 p-2">{headers[4]}</div>
       </div>
 
-      {/* Filas con grid */}
       <div className="text-black dark:text-white flex flex-col gap-2">
         {requests.map((request, index) => (
           <div key={index}>
             <div className="px-2 grid grid-cols-40 h-full border border-white-1 dark:border-black-1 rounded-sidebar hover:bg-black-05 ">
-              {/* DNI - 2 columnas */}
               <div className="col-span-5 p-2 ">
                 <div className="w-full overflow-hidden">
                   <input
@@ -126,7 +118,6 @@ export const CreationTable = ({
                 </div>
               </div>
 
-              {/* Nombres completos - 4 columnas */}
               <div className="col-span-8 p-2 ">
                 <div className="w-full overflow-hidden"> 
                   <textarea
@@ -164,7 +155,6 @@ export const CreationTable = ({
                 </div>
               </div>
 
-              {/* Teléfono - 2 columnas */}
               <div className="col-span-5 p-2 ">
                 <div className="w-full h-full overflow-hidden">
                   <input
@@ -198,7 +188,6 @@ export const CreationTable = ({
                 </div>
               </div>
 
-              {/* Documentos - 2 columnas */}
               <div className="col-span-16 p-2  relative">
                 <div className="flex justify-between items-start w-full">
                   <div className="flex flex-wrap gap-1 flex-1">
@@ -226,7 +215,6 @@ export const CreationTable = ({
                 />
               </div>
 
-              {/* Acciones - 1 columna */}
               <div className="col-span-6 p-2 flex justify-around items-center gap-1">
                 <p className="text-[12px]">Confirmar</p>
                 <p className="text-[12px]">Eliminar</p>
@@ -236,7 +224,6 @@ export const CreationTable = ({
         ))}
       </div>
 
-      {/* Botón para agregar fila */}
       <div ref={listEndRef} className="flex justify-start p-4">
         <AddButton type="request" onClick={addRow} />
       </div>

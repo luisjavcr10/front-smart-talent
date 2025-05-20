@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/shared/components/checkbox";
 import { useRef, useEffect } from "react";
 import { RequestsType } from "@/requests/types/RequestsListType";
 
