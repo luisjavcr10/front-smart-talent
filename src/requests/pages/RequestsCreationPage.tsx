@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CreationTable } from "../components/private/creation/CreationTable";
 import { RequestsType } from "../types/RequestsListType";
+import { IDocumentType } from "../interfaces/IDocumentTypeResponse";
 
 export function RequestsCreationPage() {
   const [requests, setRequests] = useState<RequestsType[]>([]);
@@ -20,17 +21,21 @@ export function RequestsCreationPage() {
 
   const handleDocCheckbox = (
     rowIndex: number,
-    docName: string,
+    docType: IDocumentType,
     checked: boolean
   ) => {
     const newRequests = [...requests];
     const docs = newRequests[rowIndex].docs;
     if (checked) {
-      if (!docs.some((doc) => doc.name === docName)) {
-        docs.push({ name: docName, state: true });
+      if (!docs.some((doc) => doc.name === docType.name)) {
+        docs.push({ 
+          name: docType.name, 
+          state: true, 
+          resources: docType.resourceTypes
+        });
       }
     } else {
-      newRequests[rowIndex].docs = docs.filter((doc) => doc.name !== docName);
+      newRequests[rowIndex].docs = docs.filter((doc) => doc.name !== docType.name);
     }
     setRequests(newRequests);
   };

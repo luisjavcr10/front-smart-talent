@@ -13,4 +13,5 @@ export interface IResourceType {
     id: number;
     name: string;
     documentTypeId: number;
+    allowedFileTypes: string[];
 }

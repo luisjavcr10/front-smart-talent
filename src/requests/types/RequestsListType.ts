@@ -1,3 +1,5 @@
+import { IResourceType } from "../interfaces/IDocumentTypeResponse";
+
 export type RequestsType = {
     dni: string;
     fullname: string;
@@ -5,5 +7,6 @@ export type RequestsType = {
     docs: {
       name: string;
       state: boolean;
+      resources: IResourceType[];
     }[];
 };

@@ -2,6 +2,7 @@ import { Checkbox } from "@/shared/components/checkbox";
 import { useRef, useEffect } from "react";
 import { RequestsType } from "@/requests/types/RequestsListType";
 import { useDocumentType } from '@/requests/hooks/useDocumentType';
+import { IDocumentType } from "@/requests/interfaces/IDocumentTypeResponse";
 
 
 
@@ -16,7 +17,7 @@ export const DocsChecklist = ({
   request: RequestsType,
   index: number,
   openIndex: number | null,
-  handleDocCheckbox: (rowIndex: number, docName: string, checked: boolean) => void,
+  handleDocCheckbox: (rowIndex: number, doc: IDocumentType, checked: boolean) => void,
   handleOpen: () => void
 }>) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -57,7 +58,7 @@ export const DocsChecklist = ({
                 <Checkbox
                   checked={checked}
                   onCheckedChange={(checked: boolean) =>
-                    handleDocCheckbox(index, option.name, checked)
+                    handleDocCheckbox(index, option, checked)
                   }
                 />
               </div>

@@ -15,6 +15,7 @@
 /* Variables de tema personalizadas */
 @theme {
 /* Colores */
+--color-black-opacity-50: #10101080;
 --color-black: #101010;
 --color-black-2: #535353;
 --color-black-1:#7D7D7D;
