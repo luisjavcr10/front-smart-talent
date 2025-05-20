@@ -1,4 +1,4 @@
-export const FormLayout = ({children, handleChange}:Readonly<{children:React.ReactNode, handleChange:()=>void}>)=>{
+export const FormLayout = ({children, handleChange}:Readonly<{children:React.ReactNode, handleChange:(e: React.FormEvent<HTMLFormElement>)=>void}>)=>{
     return(
         <form 
             onSubmit={handleChange}

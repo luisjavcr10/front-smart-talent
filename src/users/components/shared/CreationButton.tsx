@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-export const CreationButton = () => {
+export const CreationButton = ({handleClick}:Readonly<{handleClick:()=>void}>) => {
   return (
     <div className="flex justify-end">
       <motion.button
+        onClick={handleClick}
         whileHover={{
           scale: 1.01,
           transition: { duration: 0.2 },

@@ -18,9 +18,9 @@ export const AuthService = {
       return data;
     } catch (error: any) {
       if (error.response?.status === 401) {
-        return null; // En lugar de lanzar error, devuelve null
+        return null;
       }
-      throw new Error("Error en el servidor"); // Solo lanza errores inesperados
+      throw new Error("Error en el servidor");
     }
   },
 };

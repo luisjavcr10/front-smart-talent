@@ -2,21 +2,23 @@ import { useState } from "react";
 import { FormLayout } from "../shared/FormLayout";
 import { FormInput } from "../shared/FormInput";
 import { CreationButton } from "../shared/CreationButton";
+import { UsersService } from "@/users/service/usersService";
 
-interface NaturalUserProps {
-  DNI: string;
-  name: string;
-  paternalSurname: string;
-  maternalSurname: string;
+interface UserProps {
+  documentNumber: string;
+  firstName?: string;
+  paternalSurname?: string;
+  maternalSurname?: string;
+  businessName?: string;
   email: string;
   address: string;
   phone: string;
 }
 
 export const FormNatural = () => {
-  const [user, setUser] = useState<NaturalUserProps>({
-    DNI: "",
-    name: "",
+  const [user, setUser] = useState<UserProps>({
+    documentNumber: "",
+    firstName: "",
     paternalSurname: "",
     maternalSurname: "",
     email: "",
@@ -26,57 +28,40 @@ export const FormNatural = () => {
 
   const handleCreateUser = async () => {
     const payload = {
-      documentNumber: user.DNI,
-      name: user.name,
-      paternalSurname: user.paternalSurname,
-      maternalSurname: user.maternalSurname,
-      email: user.email,
-      address: user.address,
-      phone: user.phone,
-      type: "JURIDICO"
+      ...user,
+      type: "NATURAL"
     };
-    try {
-      const response = await fetch("https://smart-talent-api-k6yj.onrender.com/api/entities", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNzQ3Nzc3NzE3LCJleHAiOjE3NDc4NjQxMTd9.1_aUgpkOUwj2oSGtjnq6dQ4lGBUj8U-0rzddsY0tP2Y"
-        },
-        body: JSON.stringify(payload)
-      });
-      const data = await response.json();
-      console.log("Respuesta del API:", data);
-    } catch (error) {
-      console.error("Error al crear usuario jurídico:", error);
-    }
+    const response = await UsersService.createUser(payload);
+    console.log(response);
+
   };
 
 
 
   return (
-    <FormLayout handleChange={handleCreateUser}>
+    <div className="flex flex-col gap-4">
       <FormInput
         fieldName="DNI"
-        value={user.DNI}
-        handleOnChange={(e) => setUser({ ...user, DNI: e.target.value })}
+        value={user.documentNumber}
+        handleOnChange={(e) => setUser({ ...user, documentNumber: e.target.value })}
       />
 
       <FormInput
         fieldName="Nombres"
-        value={user.name}
-        handleOnChange={(e) => setUser({ ...user, name: e.target.value })}
+        value={user.firstName || ''}
+        handleOnChange={(e) => setUser({ ...user, firstName: e.target.value })}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormInput
           fieldName="Apellido Paterno"
-          value={user.name}
+          value={user.paternalSurname || ''}
           handleOnChange={(e) =>
             setUser({ ...user, paternalSurname: e.target.value })
           }
         />
         <FormInput
           fieldName="Apellido Materno"
-          value={user.name}
+          value={user.maternalSurname || ''}
           handleOnChange={(e) =>
             setUser({ ...user, maternalSurname: e.target.value })
           }
@@ -100,7 +85,7 @@ export const FormNatural = () => {
         handleOnChange={(e) => setUser({ ...user, email: e.target.value })}
       />
 
-      <CreationButton />
-    </FormLayout>
+      <CreationButton handleClick={handleCreateUser}/>
+    </div>
   );
 };

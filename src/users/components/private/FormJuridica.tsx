@@ -1,19 +1,22 @@
 import { useState } from "react";
-import { FormLayout } from "../shared/FormLayout";
+import { UsersService } from "@/users/service/usersService";
 import { FormInput } from "../shared/FormInput";
 import { CreationButton } from "../shared/CreationButton";
 
-interface JuridicaUserProps {
-    RUC: string;
-    businessName: string;
-    email: string;
-    address: string;
-    phone: string;
-  }
+interface UserProps {
+  documentNumber: string;
+  firstName?: string;
+  paternalSurname?: string;
+  maternalSurname?: string;
+  businessName?: string;
+  email: string;
+  address: string;
+  phone: string;
+}
 
 export const FormJuridica = () => {
-  const [user, setUser] = useState<JuridicaUserProps>({
-    RUC: "",
+  const [user, setUser] = useState<UserProps>({
+    documentNumber: "",
     businessName: "",
     email: "",
     address: "",
@@ -22,39 +25,24 @@ export const FormJuridica = () => {
 
   const handleCreateUser = async () => {
     const payload = {
-      documentNumber: user.RUC,
-      businessName: user.businessName,
-      email: user.email,
-      address: user.address,
-      phone: user.phone,
-      type: "JURIDICO"
+      ...user,
+      type: "JURIDICA"
     };
-    try {
-      const response = await fetch("https://smart-talent-api-k6yj.onrender.com/api/entities", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiQURNSU4iXSwiaWF0IjoxNzQ3Nzc3NzE3LCJleHAiOjE3NDc4NjQxMTd9.1_aUgpkOUwj2oSGtjnq6dQ4lGBUj8U-0rzddsY0tP2Y"
-        },
-        body: JSON.stringify(payload)
-      });
-      const data = await response.json();
-      console.log("Respuesta del API:", data);
-    } catch (error) {
-      console.error("Error al crear usuario jurídico:", error);
-    }
+    const response = await UsersService.createUser(payload);
+    console.log(response);
+
   };
 
   return (
-    <FormLayout handleChange={handleCreateUser}>
+    <div className="flex flex-col gap-4">
         <FormInput
         fieldName="RUC"
-        value={user.RUC}
-        handleOnChange={(e) => setUser({ ...user, RUC: e.target.value })}
+        value={user.documentNumber}
+        handleOnChange={(e) => setUser({ ...user, documentNumber: e.target.value })}
         />
         <FormInput
         fieldName="Razón social"
-        value={user.RUC}
+        value={user.businessName || ''}
         handleOnChange={(e) => setUser({ ...user, businessName: e.target.value })}
         />
         <FormInput
@@ -73,8 +61,8 @@ export const FormJuridica = () => {
         value={user.email}
         handleOnChange={(e) => setUser({ ...user, email: e.target.value })}
       />
-      <CreationButton />
-    </FormLayout>
+      <CreationButton handleClick={handleCreateUser}/>
+    </div>
   )
 }
 
