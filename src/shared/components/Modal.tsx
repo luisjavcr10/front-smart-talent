@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, TargetAndTransition, VariantLabels, AnimationControls } from 'framer-motion';
+import { motion, AnimatePresence, TargetAndTransition, VariantLabels } from 'framer-motion';
 
 interface ModalProps {
     isOpen: boolean;
