@@ -11,6 +11,7 @@ interface LoginResponse {
     token: string;
     user: {
       id: number;
+      entityId: number;
       username: string;
       email: string;
       roles: string[];

@@ -13,7 +13,7 @@ export function RequestsListPage() {
     const [requests, setRequests] = useState<Request[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    
     const isAdmin = useHasRole(ROLES.ADMIN);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export function RequestsListPage() {
             try {
                 const data = await (isAdmin 
                     ? requestsService.getAllPeople()
-                    : requestsService.getAllPeopleByEntityId(2)
+                    : requestsService.getAllPeopleByEntityId(user?.entityId as number)
                 );
                 setRequests(data.people);
                 setLoading(false);
