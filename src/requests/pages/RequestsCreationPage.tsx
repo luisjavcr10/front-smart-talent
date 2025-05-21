@@ -4,11 +4,13 @@ import { RequestsType } from "../types/RequestsListType";
 import { IDocumentType } from "../interfaces/IDocumentTypeResponse";
 import { useUpload } from "@/shared/hooks/useUpload";
 import { apiClient } from "@/lib/axios/client";
+import { useUser } from "@/auth/hooks/useUser";
 
 export function RequestsCreationPage() {
   const [requests, setRequests] = useState<RequestsType[]>([]);
   const [openOptionsIndex, setOpenOptionsIndex] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useUser()
 
   const toggleOpenOptions = (rowIndex: number) => {
     setOpenOptionsIndex(openOptionsIndex === rowIndex ? null : rowIndex);
@@ -79,7 +81,7 @@ export function RequestsCreationPage() {
                     if (file instanceof File) {
                       try {
                         // Obtener URL firmada del backend
-                        const signedUrlResponse = await apiClient.post('/upload/signed-url', {
+                        const signedUrlResponse = await apiClient.post('/upload/write-signed-url', {
                           fileName: file.name,
                           contentType: file.type
                         });
@@ -91,7 +93,7 @@ export function RequestsCreationPage() {
                         // Agregar nuevo recurso con la URL
                         processedResources.push({
                           ...resource,
-                          value: signedUrl.split('?')[0] // URL base sin parámetros de firma
+                          value: file.name
                         });
                       } catch (error) {
                         console.error('Error al procesar archivo:', error);
@@ -100,7 +102,6 @@ export function RequestsCreationPage() {
                     }
                   }
                 } else {
-                  // Si no es un array de archivos, mantener el recurso original
                   processedResources.push(resource);
                 }
               }
@@ -121,7 +122,7 @@ export function RequestsCreationPage() {
       
       // Enviar las solicitudes procesadas al backend
       const response = await apiClient.post('/requests', { 
-          entityId: 2, 
+          entityId: user?.entityId, 
           people: processedRequests 
         });
 

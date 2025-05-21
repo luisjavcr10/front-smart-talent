@@ -33,7 +33,7 @@ export const useUpload = (options?: UseUploadOptions): UseUploadReturn => {
       }
 
       // Extraer la URL base del archivo subido (sin los parámetros de firma)
-      const fileUrl = signedUrl.split('?')[0];
+      const fileUrl = signedUrl.split('?')[0].split('.com/')[1]
       
       options?.onSuccess?.(fileUrl);
     } catch (err) {

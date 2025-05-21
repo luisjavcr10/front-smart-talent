@@ -9,8 +9,15 @@ export interface Request {
     status: string;
     phone: string;
     documents: {
+        id: number;
         name: string;
-        state: boolean;
+        url: string | null;
+        result: string | null;
+        resources: {
+            id: number;
+            name: string;
+            value: string;
+        }[]
     }[];
 }
 

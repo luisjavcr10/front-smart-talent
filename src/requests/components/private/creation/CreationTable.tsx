@@ -271,7 +271,6 @@ export const CreationTable = ({
           <AddButton type="request" onClick={addRow} />
         </div>
 
-
       <Modal
         isOpen={modalOpen}
         title="Recursos Necesarios"
