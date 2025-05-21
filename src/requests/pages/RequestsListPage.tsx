@@ -47,7 +47,7 @@ export function RequestsListPage() {
             LISTA DE SOLICITUDES
           </p>
           <p className="text-[12px] font-light">
-            Visualiza tus solicitudes, su estado y los documentos requeridos.
+            Visualiza tus solicitudes, su estado y los informes requeridos.
           </p>
         </div>
 

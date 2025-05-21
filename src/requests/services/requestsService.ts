@@ -52,7 +52,7 @@ export const requestsService = {
     try {
       await apiClient.put(REQUEST_ENDPOINTS.UPDATE_DOCUMENTS, { updates });
     } catch (error) {
-      console.error('Error al actualizar los documentos:', error);
+      console.error('Error al actualizar los informes:', error);
       throw error;
     }
   }

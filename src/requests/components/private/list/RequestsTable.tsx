@@ -66,7 +66,7 @@ export const RequestsTable = ({
 
     if (user?.roles.includes(ROLES.ADMIN)) {
       try {
-        const loadingMessage = 'Procesando documentos...';
+        const loadingMessage = 'Procesando informes...';
         alert(loadingMessage);
   
         const documentsToUpdate = [];
@@ -87,10 +87,10 @@ export const RequestsTable = ({
         }
   
         await requestsService.updateDocuments(documentsToUpdate);
-        alert('Documentos actualizados correctamente');
+        alert('Informes actualizados correctamente');
       } catch (error) {
-        console.error('Error al actualizar los documentos:', error);
-        alert('Error al actualizar los documentos. Por favor, inténtelo de nuevo.');
+        console.error('Error al actualizar los informes:', error);
+        alert('Error al actualizar los informes. Por favor, inténtelo de nuevo.');
       }
     }
     setModalOpen(false);
@@ -111,7 +111,7 @@ export const RequestsTable = ({
         <div className="col-span-1 p-2">DNI</div>
         <div className="col-span-3 p-2 hidden md:block">Nombre Completo</div>
         <div className="col-span-1 p-2 hidden md:block">Estado</div>
-        <div className="col-span-5 p-2 hidden md:block">Documentos</div>
+        <div className="col-span-5 p-2 hidden md:block">Informes</div>
         <div className="col-span-1 p-2 hidden md:block">Acciones</div>
         <div className="col-span-1 p-2 md:hidden">Acciones</div>
       </div>
@@ -183,7 +183,7 @@ export const RequestsTable = ({
                     <p>
                       Estado: <strong>{STATUS[request.status as keyof typeof STATUS]}</strong>
                     </p>
-                    <p>Documentos solicitados:</p>
+                    <p>Informes solicitados:</p>
                     <div className="flex flex-col gap-1 items-center">
                       {request.documents.map((doc: any, docIndex: number) => (
                         <span
@@ -202,7 +202,7 @@ export const RequestsTable = ({
                         onClick={() => openResourceModal(index)}
                         className="py-0.5 px-2 bg-black-15 dark:bg-white-20 rounded-[5px]"
                       >
-                        Ver documentos
+                        Ver Informes
                       </button>
                     </div>
                   </div>
@@ -216,7 +216,7 @@ export const RequestsTable = ({
 
       <Modal
         isOpen={modalOpen}
-        title={!user?.roles.includes('ADMIN') ? "Visualización y descarga de archivos" : "Carga de documentos solicitados"}
+        title={!user?.roles.includes('ADMIN') ? "Visualización y descarga de archivos" : "Carga de informes solicitados"}
         onClose={() => {
           setModalOpen(false);
           if (selectedRequest !== null && requests[selectedRequest]?.documents) {
