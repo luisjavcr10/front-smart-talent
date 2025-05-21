@@ -118,18 +118,12 @@ export function RequestsCreationPage() {
           };
         })
       );
-      debugger
+      
       // Enviar las solicitudes procesadas al backend
-      const response = await apiClient.post('/requests', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          entityId: 1, 
+      const response = await apiClient.post('/requests', { 
+          entityId: 2, 
           people: processedRequests 
-        }),
-      });
+        });
 
       if (response.status === 200) {
         throw new Error('Error al guardar las solicitudes');

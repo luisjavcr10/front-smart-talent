@@ -1,6 +1,7 @@
 import { IResourceType } from "../interfaces/IDocumentTypeResponse";
 
 export type RequestsType = {
+    isConfirmed: boolean;
     dni: string;
     fullname: string;
     phone: string;

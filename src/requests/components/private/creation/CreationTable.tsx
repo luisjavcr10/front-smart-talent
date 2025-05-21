@@ -56,6 +56,7 @@ export const CreationTable = ({
         dni: "",
         fullname: "",
         phone: "",
+        isConfirmed: false,
         documents: [],
       },
     ]);
@@ -76,13 +77,26 @@ export const CreationTable = ({
   }, [requests]);
 
   const handleConfirm = (index: number) => {
-    setSelectedRequest(index);
-    setModalOpen(true);
+    if (!requests[index].isConfirmed) {
+      setSelectedRequest(index);
+      setModalOpen(true);
+    }
   };
 
   const handleConfirmRequest = () => {
     setModalOpen(false);
+    const newRequests = [...requests];
+    if (selectedRequest !== null) {
+      newRequests[selectedRequest].isConfirmed = true;
+      handleRequests(newRequests);
+    }
     setSelectedRequest(null);
+  };
+
+  const handleDelete = (index: number) => {
+    const newRequests = [...requests];
+    newRequests.splice(index, 1);
+    handleRequests(newRequests);
   };
 
   return (
@@ -242,12 +256,15 @@ export const CreationTable = ({
                 {/* Modificar la sección de acciones */}
                 <div className="col-span-6 p-2 flex justify-around items-center gap-1">
                   <button
-                    className="text-[12px] hover:text-main transition-colors"
+                    className={`${requests[index].isConfirmed ? 'bg-green-700 rounded-xl' : 'hover:text-main transition-colors'} text-[12px]`}
                     onClick={() => handleConfirm(index)}
                   >
                     Confirmar
                   </button>
-                  <button className="text-[12px] hover:text-error transition-colors">
+                  <button 
+                  className="text-[12px] hover:text-error transition-colors"
+                  onClick={() => handleDelete(index)}
+                  >
                     Eliminar
                   </button>
                 </div>
@@ -288,10 +305,10 @@ export const CreationTable = ({
         <div className="flex flex-col gap-4">
           {selectedRequest !== null && (
             <div className="text-sm">
-              {requests[selectedRequest].documents.map((doc, i) => (
+              {requests[selectedRequest]?.documents.map((doc, i) => (
                 <div key={i} className="gap-2">
                   <h2 className="text-lg">{doc.name}</h2>
-                  
+
                   {doc.resourceTypes.map((resourceType, j) => (
                     <ResourceInput
                       key={j}
