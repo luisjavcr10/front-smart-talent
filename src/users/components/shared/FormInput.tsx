@@ -8,7 +8,7 @@ export const FormInput = ({
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>) => {
   return (
-    <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex flex-col md:flex-row gap-1 md:gap-4">
       <label className="min-w-[120px]">{fieldName}</label>
       <input
         value={value}

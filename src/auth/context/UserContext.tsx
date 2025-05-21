@@ -4,6 +4,7 @@ import { AuthService } from "../services/authService";
 
 interface User {
   id: number;
+  entityId: number;
   username: string;
   email: string;
   roles: string[];

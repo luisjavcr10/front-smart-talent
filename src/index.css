@@ -24,6 +24,7 @@
 --color-white-2: #F5F7F8;
 --color-white: #FFFFFF;
 --color-error:#E74C3C;
+--color-error-1:#C0392B;
 --color-warning:#F3CB26;
 --color-success:#1ABC9C;
 --color-main-3:#B65800;
@@ -33,6 +34,7 @@
 --color-main-1plus:#FF9E44;
 --color-main-2plus:#FFBD81;
 --color-main-3plus:#FFDCBD;
+--color-opacity:#101010
 
 /* Sombras */
 --shadow-sidebar:1px 0px 2px 0px #00000040;

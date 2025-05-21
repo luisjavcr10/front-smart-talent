@@ -14,4 +14,5 @@ interface UserProps {
 
 export const UsersApi = {
     createUser: (payload: UserProps) => apiClient.post(USERS_ENDPOINTS.CREATE_USER, payload),
+    getUsers:() => apiClient.get(USERS_ENDPOINTS.LIST_USERS)
 } as const;

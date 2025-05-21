@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { TbFileDollar, TbFileDescription, TbLogout, TbList, TbPlaylistAdd,TbUserPlus, TbUserFilled } from "react-icons/tb";
+import { TbFileDollar, TbFileDescription, TbLogout, TbList, TbPlaylistAdd, TbUserPlus, TbUserFilled } from "react-icons/tb";
 import { SidebarToggle } from './SidebarToggle';
 import { Logotipo } from './Logotipo';
 import { useUser } from '@/auth/hooks/useUser'
@@ -9,10 +9,11 @@ import { ThemeSwitch } from './ThemeSwitch';
 import { FaClipboardUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useModalStore } from '@/store/modalStore';
+import { ROLES } from '@/auth/constants/roles';
 
 
 export const Sidebar = () => {
-  const {user, logout} = useUser();
+  const { user, logout } = useUser();
   const navigate = useNavigate();
   const [isRequestsOpen, setIsRequestsOpen] = useState(false);
   const [isUsersOpen, setIsUsersOpen] = useState(false);
@@ -31,14 +32,14 @@ export const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleLogout = () =>{
+  const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
   return (
     <>
-      <aside 
+      <aside
         className={`
           fixed xl:relative inset-y-0 left-0 z-40 
           w-96 h-screen
@@ -52,24 +53,24 @@ export const Sidebar = () => {
           border-r border-medium  dark:border-black-1 rounded-r-sidebar shadow-sidebar`}
       >
         <div className='w-full flex flex-col items-center mb-5'>
-          <Logotipo where='sidebar'/>
+          <Logotipo where='sidebar' />
         </div>
-        
+
         <div className="flex justify-center items-center gap-4 px-2 py-6 border-t-[1px] border-medium w-full">
           <img className="w-[45px] h-[45px]" src="/images/profile.png" alt="profile" />
           <p className='text-[14px] font-light'>{user?.username}</p>
         </div>
         <div
-            className={`w-full flex flex-row justify-between items-center gap-2 text-[14px] font-light  py-3.5 border-t border-medium px-6`}
-          >
-            <p>Tema del sistema</p>
-            <ThemeSwitch />
+          className={`w-full flex flex-row justify-between items-center gap-2 text-[14px] font-light  py-3.5 border-t border-medium px-6`}
+        >
+          <p>Tema del sistema</p>
+          <ThemeSwitch />
         </div>
 
         <div className="flex flex-col w-full border-t border-medium text-[14px] font-light overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [-webkit-scrollbar]:hidden">
-          
+
           <div>
-            <div 
+            <div
               className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6 cursor-pointer`}
               onClick={toggleRequestsMenu}
             >
@@ -81,73 +82,79 @@ export const Sidebar = () => {
                 </div>
               </span>
             </div>
-            
+
             {isRequestsOpen && (
               <div className="transition-all duration-300 ease-in-out">
-                <div className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
+                <div
+                  onClick={() => navigate('/requests')}
+                  className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium dark:border-black-1 bg-white dark:bg-black px-10 cursor-pointer'>
                   <TbList className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
                   Lista de Solicitudes
                 </div>
-                <div
-                  onClick={() => {
-                    setIsActive(true);
-                  }}
-                  className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
-                  <TbPlaylistAdd className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
-                  Agregar Solicitud
-                </div>
+
+                {user?.roles.includes(ROLES.USER) &&
+                  <div
+                    onClick={() => {
+                      navigate('/requests');
+                      setIsActive(true);
+                    }}
+                    className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium dark:border-black-1 bg-white dark:bg-black px-10 cursor-pointer'>
+                    <TbPlaylistAdd className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
+                    Agregar Solicitud
+                  </div>
+                }
               </div>
             )}
           </div>
-          
+
           {/* Facturación Menu Item */}
-          <div 
+          <div
             className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6 cursor-pointer`}
           >
             <TbFileDollar className='w-[30px] h-[30px] text-black-2 dark:text-white-1' />
             Facturación
           </div>
 
-         {user?.roles[0] === 'ADMIN' &&   
-          (<div>
-            <div 
-              className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6 cursor-pointer`}
-              onClick={toggleUsersMenu}
-            >
-              <TbUserFilled className='w-[25px] h-[25px] text-black-2 dark:text-white-1' />
-              Usuarios
-              <span className="ml-auto">
-                <div className={`transition-all duration-300 transform ${isUsersOpen ? 'rotate-180' : 'rotate-0'}`}>
-                  <MdExpandMore className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
-                </div>
-              </span>
-            </div>
-            
-            {isUsersOpen && (
-              <div className="transition-all duration-300 ease-in-out">
-                <div className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
-                  <FaClipboardUser className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
-                  Lista de Usuarios
-                </div>
-                <Link 
-                  to={'/users/create'}
-                  className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
-                  <TbUserPlus className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
-                  Crear Usuario
-                </Link>
+          {user?.roles.includes(ROLES.ADMIN) &&
+            (<div>
+              <div
+                className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6 cursor-pointer`}
+                onClick={toggleUsersMenu}
+              >
+                <TbUserFilled className='w-[25px] h-[25px] text-black-2 dark:text-white-1' />
+                Usuarios
+                <span className="ml-auto">
+                  <div className={`transition-all duration-300 transform ${isUsersOpen ? 'rotate-180' : 'rotate-0'}`}>
+                    <MdExpandMore className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
+                  </div>
+                </span>
               </div>
-            )}
-          </div>)}
-          
+
+              {isUsersOpen && (
+                <div className="transition-all duration-300 ease-in-out">
+                  <button onClick={() => navigate('/users')} className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 bg-white dark:bg-black dark:hover:bg-black-2 border-b border-medium dark:border-black-1 px-10 cursor-pointer'>
+                    <FaClipboardUser className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
+                    Lista de Usuarios
+                  </button>
+                  <Link
+                    to={'/users/create'}
+                    className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium dark:border-black-1 bg-white dark:bg-black px-10 cursor-pointer'>
+                    <TbUserPlus className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
+                    Crear Usuario
+                  </Link>
+                </div>
+              )}
+            </div>)}
+
           {/* Cerrar Sesión Button */}
           <button
             onClick={handleLogout}
             className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6 cursor-pointer mb-14`}
           >
-            <TbLogout className="w-[30px] h-[30px] text-black-2 dark:text-white-1"/>
+            <TbLogout className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
             Cerrar Sesión
           </button>
-        </div>         
+        </div>
       </aside>
 
       <SidebarToggle handleIsOpen={handleIsOpen} />
