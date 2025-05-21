@@ -1,10 +1,13 @@
 import { STATUS } from "@/auth/constants/status";
-import { Request } from "@/requests/services/requestsService";
+import { Request, requestsService } from "@/requests/services/requestsService";
 import { useState } from "react";
 import { FaChevronCircleDown } from "react-icons/fa";
 import { Modal } from "@/shared/components/Modal"; // Asegúrate de importar el componente Modal
-import { ResourceInput } from "../../public/ResourceInput"; // Importa el componente ResourceInput
 import { ResourceOutput } from "../../public/ResourceOutput";
+import { apiClient } from "@/lib/axios/client";
+import { useUpload } from '@/shared/hooks/useUpload'
+import { useUser } from "@/auth/hooks/useUser";
+import { ROLES } from "@/auth/constants/roles";
 
 export const RequestsTable = ({
   data,
@@ -17,6 +20,8 @@ export const RequestsTable = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<number | null>(null);
   const [requests, setRequests] = useState<Request[]>([]);
+  const { uploadFile } = useUpload();
+  const { user } = useUser()
 
   // Inicializar requests con los datos proporcionados
   useState(() => {
@@ -33,7 +38,61 @@ export const RequestsTable = ({
     setRequests(newRequests);
   };
 
-  const handleConfirmRequest = () => {
+  const handleFileUpload = async (file: File) => {
+    try {
+      const response = await apiClient.post('upload/write-signed-url', {
+        fileName: file.name,
+        contentType: file.type
+      });
+
+      if (response.status !== 200) {
+        throw new Error('No se pudo obtener la URL firmada para subir el archivo');
+      }
+
+      const { signedUrl } = response.data;
+
+      await uploadFile(file, signedUrl);
+
+      return file.name;
+    } catch (error) {
+      console.error('Error al subir el archivo:', error);
+      alert('Error al subir el archivo. Por favor, inténtelo de nuevo.');
+      return null;
+    }
+  };
+
+  const handleConfirmRequest = async () => {
+    if (selectedRequest === null) return;
+
+    if (user?.roles.includes(ROLES.ADMIN)) {
+      try {
+        const loadingMessage = 'Procesando documentos...';
+        alert(loadingMessage);
+  
+        const documentsToUpdate = [];
+  
+        for (let i = 0; i < requests[selectedRequest].documents.length; i++) {
+          const doc = requests[selectedRequest].documents[i];
+  
+          if (doc.filename instanceof File) {
+            const fileKey = await handleFileUpload(doc.filename);
+            if (fileKey) {
+              documentsToUpdate.push({
+                id: doc.id,
+                result: doc.result || '',
+                filename: fileKey
+              });
+            }
+          }
+        }
+  
+        await requestsService.updateDocuments(documentsToUpdate);
+        alert('Documentos actualizados correctamente');
+      } catch (error) {
+        console.error('Error al actualizar los documentos:', error);
+        alert('Error al actualizar los documentos. Por favor, inténtelo de nuevo.');
+      }
+    }
     setModalOpen(false);
   };
 
@@ -83,8 +142,8 @@ export const RequestsTable = ({
                     <span
                       key={docIndex}
                       className={`${doc.state
-                          ? "bg-success text-white"
-                          : "bg-transparent  text-black dark:text-white"
+                        ? "bg-success text-white"
+                        : "bg-transparent  text-black dark:text-white"
                         } py-0.5 px-2 rounded-[5px]`}
                     >
                       {doc.name}
@@ -128,8 +187,8 @@ export const RequestsTable = ({
                         <span
                           key={docIndex}
                           className={`w-full ${doc.state
-                              ? "bg-success text-white"
-                              : "bg-transparent border border-black-05 dark:border-shadow-dark text-black dark:text-white"
+                            ? "bg-success text-white"
+                            : "bg-transparent border border-black-05 dark:border-shadow-dark text-black dark:text-white"
                             } py-0.5 px-2 rounded-[5px] text-center`}
                         >
                           {doc.name}
@@ -177,40 +236,60 @@ export const RequestsTable = ({
         </>}
       >
         <div className="flex flex-col gap-4">
-          {true && true && <>
 
-          </>}
           {selectedRequest !== null && requests[selectedRequest] && (
             <div className="text-sm">
-              {requests[selectedRequest]?.documents.map((doc, i) => (
-                <div key={i} className="gap-2 mb-4">
-                  <h2 className="text-lg font-medium mb-2">{doc.name}</h2>
+              {requests[selectedRequest]?.documents.map((doc, i) => {
 
-                  <div className="flex flex-col gap-2">
+                return (<div key={i} className="gap-2 mb-4">
+                  <h2 className="text-lg font-medium mb-2">{doc.name}</h2>
+                  {false && false ?
                     <div className="flex flex-col gap-2">
-                      <label className="text-sm font-medium">Resultado</label>
-                      <input 
-                        type="text" 
-                        placeholder="Add a description"
-                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-2plus"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label className="text-sm font-medium">Documento</label>
-                      <input
-                        type="file"
-                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-2plus file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-main-2plus file:text-white hover:file:bg-main-3plus"
-                      />
-                    </div>
-                  </div>
+                      <div className="flex flex-col gap-2">
+                        <label className="text-sm font-medium">Resultado</label>
+                        <input
+                          type="text"
+                          placeholder="Agregar una descripción"
+                          value={doc.result || ''}
+                          onChange={(e) => {
+                            if (selectedRequest !== null) {
+                              const newRequests = [...requests];
+                              newRequests[selectedRequest].documents[i].result = e.target.value;
+                              handleRequests(newRequests);
+                            }
+                          }}
+                          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-2plus"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <label className="text-sm font-medium">Documento</label>
+                        <input
+                          type="file"
+                          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                          onChange={(e) => {
+                            if (e.target.files && e.target.files.length > 0 && selectedRequest !== null) {
+                              const file = e.target.files[0];
+                              const newRequests = [...requests];
+                              newRequests[selectedRequest].documents[i].filename = file;
+                              handleRequests(newRequests);
+                            }
+                          }}
+                          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-2plus file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-main-2plus file:text-white hover:file:bg-main-3plus"
+                        />
+                      </div>
 
                   {doc.resources.map((resource, j) => (
                     <ResourceOutput key={j} {...resource} />
                   ))}
+                    </div> : <div>
+                      <ResourceOutput key={Date.now() - 1} name="Resultados" value={doc.result as string} />
+                      <ResourceOutput key={Date.now() - 2}  name="Documento" value={doc.filename as string}/>
+                    </div>}
 
-                </div>
-              ))}
+
+
+                </div>)
+              })}
             </div>
           )}
         </div>
