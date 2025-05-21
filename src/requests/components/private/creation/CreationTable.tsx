@@ -94,15 +94,17 @@ export const CreationTable = ({
   };
 
   const handleDelete = (index: number) => {
-    const newRequests = [...requests];
-    newRequests.splice(index, 1);
-    handleRequests(newRequests);
+    if (confirm('¿Está seguro que desea eliminar este registro?')) {
+      const newRequests = [...requests];
+      newRequests.splice(index, 1);
+      handleRequests(newRequests);
+    }
   };
 
+
   return (
-    
     <div className="p-3 w-full h-[500px] dark:border dark:border-black-1 shadow-doc-options text-[14px] overflow-x-auto relative text-black dark:text-white rounded-sidebar font-karla font-light">
-      <div className="px-2 grid grid-cols-40 items-center min-w-[800px] sticky top-0 z-10 bg-main-1plus dark:bg-black-0 rounded-sidebar mb-4">
+      <div className="px-2 grid grid-cols-40 items-center min-w-[800px] sticky top-0 z-10 bg-main-3plus dark:bg-main rounded-sidebar mb-4">
         <div className="col-span-5 p-2">{headers[0]}</div>
         <div className="col-span-8 p-2">{headers[1]}</div>
         <div className="col-span-5 p-2">{headers[2]}</div>
@@ -113,8 +115,7 @@ export const CreationTable = ({
       <div className="text-black dark:text-white flex flex-col gap-2">
         {requests.map((request, index) => (
           <div key={index}>
-            <div className="px-2 grid grid-cols-40 h-full border border-white-1 dark:border-black-1 rounded-sidebar hover:bg-black-05 ">
-              
+            <div className=" grid grid-cols-40 h-full border border-white-1 dark:border-black-1 rounded-sidebar hover:bg-black-05 ">
               <div className="col-span-5 p-2 ">
                 <div className="w-full overflow-hidden">
                   <input
@@ -123,67 +124,71 @@ export const CreationTable = ({
                       inputErrors.dni[index]
                         ? "border border-error"
                         : "border border-white-1 dark:border-black-2"
-                        }`}
-                      type="text"
-                      value={request.dni}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        const hasInvalidChars = /[^0-9]/.test(value);
-                        const length = value.length;
+                    }`}
+                    type="text"
+                    value={request.dni}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      const hasInvalidChars = /[^0-9]/.test(value);
+                      const length = value.length;
 
-                        setInputErrors((prev) => ({
-                          ...prev,
-                          dni: { ...prev.dni, [index]: (hasInvalidChars || length >= 9 || length <= 7) },
-                        }));
+                      setInputErrors((prev) => ({
+                        ...prev,
+                        dni: {
+                          ...prev.dni,
+                          [index]:
+                            hasInvalidChars || length >= 9 || length <= 7,
+                        },
+                      }));
 
-                        const newRequests = [...requests];
-                        newRequests[index].dni = value;
-                        handleRequests(newRequests);
-                      }}
-                    />
-                    {inputErrors.dni[index] && (
-                      <p className="text-error text-[8px] font-bold mt-1">
-                        Formato incorrecto
-                      </p>
-                    )}
-                  </div>
+                      const newRequests = [...requests];
+                      newRequests[index].dni = value;
+                      handleRequests(newRequests);
+                    }}
+                  />
+                  {inputErrors.dni[index] && (
+                    <p className="text-error text-[8px] font-bold mt-1">
+                      Formato incorrecto
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="col-span-8 p-2 ">
-                <div className="w-full overflow-hidden"> 
+                <div className="w-full overflow-hidden">
                   <textarea
                     className={`w-full resize-none rounded-[5px] py-0.5 px-1 focus:outline-none ${
                       inputErrors.fullname[index]
                         ? "border border-error"
                         : "border border-white-1 dark:border-black-2"
-                        }`}
-                      value={request.fullname}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        const hasNumbers = /[0-9]/.test(value);
+                    }`}
+                    value={request.fullname}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      const hasNumbers = /[0-9]/.test(value);
 
-                        setInputErrors((prev) => ({
-                          ...prev,
-                          fullname: { ...prev.fullname, [index]: hasNumbers },
-                        }));
+                      setInputErrors((prev) => ({
+                        ...prev,
+                        fullname: { ...prev.fullname, [index]: hasNumbers },
+                      }));
 
-                        const newRequests = [...requests];
-                        newRequests[index].fullname = value;
-                        handleRequests(newRequests);
-                      }}
-                      rows={1}
-                      onInput={(e) => {
-                        e.currentTarget.style.height = "auto";
-                        e.currentTarget.style.height =
-                          e.currentTarget.scrollHeight + "px";
-                      }}
-                    />
-                    {inputErrors.fullname[index] && (
-                      <p className="text-error text-[8px] font-bold mt-1">
-                        Formato incorrecto
-                      </p>
-                    )}
-                  </div>
+                      const newRequests = [...requests];
+                      newRequests[index].fullname = value;
+                      handleRequests(newRequests);
+                    }}
+                    rows={1}
+                    onInput={(e) => {
+                      e.currentTarget.style.height = "auto";
+                      e.currentTarget.style.height =
+                        e.currentTarget.scrollHeight + "px";
+                    }}
+                  />
+                  {inputErrors.fullname[index] && (
+                    <p className="text-error text-[8px] font-bold mt-1">
+                      Formato incorrecto
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="col-span-5 p-2 ">
@@ -193,106 +198,119 @@ export const CreationTable = ({
                       inputErrors.phone[index]
                         ? "border border-error"
                         : "border border-white-1 dark:border-black-2"
-                        }`}
-                      type="text"
-                      value={request.phone}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        const hasInvalidChars = /[^0-9]/.test(value);
-                        const length = value.length;
+                    }`}
+                    type="text"
+                    value={request.phone}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      const hasInvalidChars = /[^0-9]/.test(value);
+                      const length = value.length;
 
-                        setInputErrors((prev) => ({
-                          ...prev,
-                          phone: { ...prev.phone, [index]: hasInvalidChars || length >= 10 || length <= 8 },
-                        }));
-                        const newRequests = [...requests];
-                        newRequests[index].phone = value;
-                        handleRequests(newRequests);
-                      }}
-                    />
-                    {inputErrors.phone[index] && (
-                      <p className="text-error text-[8px] font-bold mt-1">
-                        Formato incorrecto
-                      </p>
-                    )} 
-                </div> 
-              </div>  
-
-                {/* Documentos - 2 columnas */}
-                <div className="col-span-16 p-2  relative">
-                  <div className="flex justify-between items-start w-full">
-                    <div className="flex flex-wrap gap-1 flex-1">
-                      {request.documents.map((doc, docIndex) => (
-                        <span
-                          key={docIndex}
-                          className="border border-medium dark:border-black-2 py-0.5 px-2 rounded-[5px]"
-                        >
-                          {doc.name}
-                        </span>
-                      ))}
-                    </div>
-
-                    <AddButton
-                      type="document"
-                      onClick={() => toggleOpenOptions(index)}
-                    />
-                  </div>
-                  <DocsChecklist
-                    openIndex={openIndex}
-                    index={index}
-                    request={request}
-                    handleOpen={handleOpenOptionsIndex}
-                    handleDocCheckbox={handleDocCheckbox}
+                      setInputErrors((prev) => ({
+                        ...prev,
+                        phone: {
+                          ...prev.phone,
+                          [index]:
+                            hasInvalidChars || length >= 10 || length <= 8,
+                        },
+                      }));
+                      const newRequests = [...requests];
+                      newRequests[index].phone = value;
+                      handleRequests(newRequests);
+                    }}
                   />
-                </div>
-
-                {/* Modificar la sección de acciones */}
-                <div className="col-span-6 p-2 flex justify-around items-center gap-1">
-                  <button
-                    className={`${requests[index].isConfirmed ? 'bg-green-700 rounded-xl' : 'hover:text-main transition-colors'} text-[12px]`}
-                    onClick={() => handleConfirm(index)}
-                  >
-                    Confirmar
-                  </button>
-                  <button 
-                  className="text-[12px] hover:text-error transition-colors"
-                  onClick={() => handleDelete(index)}
-                  >
-                    Eliminar
-                  </button>
+                  {inputErrors.phone[index] && (
+                    <p className="text-error text-[8px] font-bold mt-1">
+                      Formato incorrecto
+                    </p>
+                  )}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Botón para agregar fila */}
-        <div ref={listEndRef} className="flex justify-start p-4">
-          <AddButton type="request" onClick={addRow} />
-        </div>
+              {/* Documentos - 2 columnas */}
+              <div className="col-span-16 p-2  relative">
+                <div className="flex justify-between items-start w-full">
+                  <div className="flex flex-wrap gap-1 flex-1">
+                    {request.documents.map((doc, docIndex) => (
+                      <span
+                        key={docIndex}
+                        className="border border-white-1 dark:border-black-2 py-0.5 px-2 rounded-[5px]"
+                      >
+                        {doc.name}
+                      </span>
+                    ))}
+                  </div>
+
+                  <AddButton
+                    type="document"
+                    onClick={() => toggleOpenOptions(index)}
+                  />
+                </div>
+                <DocsChecklist
+                  openIndex={openIndex}
+                  index={index}
+                  request={request}
+                  handleOpen={handleOpenOptionsIndex}
+                  handleDocCheckbox={handleDocCheckbox}
+                />
+              </div>
+
+              {/* Modificar la sección de acciones */}
+              <div className="col-span-6 px-1 py-2 flex justify-around items-start gap-1">
+                <button
+                  className={`${
+                    requests[index].isConfirmed
+                      ? "bg-success rounded-[5px] py-1 px-1.5 text-white cursor-not-allowed"
+                      : "border border-white-1 rounded-[5px] py-1 px-1.5 hover:text-main transition-colors"
+                  } text-[12px]`}
+                  onClick={() => handleConfirm(index)}
+                >
+                  {requests[index].isConfirmed? 'Confirmado' : 'Confirmar'}
+                </button>
+                <button
+                  className="text-[12px] py-1 px-1.5 border border-white-1 rounded-[5px] hover:border-error hover:text-error transition-colors"
+                  onClick={() => handleDelete(index)}
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      {/* Botón para agregar fila */}
+      <div ref={listEndRef} className="flex justify-start p-4">
+        <AddButton type="request" onClick={addRow} />
+      </div>
 
       <Modal
         isOpen={modalOpen}
         title="Recursos Necesarios"
         onClose={() => {
-          setModalOpen(false)
+          setModalOpen(false);
           const newRequests = [...requests];
           if (selectedRequest !== null) {
-            newRequests[selectedRequest].documents = newRequests[selectedRequest].documents.filter(doc => doc.resources.length > 0)
+            newRequests[selectedRequest].documents = newRequests[
+              selectedRequest
+            ].documents.filter((doc) => doc.resources.length > 0);
           }
           handleRequests(newRequests);
         }}
         position="center"
         width="400px"
         className="p-6"
-        footer={<>
-          <button
-            className="px-4 py-2 text-sm bg-main text-white rounded-md hover:bg-opacity-90"
-            onClick={handleConfirmRequest}
-          >
-            Confirmar
-          </button>
-        </>}
+        footer={
+          <>
+            <button
+              className="px-4 py-2 text-sm bg-main text-white rounded-md hover:bg-opacity-90"
+              onClick={handleConfirmRequest}
+            >
+              Confirmar
+            </button>
+          </>
+        }
       >
         <div className="flex flex-col gap-4">
           {selectedRequest !== null && (
@@ -307,11 +325,13 @@ export const CreationTable = ({
                       {...resourceType}
                       onChange={(value) => {
                         const newRequests = [...requests];
-                        newRequests[selectedRequest].documents[i].resources.push({
+                        newRequests[selectedRequest].documents[
+                          i
+                        ].resources.push({
                           resourceTypeId: resourceType.id,
                           name: resourceType.name,
                           value: value,
-                        })
+                        });
                         handleRequests(newRequests);
                       }}
                     />
@@ -322,7 +342,6 @@ export const CreationTable = ({
           )}
         </div>
       </Modal>
-
     </div>
   );
-}
+};

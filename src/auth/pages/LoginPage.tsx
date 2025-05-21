@@ -9,9 +9,9 @@ export function LoginPage() {
             href="/register"
             direction="r" 
             greeting="¡BIENVENIDO!" 
-            />
+        />
 
-         <FormSection direction="r">
+         <FormSection>
                 <LoginForm/>
         </FormSection>
       </>

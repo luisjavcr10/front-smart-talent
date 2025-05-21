@@ -87,7 +87,7 @@ export const Sidebar = () => {
               <div className="transition-all duration-300 ease-in-out">
                 <div
                   onClick={() => navigate('/requests')}
-                  className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
+                  className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium dark:border-black-1 bg-white dark:bg-black px-10 cursor-pointer'>
                   <TbList className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
                   Lista de Solicitudes
                 </div>
@@ -95,9 +95,10 @@ export const Sidebar = () => {
                 {user?.roles.includes(ROLES.USER) &&
                   <div
                     onClick={() => {
+                      navigate('/requests');
                       setIsActive(true);
                     }}
-                    className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
+                    className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium dark:border-black-1 bg-white dark:bg-black px-10 cursor-pointer'>
                     <TbPlaylistAdd className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
                     Agregar Solicitud
                   </div>
@@ -131,13 +132,13 @@ export const Sidebar = () => {
 
               {isUsersOpen && (
                 <div className="transition-all duration-300 ease-in-out">
-                  <div className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
+                  <div className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 bg-white dark:bg-black dark:hover:bg-black-2 border-b border-medium dark:border-black-1 px-10 cursor-pointer'>
                     <FaClipboardUser className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
                     Lista de Usuarios
                   </div>
                   <Link
                     to={'/users/create'}
-                    className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
+                    className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium dark:border-black-1 bg-white dark:bg-black px-10 cursor-pointer'>
                     <TbUserPlus className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
                     Crear Usuario
                   </Link>
