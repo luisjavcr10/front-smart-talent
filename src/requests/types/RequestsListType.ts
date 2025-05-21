@@ -1,9 +1,19 @@
+import { IResourceType } from "../interfaces/IDocumentTypeResponse";
+
 export type RequestsType = {
+    isConfirmed: boolean;
     dni: string;
     fullname: string;
     phone: string;
-    docs: {
+    documents: {
+      documentTypeId: number;
       name: string;
       state: boolean;
+      resourceTypes: IResourceType[];
+      resources: {
+        resourceTypeId: number;
+        name: string;
+        value: File[] | string | null;
+      }[];
     }[];
 };

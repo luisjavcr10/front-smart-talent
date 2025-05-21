@@ -8,6 +8,8 @@ import { MdExpandMore } from "react-icons/md";
 import { ThemeSwitch } from './ThemeSwitch';
 import { FaClipboardUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import { useModalStore } from '@/store/modalStore';
+
 
 export const Sidebar = () => {
   const {user, logout} = useUser();
@@ -15,6 +17,7 @@ export const Sidebar = () => {
   const [isRequestsOpen, setIsRequestsOpen] = useState(false);
   const [isUsersOpen, setIsUsersOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { setIsActive } = useModalStore();
 
   const toggleRequestsMenu = () => {
     setIsRequestsOpen(!isRequestsOpen);
@@ -86,6 +89,9 @@ export const Sidebar = () => {
                   Lista de Solicitudes
                 </div>
                 <div
+                  onClick={() => {
+                    setIsActive(true);
+                  }}
                   className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
                   <TbPlaylistAdd className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
                   Agregar Solicitud

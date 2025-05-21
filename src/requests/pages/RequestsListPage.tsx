@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { OptionsModal } from "../components/private/list/OptionsModal";
 import { RequestsTable } from "../components/private/list/RequestsTable";
 import {motion} from "framer-motion"
+import { useModalStore } from "../../store/modalStore";
 
 const requests= [
     {
@@ -45,7 +45,7 @@ const requests= [
 ]
 
 export function RequestsListPage() {
-    const [isActive, setIsActive] = useState(false);
+    const { isActive, setIsActive } = useModalStore();
     
     return(
         <div className="flex flex-col mx-5 md:mx-8 my-15 gap-11">
@@ -78,5 +78,5 @@ export function RequestsListPage() {
                 
             </div>
         </div>
-    )
+    );
 }
