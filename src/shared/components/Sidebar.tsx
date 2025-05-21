@@ -102,7 +102,8 @@ export const Sidebar = () => {
             Facturación
           </div>
 
-          <div>
+         {user?.roles[0] === 'ADMIN' &&   
+          (<div>
             <div 
               className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6 cursor-pointer`}
               onClick={toggleUsersMenu}
@@ -130,7 +131,7 @@ export const Sidebar = () => {
                 </Link>
               </div>
             )}
-          </div>
+          </div>)}
           
           {/* Cerrar Sesión Button */}
           <button

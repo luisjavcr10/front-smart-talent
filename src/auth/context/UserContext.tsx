@@ -6,7 +6,7 @@ interface User {
   id: number;
   username: string;
   email: string;
-  role: string[];
+  roles: string[];
 }
 
 interface LoginProps {
@@ -37,7 +37,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const login = async ({ email, password }: LoginProps): Promise<boolean> => {
     try {
       const response = await AuthService.login(email, password);
-      if (!response) return false; // Si es null, credenciales incorrectas
+      if (!response) return false;
   
       storage.setToken(response.token);
       storage.setUser(response.user);
