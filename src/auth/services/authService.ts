@@ -5,19 +5,22 @@ interface LoginResponse {
   token: string;
   user: {
     id: number;
-    name: string;
+    username: string;
     email: string;
-    role: string[];
+    roles: string[];
   };
 }
 
 export const AuthService = {
-  async login(email: string, password: string): Promise<LoginResponse> {
+  async login(email: string, password: string): Promise<LoginResponse | null> {
     try {
       const { data } = await AuthApi.login({ email, password });
       return data;
-    } catch (error) {
-      throw new Error('Login failed');
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        return null;
+      }
+      throw new Error("Error en el servidor");
     }
   },
 };

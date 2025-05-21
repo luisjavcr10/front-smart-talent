@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FormLayout } from "../../shared/FormLayout";
 import { FormInput } from "../../shared/FormInput";
@@ -13,6 +13,15 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const { login } = useUser();
 
+  // Cargar error desde localStorage al iniciar
+  useEffect(() => {
+    const savedError = localStorage.getItem('loginError');
+    if (savedError) {
+      setError(savedError);
+      localStorage.removeItem('loginError'); // Limpiar después de mostrar
+    }
+  }, []);
+
   const clearError = () => {
     setError(null);
   };
@@ -22,20 +31,29 @@ export const LoginForm = () => {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-
+  
+    if (!email || !password) {
+      setError("Completa todos los campos");
+      return;
+    }
+  
+    setIsLoading(true);
+    setError(null); // Limpiar errores anteriores
+  
     try {
-      setIsLoading(true);
       const state = await login({ email, password });
-      if(state){
-        setIsLoading(false);
+      if (state) {
         navigate("/requests");
-      }else{
-        setIsLoading(false);
-        setError("Credenciales inválidas");
+      } else {
+        // Guardar error en localStorage antes de recargar
+        localStorage.setItem('loginError', 'Credenciales inválidas');
+        window.location.reload(); // Recarga controlada
       }
-    } catch (error) {
+    } catch (error: any) {
+      // Manejar errores inesperados sin recargar
+      setError(error.message || "Error en el servidor");
+    } finally {
       setIsLoading(false);
-      console.error(error);
     }
   };
 
