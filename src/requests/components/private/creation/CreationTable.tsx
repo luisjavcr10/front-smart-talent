@@ -100,6 +100,7 @@ export const CreationTable = ({
   };
 
   return (
+    
     <div className="p-3 w-full h-[500px] dark:border dark:border-black-1 shadow-doc-options text-[14px] overflow-x-auto relative text-black dark:text-white rounded-sidebar font-karla font-light">
       <div className="px-2 grid grid-cols-40 items-center min-w-[800px] sticky top-0 z-10 bg-main-1plus dark:bg-black-0 rounded-sidebar mb-4">
         <div className="col-span-5 p-2">{headers[0]}</div>
@@ -113,6 +114,7 @@ export const CreationTable = ({
         {requests.map((request, index) => (
           <div key={index}>
             <div className="px-2 grid grid-cols-40 h-full border border-white-1 dark:border-black-1 rounded-sidebar hover:bg-black-05 ">
+              
               <div className="col-span-5 p-2 ">
                 <div className="w-full overflow-hidden">
                   <input
@@ -145,7 +147,7 @@ export const CreationTable = ({
                       </p>
                     )}
                   </div>
-                </div>
+              </div>
 
               <div className="col-span-8 p-2 ">
                 <div className="w-full overflow-hidden"> 
@@ -182,7 +184,7 @@ export const CreationTable = ({
                       </p>
                     )}
                   </div>
-                </div>
+              </div>
 
               <div className="col-span-5 p-2 ">
                 <div className="w-full h-full overflow-hidden">
@@ -212,7 +214,9 @@ export const CreationTable = ({
                       <p className="text-error text-[8px] font-bold mt-1">
                         Formato incorrecto
                       </p>
-                    )}
+                    )} 
+                </div> 
+              </div>  
 
                 {/* Documentos - 2 columnas */}
                 <div className="col-span-16 p-2  relative">
@@ -319,6 +323,7 @@ export const CreationTable = ({
           )}
         </div>
       </Modal>
-    </>
+
+    </div>
   );
-};
+}
