@@ -4,11 +4,12 @@ import { motion } from "framer-motion"
 import { useModalStore } from "../../store/modalStore";
 import { useEffect, useState } from "react";
 import { Request, requestsService } from "../services/requestsService";
-import { useHasRole } from "@/auth/hooks/useUser";
+import { useHasRole, useUser } from "@/auth/hooks/useUser";
 import { ROLES } from "@/auth/constants/roles";
 
 export function RequestsListPage() {
     const { isActive, setIsActive } = useModalStore();
+    const { user } = useUser()
     const [requests, setRequests] = useState<Request[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -46,7 +47,8 @@ export function RequestsListPage() {
                     <p className="text-[12px] font-light">Visualiza tus solicitudes, su estado y los documentos requeridos.</p>
                 </div>
 
-                <motion.button
+                {user?.roles.includes(ROLES.USER) &&
+                    <motion.button
                     whileHover={{
                         scale: 1.01,
                         transition: { duration: 0.2 },
@@ -56,6 +58,7 @@ export function RequestsListPage() {
                     onClick={() => setIsActive(true)}>
                     Agregar nueva solicitud
                 </motion.button>
+                }
             </div>
 
             <div className="w-full h-[500px] p-3 rounded-sidebar shadow-doc-options bg-white dark:bg-black dark:border dark:border-black-1 text-[12px] overflow-x-auto relative">
