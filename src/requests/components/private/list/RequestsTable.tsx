@@ -216,11 +216,11 @@ export const RequestsTable = ({
 
       <Modal
         isOpen={modalOpen}
-        title={true && true ? "Visualización y descarga de archivos" : "Carga de documentos solicitados"}
+        title={!user?.roles.includes('ADMIN') ? "Visualización y descarga de archivos" : "Carga de documentos solicitados"}
         onClose={() => {
           setModalOpen(false);
           if (selectedRequest !== null && requests[selectedRequest]?.documents) {
-            const newRequests = [...requests];
+            //const newRequests = [...requests];
             // newRequests[selectedRequest].documents = newRequests[selectedRequest].documents.filter(doc => doc.resources && doc.resources.length > 0);
             // handleRequests(newRequests);
           }
@@ -245,7 +245,7 @@ export const RequestsTable = ({
 
                 return (<div key={i} className="gap-2 mb-4">
                   <h2 className="text-lg font-medium mb-2">{doc.name}</h2>
-                  {false && false ?
+                  {user?.roles.includes('ADMIN') ?
                     <div className="flex flex-col gap-2">
                       <div className="flex flex-col gap-2">
                         <label className="text-sm font-medium">Resultado</label>

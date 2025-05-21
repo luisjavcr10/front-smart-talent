@@ -132,10 +132,10 @@ export const Sidebar = () => {
 
               {isUsersOpen && (
                 <div className="transition-all duration-300 ease-in-out">
-                  <div className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 bg-white dark:bg-black dark:hover:bg-black-2 border-b border-medium dark:border-black-1 px-10 cursor-pointer'>
+                  <button onClick={() => navigate('/users')} className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 bg-white dark:bg-black dark:hover:bg-black-2 border-b border-medium dark:border-black-1 px-10 cursor-pointer'>
                     <FaClipboardUser className="w-[25px] h-[25px] text-black-2 dark:text-white-1" />
                     Lista de Usuarios
-                  </div>
+                  </button>
                   <Link
                     to={'/users/create'}
                     className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium dark:border-black-1 bg-white dark:bg-black px-10 cursor-pointer'>
