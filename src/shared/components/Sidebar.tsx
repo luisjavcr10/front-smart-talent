@@ -10,6 +10,7 @@ import { FaClipboardUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useModalStore } from '@/store/modalStore';
 
+
 export const Sidebar = () => {
   const {user, logout} = useUser();
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export const Sidebar = () => {
         
         <div className="flex justify-center items-center gap-4 px-2 py-6 border-t-[1px] border-medium w-full">
           <img className="w-[45px] h-[45px]" src="/images/profile.png" alt="profile" />
-          <p className='text-[14px] font-light'>{user?.name}</p>
+          <p className='text-[14px] font-light'>{user?.username}</p>
         </div>
         <div
             className={`w-full flex flex-row justify-between items-center gap-2 text-[14px] font-light  py-3.5 border-t border-medium px-6`}
@@ -107,7 +108,8 @@ export const Sidebar = () => {
             Facturación
           </div>
 
-          <div>
+         {user?.roles[0] === 'ADMIN' &&   
+          (<div>
             <div 
               className={`w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white-2 dark:hover:bg-black-2 border-b border-medium px-6 cursor-pointer`}
               onClick={toggleUsersMenu}
@@ -135,7 +137,7 @@ export const Sidebar = () => {
                 </Link>
               </div>
             )}
-          </div>
+          </div>)}
           
           {/* Cerrar Sesión Button */}
           <button

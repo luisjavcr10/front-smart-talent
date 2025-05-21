@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 
@@ -62,7 +63,17 @@ export const OptionsModal = ({
                 SELECCIONA EL MÉTODO DE INGRESO DE DATOS
               </p>
 
-              <div className="flex flex-col gap-3 w-full max-w-md">
+            <div className="flex flex-col gap-3 w-full max-w-md">
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                onClick={()=>(navigate("/requests/create"))}
+                className="bg-main-1plus dark:bg-white-10 hover:bg-main py-2 px-4 w-full rounded-sidebar text-[16px] transition-colors border border-transparent dark:border-shadow-dark "
+              >
+                <p className="text-[14px] font-light">Registrar manualmente</p>
+              </motion.button>
+              <p className="text-center text-[12px] font-light">O</p>
+              <div className="flex flex-col items-center">
                 <motion.button
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
