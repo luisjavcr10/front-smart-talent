@@ -5,4 +5,5 @@ export const DOCUMENT_TYPE_ENDPOINTS = {
 export const REQUEST_ENDPOINTS = {
     GET_REQUEST_PEOPLE: '/requests/people',
     GET_REQUEST_PEOPLE_BY_ENTITY_ID: (entityId: number) => `/requests/entity/${entityId}/people`,
+    UPDATE_DOCUMENTS: '/documents/bulk-update'
 } as const;

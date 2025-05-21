@@ -104,22 +104,20 @@ export function RequestsCreationPage() {
                     if (file instanceof File) {
                       try {
                         // Obtener URL firmada del backend
-                        const signedUrlResponse = await apiClient.post(
-                          "/upload/signed-url",
-                          {
-                            fileName: file.name,
-                            contentType: file.type,
-                          }
-                        );
+                        const signedUrlResponse = await apiClient.post('/upload/write-signed-url', {
+                          fileName: file.name,
+                          contentType: file.type
+                        });
 
-                        const signedUrl = signedUrlResponse.data.signedUrl;
+                        const signedUrl = signedUrlResponse.data.signedUrl;                        
+
                         // Subir el archivo usando el hook
                         await uploadFile(file, signedUrl);
 
                         // Agregar nuevo recurso con la URL
                         processedResources.push({
                           ...resource,
-                          value: signedUrl.split("?")[0], // URL base sin parámetros de firma
+                          value: file.name
                         });
                       } catch (error) {
                         console.error("Error al procesar archivo:", error);
@@ -128,7 +126,6 @@ export function RequestsCreationPage() {
                     }
                   }
                 } else {
-                  // Si no es un array de archivos, mantener el recurso original
                   processedResources.push(resource);
                 }
               }
@@ -148,11 +145,11 @@ export function RequestsCreationPage() {
       );
 
       // Enviar las solicitudes procesadas al backend
-      const response = await apiClient.post("/requests", {
-        entityId: user?.entityId,
-        people: processedRequests,
-      });
-      setIsLoading(false);
+      const response = await apiClient.post('/requests', { 
+          entityId: user?.entityId, 
+          people: processedRequests 
+        });
+
 
       if (response.status === 200) {
         throw new Error("Error al guardar las solicitudes");

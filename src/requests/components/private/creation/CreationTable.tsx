@@ -279,6 +279,7 @@ export const CreationTable = ({
         ))}
       </div>
 
+
       {/* Botón para agregar fila */}
       <div ref={listEndRef} className="flex justify-start p-4">
         <AddButton type="request" onClick={addRow} />
