@@ -60,6 +60,8 @@ export const LoginForm = () => {
   return (
     <>
       {isLoading && <Loader />}
+      
+
       <p className="w-full opacity-50 text-[20px]">
         Por favor ingresa tus datos
       </p>
@@ -84,7 +86,7 @@ export const LoginForm = () => {
                     flex justify-center items-center
                     bg-main-3plus dark:bg-black-2 hover:opacity-80
                     border border-white dark:border-main rounded-[15px] 
-                    px-4 py-2 
+                    mt-6 px-4 py-2 
                     w-full 
                     cursor-pointer
                     gap-4"

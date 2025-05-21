@@ -61,7 +61,7 @@ export const RequestsTable = ({
                       className={`${
                         doc.state
                           ? "bg-success text-white"
-                          : "bg-transparent  text-black dark:text-white"
+                          : "border border-white-1 dark:border-black-1 text-black dark:text-white"
                       } py-0.5 px-2 rounded-[5px]`}
                     >
                       {doc.name}

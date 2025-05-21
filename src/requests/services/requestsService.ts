@@ -32,6 +32,7 @@ export const requestsService = {
     getAllPeopleByEntityId: async (entityId: number): Promise<GetAllPeopleResponse> => {
         try {
             const response = await apiClient.get(REQUEST_ENDPOINTS.GET_REQUEST_PEOPLE_BY_ENTITY_ID(entityId));
+            console.log(response);
             return response.data;
         } catch (error) {
             console.error('Error al obtener las solicitudes:', error);
