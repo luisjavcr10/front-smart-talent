@@ -284,7 +284,7 @@ export const RequestsTable = ({
                     <ResourceOutput key={j} {...resource} />
                   ))}
                     </div> : <div>
-                      <ResourceOutput key={Date.now() - 1} name="Resultados" value={doc.result as string} />
+                      <ResourceOutput key={Date.now() - 1} name="Comentarios" value={doc.result as string} />
                       <ResourceOutput key={Date.now() - 2}  name="Documento" value={doc.filename as string}/>
                     </div>}
 
