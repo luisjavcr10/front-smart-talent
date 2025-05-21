@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { UsersService } from "@/users/service/usersService";
-import { FormInput } from "../shared/FormInput";
-import { CreationButton } from "../shared/CreationButton";
+import { FormInput } from "../../shared/FormInput";
+import { CreationButton } from "../../shared/CreationButton";
 
 interface UserProps {
   documentNumber: string;
