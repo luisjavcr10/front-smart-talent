@@ -4,8 +4,10 @@ import { CreationButton } from "../../shared/CreationButton";
 import { UsersService } from "@/users/service/usersService";
 import { UserProps } from "@/users/types/UserListResponse";
 import { useNavigate } from "react-router";
+import { Loader } from "@/shared/components/Loader";
 
 export const FormNatural = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState<UserProps>({
@@ -23,13 +25,16 @@ export const FormNatural = () => {
       ...user,
       type: "NATURAL",
     };
+    setLoading(true);
     const response = await UsersService.createUser(payload);
+    setLoading(false);
     navigate('/users');
     console.log(response);
   };
 
   return (
     <>
+      {loading && <Loader />}
       <div className="flex flex-col gap-4">
         <FormInput
           fieldName="DNI"
