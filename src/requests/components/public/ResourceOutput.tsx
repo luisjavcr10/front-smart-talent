@@ -6,13 +6,13 @@ interface ResourceOutputProps {
 }
 
 export const ResourceOutput = (props: ResourceOutputProps) => {
-    const isURL = (value: string): boolean => {
-        try {
-            new URL(value);
-            return true;
-        } catch (error) {
-            return false;
-        }
+    const isFileReference = (value: string): boolean => {
+        const fileExtensions = ['.pdf', '.doc', '.docx', '.jpg', '.jpeg', '.png', '.txt', '.xls', '.xlsx', '.csv'];
+        const hasExtension = fileExtensions.some(ext => value.toLowerCase().endsWith(ext));
+        const hasPathSeparator = value.includes('/') || value.includes('\\');
+        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
+        
+        return hasExtension || hasPathSeparator || isUUID;
     };
 
     const handleDownload = async (e: React.MouseEvent) => {
@@ -41,7 +41,7 @@ export const ResourceOutput = (props: ResourceOutputProps) => {
                     {props.name}
                 </label>
                 
-                {isURL(props.value) ? (
+                {isFileReference(props.value) ? (
                     <div className="flex items-center">
                         <a 
                             href="#"
