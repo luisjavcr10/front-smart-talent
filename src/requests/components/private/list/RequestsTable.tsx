@@ -1,11 +1,14 @@
+import { STATUS } from "@/auth/constants/status";
+import { Request } from "@/requests/services/requestsService";
 import { useState } from "react";
 import { FaChevronCircleDown } from "react-icons/fa";
-import { RequestsBody } from "@/requests/types/RequestBody";
 
 export const RequestsTable = ({
   data,
+  isAdmin,
 }: Readonly<{
-  data: RequestsBody[];
+  data: Request[];
+  isAdmin: boolean;
 }>) => {
   const [openRows, setOpenRows] = useState<number[]>([]);
 
@@ -19,10 +22,13 @@ export const RequestsTable = ({
     <div className="w-full text-[14px] font-karla font-light">
       {/* Header */}
       <div className="px-2 grid grid-cols-12 gap-0 bg-main-3plus dark:bg-main-1plus text-black dark:text-white rounded-sidebar mb-4">
+        {isAdmin && 
+          <div className="col-span-1 p-2">Propietario</div>
+        }
         <div className="col-span-1 p-2">DNI</div>
         <div className="col-span-3 p-2 hidden md:block">Nombre Completo</div>
         <div className="col-span-1 p-2 hidden md:block">Estado</div>
-        <div className="col-span-6 p-2 hidden md:block">Documentos</div>
+        <div className="col-span-5 p-2 hidden md:block">Documentos</div>
         <div className="col-span-1 p-2 hidden md:block">Acciones</div>
         <div className="col-span-1 p-2 md:hidden">Acciones</div>
       </div>
@@ -33,6 +39,11 @@ export const RequestsTable = ({
           <div key={index}>
             {/* Main Row */}
             <div className="px-2 grid grid-cols-12 border border-white-1 dark:border-black-1 rounded-sidebar hover:bg-black-05 dark:hover:bg-white-10">
+              {isAdmin &&
+                <div className="col-span-1 p-2">
+                {request.owner}
+              </div>
+              }
               <div className="col-span-1 p-2 ">
                 {request.dni}
               </div>
@@ -40,11 +51,11 @@ export const RequestsTable = ({
                 {request.fullname}
               </div>
               <div className="col-span-1 p-2  hidden md:block">
-                <span>{request.state}</span>
+                <span>{STATUS[request.status as keyof typeof STATUS]}</span>
               </div>
-              <div className="col-span-6 p-2  hidden md:block">
+              <div className="col-span-5 p-2  hidden md:block">
                 <div className="flex flex-wrap gap-1">
-                  {request.docs.map((doc, docIndex) => (
+                  {request.documents.map((doc: any, docIndex: number) => (
                     <span
                       key={docIndex}
                       className={`${
@@ -86,11 +97,11 @@ export const RequestsTable = ({
                 <div className="p-2 border border-black-05 dark:border-shadow-dark">
                   <div className="flex flex-col gap-2 mx-4 my-2">
                     <p>
-                      Estado: <strong>{request.state}</strong>
+                      Estado: <strong>{STATUS[request.status as keyof typeof STATUS]}</strong>
                     </p>
                     <p>Documentos solicitados:</p>
                     <div className="flex flex-col gap-1 items-center">
-                      {request.docs.map((doc, docIndex) => (
+                      {request.documents.map((doc: any, docIndex: number) => (
                         <span
                           key={docIndex}
                           className={`w-full ${
