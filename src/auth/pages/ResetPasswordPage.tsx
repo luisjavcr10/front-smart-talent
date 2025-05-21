@@ -5,7 +5,7 @@ import { ResetForm } from "../components/private/reset-password/ResetForm";
 export function ResetPasswordPage(){
     return(
         <>
-            <FormSection direction="l">
+            <FormSection >
                 <ResetForm />
             </FormSection>
             <GreetingSection

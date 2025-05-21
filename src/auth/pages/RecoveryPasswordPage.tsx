@@ -5,7 +5,7 @@ import { RecoveryForm } from "../components/private/recovery-password/RecoveryFo
 export function RecoveryPasswordPage(){
     return(
         <>
-            <FormSection direction="l">
+            <FormSection>
                 <RecoveryForm/>
             </FormSection>
             
