@@ -84,7 +84,9 @@ export const Sidebar = () => {
             
             {isRequestsOpen && (
               <div className="transition-all duration-300 ease-in-out">
-                <div className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
+                <div 
+                  onClick={() => navigate('/requests')}
+                  className='w-full flex flex-row justify-start items-center gap-2 py-3.5 hover:bg-white dark:hover:bg-black border-b border-medium dark:border-black-1 bg-white-2 dark:bg-black-2 px-10 cursor-pointer'>
                   <TbList className="w-[30px] h-[30px] text-black-2 dark:text-white-1" />
                   Lista de Solicitudes
                 </div>
