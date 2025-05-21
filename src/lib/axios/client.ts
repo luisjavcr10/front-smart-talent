@@ -9,7 +9,8 @@ export const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': '*/*'
-  }
+  },
+  withCredentials: false,
 });
 
 // Configurar interceptores
