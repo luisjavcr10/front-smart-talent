@@ -13,6 +13,7 @@ export interface Request {
         name: string;
         filename: File | string | null;
         result: string | null;
+        status: string;
         resources: {
             id: number;
             name: string;

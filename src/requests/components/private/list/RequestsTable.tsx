@@ -68,12 +68,12 @@ export const RequestsTable = ({
       try {
         const loadingMessage = 'Procesando informes...';
         alert(loadingMessage);
-  
+
         const documentsToUpdate = [];
-  
+
         for (let i = 0; i < requests[selectedRequest].documents.length; i++) {
           const doc = requests[selectedRequest].documents[i];
-  
+
           if (doc.filename instanceof File) {
             const fileKey = await handleFileUpload(doc.filename);
             if (fileKey) {
@@ -85,7 +85,7 @@ export const RequestsTable = ({
             }
           }
         }
-  
+
         await requestsService.updateDocuments(documentsToUpdate);
         alert('Informes actualizados correctamente');
       } catch (error) {
@@ -142,11 +142,10 @@ export const RequestsTable = ({
                     <span
                       key={docIndex}
 
-                      className={`${
-                        doc.state
-                          ? "bg-success text-white"
-                          : "border border-white-1 dark:border-black-1 text-black dark:text-white"
-                      } py-0.5 px-2 rounded-[5px]`}
+                      className={`${doc.state
+                        ? "bg-success text-white"
+                        : "border border-white-1 dark:border-black-1 text-black dark:text-white"
+                        } py-0.5 px-2 rounded-[5px]`}
                     >
                       {doc.name}
                     </span>
@@ -226,29 +225,33 @@ export const RequestsTable = ({
           }
         }}
         position="center"
-        width="400px"
+        width="800px"
         className=""
-        footer={<>
-          <button
-            className="px-4 py-2 text-sm bg-main text-white rounded-md hover:bg-opacity-90"
-            onClick={handleConfirmRequest}
-          >
-            Confirmar
-          </button>
-        </>}
+        footer={<>{
+          !user?.roles.includes('ADMIN') ? null :
+            <button
+              className="px-4 py-2 text-sm bg-main text-white rounded-md hover:bg-opacity-90"
+              onClick={handleConfirmRequest}
+            >
+              Confirmar
+            </button>
+        }</>}
       >
-        <div className="flex flex-col gap-4">
-
+        <div className="flex flex-col">
           {selectedRequest !== null && requests[selectedRequest] && (
             <div className="text-sm">
-              {requests[selectedRequest]?.documents.map((doc, i) => {
-
-                return (<div key={i} className="gap-2 mb-4">
-                  <h2 className="text-lg font-medium mb-2">{doc.name}</h2>
+              {requests[selectedRequest]?.documents.map((doc, i) => (
+                <div key={i} className="gap-2 border-b border-gray-300 px-[32px] py-[15px] px-[32px]">
+                  <div className="flex w-full justify-between">
+                    <h2 className="text-[24px]">{doc.name}</h2>
+                    <span className={doc.status == 'Pendiente' ? "text-yellow-500 text-[16px]" : "text-green-500 text-[16px]"}>{doc.status}</span>
+                  </div>
                   {user?.roles.includes('ADMIN') ?
-                    <div className="flex flex-col gap-2">
-                      <div className="flex flex-col gap-2">
-                        <label className="text-sm font-medium">Resultado</label>
+                    <div className="flex flex-col">
+                      <div className="flex w-full justify-between align-center py-[14px]">
+                        <div className="text-[16px] text-black-2">
+                          Resultado
+                        </div>
                         <input
                           type="text"
                           placeholder="Agregar una descripción"
@@ -260,38 +263,57 @@ export const RequestsTable = ({
                               handleRequests(newRequests);
                             }
                           }}
-                          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-2plus"
+                          className="w-full max-w-[400px] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 
+                        rounded-md focus:outline-none focus:ring-2 focus:ring-main focus:border-transparent 
+                        bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
+                        placeholder-gray-400 dark:placeholder-gray-300
+                        transition-all duration-200"
                         />
                       </div>
-                      <div className="flex flex-col gap-2">
-                        <label className="text-sm font-medium">Documento</label>
-                        <input
-                          type="file"
-                          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                          onChange={(e) => {
-                            if (e.target.files && e.target.files.length > 0 && selectedRequest !== null) {
-                              const file = e.target.files[0];
-                              const newRequests = [...requests];
-                              newRequests[selectedRequest].documents[i].filename = file;
-                              handleRequests(newRequests);
-                            }
-                          }}
-                          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-2plus file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-main-2plus file:text-white hover:file:bg-main-3plus"
-                        />
+                      <div className="flex w-full justify-between align-center py-[14px]">
+                        <div className="text-[16px] text-black-2">
+                          Documento
+                        </div>
+
+                        <div className="relative">
+                          <input
+                            type="file"
+                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                            onChange={(e) => {
+                              if (e.target.files && e.target.files.length > 0 && selectedRequest !== null) {
+                                const file = e.target.files[0];
+                                const newRequests = [...requests];
+                                newRequests[selectedRequest].documents[i].filename = file;
+                                handleRequests(newRequests);
+                              }
+                            }}
+                            className="w-full max-w-[200px] text-sm
+                              file:mr-0 file:py-[6px] file:px-[68px]
+                              file:rounded-[6px] file:border-[1px] file:border-black-2
+                              file:text-[10px] file:font-medium
+                              file:bg-white file:text-black-2
+                              hover:file:bg-black-2 hover:file:text-white hover:file:border-transparent
+                              file:w-fullo
+                              [&:not(:placeholder-shown)::file-selector-button]:content-none
+                              text-black-2 text-center
+                              cursor-pointer
+                              transition-all duration-200"
+                          />
+                        </div>
                       </div>
 
-                  {doc.resources.map((resource, j) => (
-                    <ResourceOutput key={j} {...resource} />
-                  ))}
-                    </div> : <div>
+                      {doc.resources.map((resource, j) => (
+                        <ResourceOutput key={j} {...resource} />
+                      ))}
+                    </div> :
+                    <div>
                       <ResourceOutput key={Date.now() - 1} name="Comentarios" value={doc.result as string} />
-                      <ResourceOutput key={Date.now() - 2}  name="Documento" value={doc.filename as string}/>
-                    </div>}
-
-
-
-                </div>)
-              })}
+                      <ResourceOutput key={Date.now() - 2} name="Documento" value={doc.filename as string} />
+                    </div>
+                  }
+                </div>
+              )
+              )}
             </div>
           )}
         </div>
