@@ -33,8 +33,8 @@ export const CreationTable = ({
   handleRequests: (newRequests: RequestsType[]) => void;
   toggleOpenOptions: (rowIndex: number) => void;
   handleOpenOptionsIndex: () => void;
-  handleDocCheckbox: (
-    rowIndex: number,
+  handleDocCheckbox: (      
+    rowIndex: number,     
     doc: IDocumentType,
     checked: boolean
   ) => void;
@@ -78,8 +78,9 @@ export const CreationTable = ({
 
   const handleConfirm = (index: number) => {
     if (!requests[index].isConfirmed) {
-      if (requests[index].documents.length === 0 ) {
+      if (requests[index].documents.length === 0) {
         alert("Debe agregar al menos un tipo de documento")
+        return
       }
       setSelectedRequest(index);
       setModalOpen(true);
@@ -87,11 +88,26 @@ export const CreationTable = ({
   };
 
   const handleConfirmRequest = () => {
-    setModalOpen(false);
     const newRequests = [...requests];
     if (selectedRequest !== null) {
+
+      const allResourcesHaveValues = requests[selectedRequest].documents.every(doc => {
+        const totalRequiredResources = doc.resourceTypes.length;
+
+        const resourcesWithValues = doc.resources.filter(resource =>
+          resource.value && resource.value !== ''
+        ).length;
+        return resourcesWithValues >= totalRequiredResources;
+      });
+
+      if (!allResourcesHaveValues) {
+        alert("Debe completar todos los recursos requeridos");
+        return;
+      }
+
       newRequests[selectedRequest].isConfirmed = true;
       handleRequests(newRequests);
+      setModalOpen(false);
     }
     setSelectedRequest(null);
   };
@@ -123,11 +139,10 @@ export const CreationTable = ({
                 <div className="w-full overflow-hidden">
                   <input
                     ref={(el) => setInputRef(el, index)}
-                    className={`w-full  rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
-                      inputErrors.dni[index]
+                    className={`w-full  rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${inputErrors.dni[index]
                         ? "border border-error"
                         : "border border-white-1 dark:border-black-2"
-                    }`}
+                      }`}
                     type="text"
                     value={request.dni}
                     onChange={(e) => {
@@ -160,11 +175,10 @@ export const CreationTable = ({
               <div className="col-span-8 p-2 ">
                 <div className="w-full overflow-hidden">
                   <textarea
-                    className={`w-full resize-none rounded-[5px] py-0.5 px-1 focus:outline-none ${
-                      inputErrors.fullname[index]
+                    className={`w-full resize-none rounded-[5px] py-0.5 px-1 focus:outline-none ${inputErrors.fullname[index]
                         ? "border border-error"
                         : "border border-white-1 dark:border-black-2"
-                    }`}
+                      }`}
                     value={request.fullname}
                     onChange={(e) => {
                       const value = e.target.value;
@@ -197,11 +211,10 @@ export const CreationTable = ({
               <div className="col-span-5 p-2 ">
                 <div className="w-full h-full overflow-hidden">
                   <input
-                    className={`w-full rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${
-                      inputErrors.phone[index]
+                    className={`w-full rounded-[5px] py-0.5 px-1 focus:outline-none number-input-hide-arrows ${inputErrors.phone[index]
                         ? "border border-error"
                         : "border border-white-1 dark:border-black-2"
-                    }`}
+                      }`}
                     type="text"
                     value={request.phone}
                     onChange={(e) => {
@@ -261,14 +274,13 @@ export const CreationTable = ({
               {/* Modificar la sección de acciones */}
               <div className="col-span-6 px-1 py-2 flex justify-around items-start gap-1">
                 <button
-                  className={`${
-                    requests[index].isConfirmed
+                  className={`${requests[index].isConfirmed
                       ? "bg-success rounded-[5px] py-1 px-1.5 text-white cursor-not-allowed"
                       : "border border-white-1 rounded-[5px] py-1 px-1.5 hover:text-main transition-colors"
-                  } text-[12px]`}
+                    } text-[12px]`}
                   onClick={() => handleConfirm(index)}
                 >
-                  {requests[index].isConfirmed? 'Confirmado' : 'Confirmar'}
+                  {requests[index].isConfirmed ? 'Confirmado' : 'Confirmar'}
                 </button>
                 <button
                   className="text-[12px] py-1 px-1.5 border border-white-1 rounded-[5px] hover:border-error hover:text-error transition-colors"
@@ -331,13 +343,23 @@ export const CreationTable = ({
                       {...resourceType}
                       onChange={(value) => {
                         const newRequests = [...requests];
-                        newRequests[selectedRequest].documents[
-                          i
-                        ].resources.push({
-                          resourceTypeId: resourceType.id,
-                          name: resourceType.name,
-                          value: value,
-                        });
+                        const currentDoc = newRequests[selectedRequest].documents[i];
+                        const existingResourceIndex = currentDoc.resources.findIndex(
+                          r => r.resourceTypeId === resourceType.id
+                        );
+
+                        if (existingResourceIndex >= 0) {
+                          // Update existing resource
+                          currentDoc.resources[existingResourceIndex].value = value;
+                        } else {
+                          // Add new resource
+                          currentDoc.resources.push({
+                            resourceTypeId: resourceType.id,
+                            name: resourceType.name,
+                            value: value,
+                          });
+                        }
+                        
                         handleRequests(newRequests);
                       }}
                     />
