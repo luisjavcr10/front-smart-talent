@@ -78,6 +78,9 @@ export const CreationTable = ({
 
   const handleConfirm = (index: number) => {
     if (!requests[index].isConfirmed) {
+      if (requests[index].documents.length === 0 ) {
+        alert("Debe agregar al menos un tipo de documento")
+      }
       setSelectedRequest(index);
       setModalOpen(true);
     }
@@ -294,30 +297,33 @@ export const CreationTable = ({
           if (selectedRequest !== null) {
             newRequests[selectedRequest].documents = newRequests[
               selectedRequest
-            ].documents.filter((doc) => doc.resources.length > 0);
+            ].documents.map((doc) => ({
+              ...doc,
+              resources: [],
+            })); // Limpiar los recursos de la solicitud seleccionada
           }
           handleRequests(newRequests);
         }}
         position="center"
-        width="400px"
-        className="p-6"
+        width="800px"
+        className=""
         footer={
           <>
             <button
-              className="px-4 py-2 text-sm bg-main text-white rounded-md hover:bg-opacity-90"
+              className="bg-main text-black rounded-[12px] text-[16px] color-black font-[300] px-[54px] py-[15px] hover:bg-main-2 transition-colors"
               onClick={handleConfirmRequest}
             >
-              Confirmar
+              Subir recursos necesarios
             </button>
           </>
         }
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
           {selectedRequest !== null && (
             <div className="text-sm">
               {requests[selectedRequest]?.documents.map((doc, i) => (
-                <div key={i} className="gap-2">
-                  <h2 className="text-lg">{doc.name}</h2>
+                <div key={i} className="gap-2 border-b border-gray-300 px-[32px] py-[15px] px-[32px]">
+                  <h2 className="text-[24px]">{doc.name}</h2>
 
                   {doc.resourceTypes.map((resourceType, j) => (
                     <ResourceInput

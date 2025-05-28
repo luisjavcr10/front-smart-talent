@@ -227,7 +227,7 @@ export const RequestsTable = ({
         }}
         position="center"
         width="400px"
-        className="p-6"
+        className=""
         footer={<>
           <button
             className="px-4 py-2 text-sm bg-main text-white rounded-md hover:bg-opacity-90"

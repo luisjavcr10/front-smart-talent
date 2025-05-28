@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, TargetAndTransition, VariantLabels } from 'framer-motion';
+import CloseImg from '@/assets/close.svg';
 
 interface ModalProps {
     isOpen: boolean;
@@ -17,7 +18,7 @@ interface ModalProps {
         initial?: TargetAndTransition | VariantLabels;
         animate?: TargetAndTransition | VariantLabels;
         exit?: TargetAndTransition | VariantLabels;
-        transition?: any; // Mantenemos any por ahora para la transición
+        transition?: any;
     };
 }
 
@@ -115,19 +116,19 @@ export const Modal = ({
                             transition={selectedAnimation.transition}
                         >
                             <div className="flex flex-col gap-4">
-                                <div className="flex justify-between items-center">
-                                    <h3 className="text-lg font-medium">{title}</h3>
-                                    <button 
+                                <div className="flex justify-between items-center border-b border-gray-300 px-[32px] py-[15px]">
+                                    <h3 className="text-black-2 text-[16px]">{title}</h3>
+                                    <button
                                         onClick={onClose}
                                         className="p-2 hover:text-main transition-colors"
                                     >
-                                        ✕
+                                        <img src={CloseImg} alt="Close modal" />
                                     </button>
                                 </div>
-                                <div className="overflow-y-auto max-h-[70vh] scrollbar-hide">
+                                <div className="max-h-[70vh] overflow-y-auto scrollbar-hide py-[16px]">
                                     {children}
                                 </div>
-                                <div className="flex justify-end gap-3 mt-4">
+                                <div className="flex justify-center p-[14px]">
                                     {footer}
                                 </div>
                             </div>
