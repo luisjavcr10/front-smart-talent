@@ -1,6 +1,6 @@
 export interface UsersListResponse {
     id: number;
-    type: string;
+    type: 'NATURAL' | 'JURIDICA';
     documentNumber: string;
     firstName: string;
     maternalSurname: string;
@@ -51,7 +51,7 @@ export interface UserResponse {
         updatedAt: string;
         createdAt: string;
     };
-    user: {
+    user?: {
         email: string;
         username: string;
     };

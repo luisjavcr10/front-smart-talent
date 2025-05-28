@@ -1,7 +1,7 @@
 import { OptionsModal } from "../components/private/list/OptionsModal";
 import { RequestsTable } from "../components/private/list/RequestsTable";
 import { motion } from "framer-motion";
-import { useModalStore } from "../../store/modalStore";
+import { useModalStore } from "../../shared/store/modalStore";
 import { useEffect, useState } from "react";
 import { Request, requestsService } from "../services/requestsService";
 import { useHasRole, useUser } from "@/auth/hooks/useUser";
@@ -47,7 +47,7 @@ export function RequestsListPage() {
             LISTA DE SOLICITUDES
           </p>
           <p className="text-[12px] font-light">
-            Visualiza tus solicitudes, su estado y los documentos requeridos.
+            Visualiza tus solicitudes, su estado y los informes requeridos.
           </p>
         </div>
 

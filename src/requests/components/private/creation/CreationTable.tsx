@@ -10,7 +10,7 @@ const headers = [
   "DNI",
   "Nombres completos",
   "Teléfono",
-  "Documentos",
+  "Informes",
   "Acciones",
 ];
 
@@ -227,7 +227,7 @@ export const CreationTable = ({
                 </div>
               </div>
 
-              {/* Documentos - 2 columnas */}
+              {/* Informes - 2 columnas */}
               <div className="col-span-16 p-2  relative">
                 <div className="flex justify-between items-start w-full">
                   <div className="flex flex-wrap gap-1 flex-1">

@@ -90,7 +90,7 @@ export function RequestsCreationPage() {
       }
 
       setIsLoading(true);
-      // Procesar todos los archivos de los documentos
+      // Procesar todos los archivos de los informes
       const processedRequests = await Promise.all(
         requests.map(async (request) => {
           const processedDocuments = await Promise.all(
@@ -179,7 +179,7 @@ export function RequestsCreationPage() {
             CREACIÓN DE SOLICITUDES
           </p>
           <p className="text-[12px] font-light">
-            Registra personas por DNI y nombre para solicitar documentos.
+            Registra personas por DNI y nombre para solicitar informes.
           </p>
         </div>
         <motion.button

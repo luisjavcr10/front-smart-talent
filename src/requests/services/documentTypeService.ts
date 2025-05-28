@@ -7,7 +7,7 @@ export const DocumentTypeService = {
             const { data } = await documentTypeApi.getAllWithResourceTypes();
             return data;
         } catch (error) {
-            throw new Error('Error al obtener tipos de documentos');
+            throw new Error('Error al obtener tipos de informes');
         }
     },
 };

@@ -23,7 +23,7 @@ export const DocumentTypeProvider = ({ children }: { children: ReactNode }) => {
       const response = await DocumentTypeService.getAllWithResourceTypes();
       setDocumentTypes(response.documentTypes);
     } catch (error) {
-      setError('Error al cargar los tipos de documentos');
+      setError('Error al cargar los tipos de informes');
     } finally {
       setLoading(false);
     }
