@@ -1,13 +1,18 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { UserTypeButton } from "../components/private/create/UserTypeButton";
 import { FormNatural } from "../components/private/create/FormNatural";
 import { FormJuridica } from "../components/private/create/FormJuridica";
 import { motion } from "framer-motion";
+import { UsersListResponse } from "../types/UserListResponse";
 
-export function CreateUserPage() {
-  const [userType, setUserType] = useState<"NATURAL" | "JURIDICA">("JURIDICA");
+export function UpdateUserPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const user:UsersListResponse = location.state?.user;
+
+  if (!user) {
+    return <div>No se encontró información del usuario</div>;
+  }
 
   return (
     <div className="flex flex-col mx-5 md:mx-8 my-15 gap-5 md:gap-11 font-karla font-light">
@@ -16,10 +21,10 @@ export function CreateUserPage() {
                     text-black dark:text-white">
         <div className="flex flex-col text-start">
           <p className="text-[32px] md:text-[36px] xl:text-[36px]">
-            CREACIÓN DE USUARIOS
+            EDICIÓN DE USUARIO
           </p>
           <p className="text-[14px] font-light">
-            Añade clientes y completa sus datos personales o empresariales.
+            Edita los datos del cliente seleccionado y completa sus datos personales o empresariales.
           </p>
         </div>
         <motion.button
@@ -43,13 +48,15 @@ export function CreateUserPage() {
       <div className="flex gap-6">
         <UserTypeButton
           expectedType="NATURAL"
-          userType={userType}
-          hanldeUserType={() => setUserType("NATURAL")}
+          userType={user.type}
+          hanldeUserType={() => {}}
+          isUpdate={true}
         />
         <UserTypeButton
           expectedType="JURIDICA"
-          userType={userType}
-          hanldeUserType={() => setUserType("JURIDICA")}
+          userType={user.type}
+          hanldeUserType={() => {}}
+          isUpdate={true}
         />
       </div>
 
@@ -57,7 +64,7 @@ export function CreateUserPage() {
         Ingresa los datos en los campos correspondientes:
       </p>
 
-      {userType === "NATURAL" ? <FormNatural /> : <FormJuridica />}
+      {user.type === "NATURAL" ? <FormNatural isUpdate={true} userEdit={user} /> : <FormJuridica isUpdate={true} userEdit={user} />}
     </div>
   );
 }

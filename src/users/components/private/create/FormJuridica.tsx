@@ -4,6 +4,7 @@ import { FormInput } from "../../shared/FormInput";
 import { CreationButton } from "../../shared/CreationButton";
 import { Loader } from "@/shared/components/Loader";
 import { useNavigate } from "react-router-dom";
+import { UsersListResponse } from "@/users/types/UserListResponse";
 
 interface UserProps {
   documentNumber: string;
@@ -16,16 +17,16 @@ interface UserProps {
   phone: string;
 }
 
-export const FormJuridica = () => {
+export const FormJuridica = ({userEdit, isUpdate}:Readonly<{userEdit?:UsersListResponse, isUpdate?:boolean}>) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState<UserProps>({
-    documentNumber: "",
-    businessName: "",
-    email: "",
-    address: "",
-    phone: "",
+    documentNumber: userEdit?.documentNumber || "",
+    businessName: userEdit?.businessName || "",
+    email: userEdit?.user.email || "",
+    address: userEdit?.address || "",
+    phone: userEdit?.phone || "",
   });
 
   const handleCreateUser = async () => {
@@ -33,13 +34,35 @@ export const FormJuridica = () => {
       ...user,
       type: "JURIDICA"
     };
+    setOpenModal(false);
     setLoading(true);
     const response = await UsersService.createUser(payload);
     setLoading(false);
     navigate('/users');
     console.log(response);
-
+    setOpenModal(false);
   };
+
+  const handleUpdateUser = async () =>{
+    const payload = {
+      ...user,
+      type: userEdit?.type,
+    };
+    setOpenModal(false);
+    setLoading(true);
+    const response = await UsersService.updateUser(userEdit?.id || 0, payload);
+    setLoading(false);
+    navigate('/users');
+    console.log(response);
+  }
+
+  const handleClick = () =>{
+    if(isUpdate){
+      handleUpdateUser();
+    }else{
+      handleCreateUser();
+    }
+  }
 
   return (
     <>
@@ -109,10 +132,7 @@ export const FormJuridica = () => {
                 Regresar
               </button>
               <button
-                onClick={() => {
-                  handleCreateUser();
-                  setOpenModal(false);
-                }}
+                onClick={() =>handleClick()}
                 className="text-[14px] font-light bg-main rounded-[5px] px-10 py-1"
               >
                 Confirmar

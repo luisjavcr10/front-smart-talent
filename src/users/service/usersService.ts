@@ -15,7 +15,7 @@ export const UsersService = {
     }
   },
 
-  async updateUser(id: string, payload: UserProps): Promise<UserResponse> {
+  async updateUser(id: number, payload: UserProps): Promise<UserResponse> {
     try {
       const { data } = await UsersApi.updateUser(id, payload);
       return data;

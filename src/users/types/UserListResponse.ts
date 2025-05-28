@@ -1,6 +1,6 @@
 export interface UsersListResponse {
     id: number;
-    type: string;
+    type: 'NATURAL' | 'JURIDICA';
     documentNumber: string;
     firstName: string;
     maternalSurname: string;
