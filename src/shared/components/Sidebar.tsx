@@ -8,7 +8,7 @@ import { MdExpandMore } from "react-icons/md";
 import { ThemeSwitch } from './ThemeSwitch';
 import { FaClipboardUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import { useModalStore } from '@/store/modalStore';
+import { useModalStore } from '@/shared/store/modalStore';
 import { ROLES } from '@/auth/constants/roles';
 
 

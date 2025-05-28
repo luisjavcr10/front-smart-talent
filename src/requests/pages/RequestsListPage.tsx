@@ -1,7 +1,7 @@
 import { OptionsModal } from "../components/private/list/OptionsModal";
 import { RequestsTable } from "../components/private/list/RequestsTable";
 import { motion } from "framer-motion";
-import { useModalStore } from "../../store/modalStore";
+import { useModalStore } from "../../shared/store/modalStore";
 import { useEffect, useState } from "react";
 import { Request, requestsService } from "../services/requestsService";
 import { useHasRole, useUser } from "@/auth/hooks/useUser";
