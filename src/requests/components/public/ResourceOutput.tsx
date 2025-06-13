@@ -61,7 +61,8 @@ export const ResourceOutput = ({ name, value = '' }: ResourceOutputProps) => {
                     rounded-md focus:outline-none focus:ring-2 focus:ring-main focus:border-transparent 
                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
                     placeholder-gray-400 dark:placeholder-gray-300
-                    transition-all duration-200">
+                    transition-all duration-200"
+                    >
                         {value}
                     </div>
                 )}
